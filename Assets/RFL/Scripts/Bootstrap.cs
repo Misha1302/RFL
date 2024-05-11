@@ -1,23 +1,24 @@
 namespace RFL.Scripts
 {
-    using System;
     using RFL.Scripts.DI;
     using RFL.Scripts.GameLogic;
     using RFL.Scripts.GlobalServices.Coroutines;
+    using RFL.Scripts.GlobalServices.InputManager;
     using RFL.Scripts.GlobalServices.Time;
     using RFL.Scripts.Helpers;
     using UnityEngine;
 
     public class Bootstrap : MonoBehaviour
     {
-        private static readonly Lazy<Player> _player = new(FindObjectOfType<Player>);
-
-        private void Awake()
+        [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
+        private static void OnBeforeSceneLoadRuntimeMethod()
         {
-            Di.Instance.AddGlobalSingleton(_player.Value);
+            Di.Instance.AddGlobalSingleton(Creator.Create<GameManager.GameManager>());
+
+            Di.Instance.AddGlobalSingleton(FindObjectOfType<Player>());
+            Di.Instance.AddGlobalSingleton<IInputManager>(Creator.Create<PcInputManager>());
             Di.Instance.AddGlobalSingleton(Creator.Create<GlobalTime>());
             Di.Instance.AddGlobalSingleton(Creator.Create<CoroutinesManager>());
-            Di.Instance.AddGlobalSingleton(Creator.Create<GameManager.GameManager>());
         }
     }
 }

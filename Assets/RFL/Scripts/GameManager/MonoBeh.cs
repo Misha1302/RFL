@@ -1,11 +1,10 @@
 ﻿namespace RFL.Scripts.GameManager
 {
     using RFL.Scripts.DI;
-    using UnityEngine;
 
-    public abstract class MonoBeh : MonoBehaviour
+    public abstract class MonoBeh : ComponentsKeeper
     {
-        protected MonoBeh()
+        private void Awake()
         {
             Di.Instance.GetGlobalSingleton<GameManager>().AddMonoBeh(this);
         }

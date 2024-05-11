@@ -25,8 +25,12 @@ namespace RFL.Scripts.DI
             Score<TScope>()[typeof(TSingleton)].Value.Get<TSingleton>();
 
 
-        private Dictionary<Type, Lazy<Any>> GetOrAddScope<TScope>() =>
-            _scopes[typeof(TScope)] ??= new Dictionary<Type, Lazy<Any>>();
+        private Dictionary<Type, Lazy<Any>> GetOrAddScope<TScope>()
+        {
+            if (!_scopes.TryGetValue(typeof(TScope), out var value))
+                _scopes[typeof(TScope)] = value = new Dictionary<Type, Lazy<Any>>();
+            return value;
+        }
 
         private Dictionary<Type, Lazy<Any>> Score<TScope>() =>
             _scopes[typeof(TScope)] ??

@@ -2,7 +2,7 @@
 {
     using UnityEngine;
 
-    public static class VectorsExtensions
+    public static class Vectors3Extensions
     {
         public static Vector3 WithX(this Vector3 vec, float x)
         {
