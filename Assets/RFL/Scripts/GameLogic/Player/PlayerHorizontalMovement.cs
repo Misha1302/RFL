@@ -15,7 +15,7 @@
 
 
         public override void Tick()
-        {
+        { 
             Rb.velocity = Rb.velocity.WithX(InputManager.Input.x * speed);
         }
     }
