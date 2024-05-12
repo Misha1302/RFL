@@ -1,9 +1,7 @@
 ﻿namespace RFL.Scripts.GameLogic.Player
 {
-    using RFL.Scripts.DI;
     using RFL.Scripts.Extensions;
     using RFL.Scripts.GameManager;
-    using RFL.Scripts.GlobalServices.Time;
     using RFL.Scripts.Helpers;
     using RFL.Scripts.Tags;
     using UnityEngine;
@@ -19,7 +17,7 @@
 
         public bool IsGrounded => _timeWhenIsGroundedWasTrue + coyoteTime >= Time;
 
-        private static float Time => Di.Instance.GetGlobalSingleton<GlobalTime>().Time;
+        private static float Time => Services.TimeService.Time;
 
         public override void FixedTick()
         {

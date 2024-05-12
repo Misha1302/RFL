@@ -6,7 +6,7 @@
     {
         private void Awake()
         {
-            Di.Instance.GetGlobalSingleton<GameManager>().AddMonoBeh(this);
+            Services.GameService.AddMonoBeh(this);
         }
 
         public virtual void OnStart()
@@ -27,7 +27,7 @@
 
         public virtual void SelfDestroy()
         {
-            Di.Instance.GetGlobalSingleton<GameManager>().RemoveMonoBeh(this);
+            Di.Instance.GetGlobalSingleton<GameService>().RemoveMonoBeh(this);
         }
     }
 }

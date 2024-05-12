@@ -816,8 +816,8 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  jumpTime: 1
-  jumpHeight: 10
+  jumpTime: 0.75
+  jumpHeight: 9
 --- !u!114 &1118593084
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1786,6 +1786,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af54bd75276c4c14a3e6f1264cc52d30, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  coyoteTime: 0.2
 --- !u!114 &1885987080
 MonoBehaviour:
   m_ObjectHideFlags: 0

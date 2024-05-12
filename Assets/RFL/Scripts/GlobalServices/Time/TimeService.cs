@@ -2,7 +2,7 @@
 {
     using RFL.Scripts.GameManager;
 
-    public class GlobalTime : MonoBeh
+    public class TimeService : MonoBeh
     {
         public float Time { get; private set; }
 

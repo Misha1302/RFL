@@ -3,7 +3,7 @@
     using RFL.Scripts.GameManager;
     using UnityEngine;
 
-    public class PcInputManager : MonoBeh, IInputManager
+    public class PcInputService : MonoBeh, IInputService
     {
         public Vector2 Input { get; private set; }
         public bool Jump { get; private set; }

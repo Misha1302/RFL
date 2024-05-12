@@ -4,7 +4,7 @@
     using RFL.Scripts.Extensions;
     using UnityEngine;
 
-    public class GameManager : MonoBehaviour
+    public class GameService : MonoBehaviour
     {
         public bool pause;
 

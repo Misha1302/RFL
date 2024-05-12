@@ -2,7 +2,7 @@
 {
     using UnityEngine;
 
-    public interface IInputManager
+    public interface IInputService
     {
         public Vector2 Input { get; }
         public bool Jump { get; }

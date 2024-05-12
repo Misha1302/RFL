@@ -1,10 +1,7 @@
 ﻿namespace RFL.Scripts.GameLogic.Player
 {
-    using RFL.Scripts.DI;
     using RFL.Scripts.Extensions;
     using RFL.Scripts.GameManager;
-    using RFL.Scripts.GlobalServices.InputManager;
-    using RFL.Scripts.GlobalServices.Time;
     using UnityEngine;
 
     [RequireComponent(typeof(Rigidbody2D))]
@@ -20,11 +17,10 @@
 
 
         private bool IsJumping =>
-            _startJumpTime + jumpTime >= Time && InputManager.Jump && !_playerGroundChecker.IsGrounded;
+            _startJumpTime + jumpTime >= Services.TimeService.Time && Services.InputService.Jump &&
+            !_playerGroundChecker.IsGrounded;
 
-        private static IInputManager InputManager => Di.Instance.GetGlobalSingleton<IInputManager>();
-        private static float Time => Di.Instance.GetGlobalSingleton<GlobalTime>().Time;
-        private float PassedTime => Time - _startJumpTime;
+        private float PassedTime => Services.TimeService.Time - _startJumpTime;
 
 
         public override void OnStart()
@@ -41,7 +37,8 @@
 
         private void HandleJumpIfNeed()
         {
-            if (_startJumpTime + jumpTime < Time && InputManager.Jump && _playerGroundChecker.IsGrounded)
+            if (_startJumpTime + jumpTime < Services.TimeService.Time && Services.InputService.Jump &&
+                _playerGroundChecker.IsGrounded)
                 Jump();
         }
 
@@ -74,7 +71,7 @@
 
         private void Jump()
         {
-            _startJumpTime = Time;
+            _startJumpTime = Services.TimeService.Time;
             Rb.velocity = Rb.velocity.WithY(GetYForce());
         }
 
