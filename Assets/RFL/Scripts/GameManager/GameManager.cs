@@ -10,6 +10,12 @@
 
         private readonly List<MonoBeh> _monoBehs = new();
 
+        private void Start()
+        {
+            if (!pause)
+                _monoBehs.ForAll(x => x.OnStart());
+        }
+
         private void Update()
         {
             if (!pause)

@@ -9,6 +9,10 @@
             Di.Instance.GetGlobalSingleton<GameManager>().AddMonoBeh(this);
         }
 
+        public virtual void OnStart()
+        {
+        }
+
         public virtual void Tick()
         {
         }
