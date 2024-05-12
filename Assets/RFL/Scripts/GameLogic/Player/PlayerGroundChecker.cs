@@ -1,24 +1,32 @@
 ﻿namespace RFL.Scripts.GameLogic.Player
 {
+    using RFL.Scripts.DI;
     using RFL.Scripts.Extensions;
     using RFL.Scripts.GameManager;
+    using RFL.Scripts.GlobalServices.Time;
     using RFL.Scripts.Helpers;
     using RFL.Scripts.Tags;
     using UnityEngine;
 
     public class PlayerGroundChecker : MonoBeh
     {
+        [SerializeField] private float coyoteTime = 0.2f;
+
         private readonly ContactFilter2D _contactFilter2D = new() { useTriggers = false };
         private readonly Collider2D[] _results = new Collider2D[CollisionsManager.MaxCollisionsCount];
 
-        public bool IsGrounded { get; private set; }
+        private float _timeWhenIsGroundedWasTrue = float.NegativeInfinity;
 
+        public bool IsGrounded => _timeWhenIsGroundedWasTrue + coyoteTime >= Time;
 
-        public override void Tick()
+        private static float Time => Di.Instance.GetGlobalSingleton<GlobalTime>().Time;
+
+        public override void FixedTick()
         {
             var count = GetComponent<BoxCollider2D>().OverlapCollider(_contactFilter2D, _results);
 
-            IsGrounded = _results.Any(x => !x.TryGetComponent<NotAGroundTag>(out _), count);
+            if (_results.Any(x => !x.TryGetComponent<NotAGroundTag>(out _), count))
+                _timeWhenIsGroundedWasTrue = Time;
         }
     }
 }

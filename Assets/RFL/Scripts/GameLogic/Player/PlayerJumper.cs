@@ -17,7 +17,6 @@
         private bool _jumped;
         private PlayerGroundChecker _playerGroundChecker;
         private float _startJumpTime = float.MinValue;
-        private float _timeOffset;
 
 
         private bool IsJumping =>
@@ -25,7 +24,7 @@
 
         private static IInputManager InputManager => Di.Instance.GetGlobalSingleton<IInputManager>();
         private static float Time => Di.Instance.GetGlobalSingleton<GlobalTime>().Time;
-        private float PassedTime => Time - _startJumpTime + _timeOffset;
+        private float PassedTime => Time - _startJumpTime;
 
 
         public override void OnStart()
@@ -68,8 +67,8 @@
 
             _jumped = true;
 
-            // set velocity at first time to remove error with fast acceleration
-            if (PassedTime < 0.1f) Rb.velocity = Rb.velocity.WithY(GetYForce());
+            // set velocity when grounded to remove error with fast acceleration
+            if (_playerGroundChecker.IsGrounded) Rb.velocity = Rb.velocity.WithY(GetYForce());
             else Rb.AddForce(Vector2.up * GetYForce());
         }
 
