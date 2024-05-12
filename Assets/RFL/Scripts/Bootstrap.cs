@@ -14,6 +14,7 @@ namespace RFL.Scripts
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
         private static void OnBeforeSceneLoadRuntimeMethod()
         {
+            Di.Instance.AddGlobalSingleton(new PauseService());
             Di.Instance.AddGlobalSingleton(Creator.Create<GameService>());
 
             Di.Instance.AddGlobalSingleton(FindObjectOfType<Player>());

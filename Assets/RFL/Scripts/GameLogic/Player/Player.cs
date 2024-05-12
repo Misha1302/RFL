@@ -8,6 +8,7 @@
     [RequireComponent(typeof(PlayerImageFlipper))]
     [RequireComponent(typeof(PlayerPhysicMaterial))]
     [RequireComponent(typeof(Rigidbody2D))]
+    [RequireComponent(typeof(PlayerPauseHandler))]
     public class Player : MonoBeh
     {
     }

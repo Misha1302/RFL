@@ -6,33 +6,21 @@
 
     public class GameService : MonoBehaviour
     {
-        public bool pause;
-
         private readonly List<MonoBeh> _monoBehs = new();
 
-        private void Start()
-        {
-            if (!pause)
-                _monoBehs.ForAll(x => x.OnStart());
-        }
+        private void Start() => _monoBehs.ForAll(x => x.OnStart());
 
-        private void Update()
-        {
-            if (!pause)
-                _monoBehs.ForAll(x => x.Tick());
-        }
+        private void Update() => _monoBehs.ForAll(x => x.Tick());
 
-        private void FixedUpdate()
-        {
-            if (!pause)
-                _monoBehs.ForAll(x => x.FixedTick());
-        }
+        private void FixedUpdate() => _monoBehs.ForAll(x => x.FixedTick());
 
-        private void LateUpdate()
-        {
-            if (!pause)
-                _monoBehs.ForAll(x => x.LateTick());
-        }
+        private void LateUpdate() => _monoBehs.ForAll(x => x.LateTick());
+
+
+        private void Awake() => Services.PauseService.OnPausedChanged += OnPausedChanged;
+
+
+        private void OnPausedChanged(bool isPaused) => enabled = !isPaused;
 
 
         public void AddMonoBeh(MonoBeh monoBeh) => _monoBehs.Add(monoBeh);
