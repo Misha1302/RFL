@@ -2,6 +2,7 @@ namespace RFL.Scripts
 {
     using RFL.Scripts.DI;
     using RFL.Scripts.GameLogic.Player;
+    using RFL.Scripts.GameManager;
     using RFL.Scripts.GlobalServices.Coroutines;
     using RFL.Scripts.GlobalServices.InputManager;
     using RFL.Scripts.GlobalServices.Time;
@@ -13,7 +14,7 @@ namespace RFL.Scripts
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
         private static void OnBeforeSceneLoadRuntimeMethod()
         {
-            Di.Instance.AddGlobalSingleton(Creator.Create<GameManager.GameService>());
+            Di.Instance.AddGlobalSingleton(Creator.Create<GameService>());
 
             Di.Instance.AddGlobalSingleton(FindObjectOfType<Player>());
             Di.Instance.AddGlobalSingleton<IInputService>(Creator.Create<PcInputService>());
