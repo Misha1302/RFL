@@ -23,7 +23,7 @@
         {
             var count = GetComponent<BoxCollider2D>().OverlapCollider(_contactFilter2D, _results);
 
-            if (_results.Any(x => !x.TryGetComponent<NotAGroundTag>(out _), count))
+            if (_results.Any(x => !x.HasComponent<NotAGroundTag>(), count))
                 _timeWhenIsGroundedWasTrue = Time;
         }
     }

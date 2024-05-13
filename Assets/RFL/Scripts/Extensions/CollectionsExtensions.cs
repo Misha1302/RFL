@@ -12,6 +12,8 @@
                 act(lst[index]);
         }
 
+        public static ArraySegment<T> Slice<T>(this T[] arr, int start, int count) => new(arr, start, count);
+
         public static bool Any<T>(this IReadOnlyList<T> results, Func<T, bool> predicate, int count)
         {
             var any = false;

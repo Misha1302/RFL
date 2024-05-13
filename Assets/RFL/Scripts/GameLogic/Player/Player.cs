@@ -3,6 +3,7 @@
     using RFL.Scripts.GameManager;
     using UnityEngine;
 
+    [RequireComponent(typeof(PlayerStepper))]
     [RequireComponent(typeof(PlayerHorizontalMovement))]
     [RequireComponent(typeof(PlayerJumper))]
     [RequireComponent(typeof(PlayerImageFlipper))]
