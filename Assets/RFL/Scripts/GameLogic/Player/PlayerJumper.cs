@@ -12,20 +12,21 @@
         [SerializeField] private float jumpHeight = 10;
 
         private bool _jumped;
-        private PlayerGroundChecker _playerGroundChecker;
         private float _startJumpTime = float.MinValue;
 
 
-        private bool IsJumping =>
+        public bool IsJumping =>
             _startJumpTime + jumpTime >= Services.TimeService.Time && Services.InputService.Jump &&
-            !_playerGroundChecker.IsGrounded;
+            !GroundChecker.IsGrounded;
 
         private float PassedTime => Services.TimeService.Time - _startJumpTime;
+
+        public PlayerGroundChecker GroundChecker { get; private set; }
 
 
         public override void OnStart()
         {
-            _playerGroundChecker = GetComponentInChildren<PlayerGroundChecker>();
+            GroundChecker = GetComponentInChildren<PlayerGroundChecker>();
         }
 
         public override void Tick()
@@ -38,7 +39,7 @@
         private void HandleJumpIfNeed()
         {
             if (_startJumpTime + jumpTime < Services.TimeService.Time && Services.InputService.Jump &&
-                _playerGroundChecker.IsGrounded)
+                GroundChecker.IsGrounded)
                 Jump();
         }
 
@@ -65,7 +66,7 @@
             _jumped = true;
 
             // set velocity when grounded to remove error with fast acceleration
-            if (_playerGroundChecker.IsGrounded) Rb.velocity = Rb.velocity.WithY(GetYForce());
+            if (GroundChecker.IsGrounded) Rb.velocity = Rb.velocity.WithY(GetYForce());
             else Rb.AddForce(Vector2.up * GetYForce());
         }
 

@@ -19,10 +19,17 @@ namespace RFL.Scripts.DI
 
 
         public void AddScopedSingleton<TScope, TSingleton>(TSingleton singleton) =>
-            GetOrAddScope<TScope>()[typeof(TSingleton)] = new Lazy<Any>(() => new Any(singleton));
+            AddScopedSingleton<TScope, TSingleton>(() => singleton);
 
         public TSingleton GetScopedSingleton<TScope, TSingleton>() =>
             Score<TScope>()[typeof(TSingleton)].Value.Get<TSingleton>();
+
+        public void AddGlobalSingleton<TSingleton>(Func<TSingleton> lazyFunc) =>
+            AddScopedSingleton<GlobalScope, TSingleton>(lazyFunc);
+
+
+        public void AddScopedSingleton<TScope, TSingleton>(Func<TSingleton> lazyFunc) =>
+            GetOrAddScope<TScope>()[typeof(TSingleton)] = new Lazy<Any>(() => new Any(lazyFunc()));
 
 
         private Dictionary<Type, Lazy<Any>> GetOrAddScope<TScope>()
