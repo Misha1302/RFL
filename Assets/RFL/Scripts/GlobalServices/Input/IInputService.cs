@@ -1,4 +1,4 @@
-﻿namespace RFL.Scripts.GlobalServices.InputManager
+﻿namespace RFL.Scripts.GlobalServices.Input
 {
     using UnityEngine;
 

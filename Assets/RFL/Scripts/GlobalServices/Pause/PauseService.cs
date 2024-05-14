@@ -1,4 +1,4 @@
-﻿namespace RFL.Scripts.GlobalServices.PauseService
+﻿namespace RFL.Scripts.GlobalServices.Pause
 {
     using System;
 

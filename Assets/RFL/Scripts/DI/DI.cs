@@ -6,7 +6,7 @@ namespace RFL.Scripts.DI
     using RFL.Scripts.Helpers;
     using RFL.Scripts.Singletons;
 
-    public class Di : SingletonBase<Di>, IDependencyKeeper
+    public class Di : SingletonBase<Di>
     {
         private readonly Dictionary<Type, Dictionary<Type, Lazy<Any>>> _scopes = new();
 
