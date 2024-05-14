@@ -6,7 +6,7 @@ namespace RFL.Scripts.DI
     using RFL.Scripts.Helpers;
     using RFL.Scripts.Singletons;
 
-    public class Di : SingletonBase<Di>
+    public class Di : SingletonBase<Di>, IDi
     {
         private readonly Dictionary<Type, Dictionary<Type, Lazy<Any>>> _scopes = new();
 
@@ -18,28 +18,28 @@ namespace RFL.Scripts.DI
             GetScopedSingleton<GlobalScope, TSingleton>();
 
 
-        public void AddScopedSingleton<TScope, TSingleton>(TSingleton singleton) =>
+        public void AddScopedSingleton<TScope, TSingleton>(TSingleton singleton) where TScope : IScope =>
             AddScopedSingleton<TScope, TSingleton>(() => singleton);
 
-        public TSingleton GetScopedSingleton<TScope, TSingleton>() =>
-            Score<TScope>()[typeof(TSingleton)].Value.Get<TSingleton>();
+        public TSingleton GetScopedSingleton<TScope, TSingleton>() where TScope : IScope =>
+            Scope<TScope>()[typeof(TSingleton)].Value.Get<TSingleton>();
 
         public void AddGlobalSingleton<TSingleton>(Func<TSingleton> lazyFunc) =>
             AddScopedSingleton<GlobalScope, TSingleton>(lazyFunc);
 
 
-        public void AddScopedSingleton<TScope, TSingleton>(Func<TSingleton> lazyFunc) =>
+        public void AddScopedSingleton<TScope, TSingleton>(Func<TSingleton> lazyFunc) where TScope : IScope =>
             GetOrAddScope<TScope>()[typeof(TSingleton)] = new Lazy<Any>(() => new Any(lazyFunc()));
 
 
-        private Dictionary<Type, Lazy<Any>> GetOrAddScope<TScope>()
+        private Dictionary<Type, Lazy<Any>> GetOrAddScope<TScope>() where TScope : IScope
         {
             if (!_scopes.TryGetValue(typeof(TScope), out var value))
                 _scopes[typeof(TScope)] = value = new Dictionary<Type, Lazy<Any>>();
             return value;
         }
 
-        private Dictionary<Type, Lazy<Any>> Score<TScope>() =>
+        private Dictionary<Type, Lazy<Any>> Scope<TScope>() where TScope : IScope =>
             _scopes[typeof(TScope)] ??
             Thrower.InvalidOpEx($"Scope {typeof(TScope)} does not exists").Get<Dictionary<Type, Lazy<Any>>>();
     }

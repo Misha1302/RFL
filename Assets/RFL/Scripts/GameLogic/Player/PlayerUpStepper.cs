@@ -9,6 +9,8 @@
 
     public class PlayerUpStepper : MonoBeh
     {
+        private const float StepEpsilon = 0.01f;
+
         private PlayerStepper _playerStepper;
 
         public void Init(PlayerStepper playerStepper)
@@ -16,7 +18,7 @@
             _playerStepper = playerStepper;
         }
 
-        public override void OnColEnter2D(Collision2D other)
+        public override void OnColStay2D(Collision2D other)
         {
             if (!Player.PlayerJumper.GroundChecker.IsGrounded)
                 return;
@@ -38,8 +40,11 @@
                 .WithY(point.y + (transform.position.y - _playerStepper.PlayerFoot.position.y));
         }
 
-        private bool IsFeasibleHeight(Vector2 point) =>
-            point.y - _playerStepper.PlayerFoot.position.y < _playerStepper.MaxStep;
+        private bool IsFeasibleHeight(Vector2 point)
+        {
+            var delta = point.y - _playerStepper.PlayerFoot.position.y;
+            return delta < _playerStepper.MaxStep && delta > StepEpsilon;
+        }
 
         private static int InputDirection() => Math.Sign(-Services.InputService.Input.x);
 
