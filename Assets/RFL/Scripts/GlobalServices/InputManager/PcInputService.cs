@@ -1,6 +1,6 @@
 ﻿namespace RFL.Scripts.GlobalServices.InputManager
 {
-    using RFL.Scripts.GameManager;
+    using RFL.Scripts.GlobalServices.GameManager.MonoBeh;
     using UnityEngine;
 
     public class PcInputService : MonoBeh, IInputService

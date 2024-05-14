@@ -1,6 +1,7 @@
 ﻿namespace RFL.Scripts.GameLogic.Camera
 {
-    using RFL.Scripts.GameManager;
+    using RFL.Scripts.GlobalServices;
+    using RFL.Scripts.GlobalServices.GameManager.MonoBeh;
     using UnityEngine;
 
     public class CameraMover : MonoBeh

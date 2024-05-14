@@ -1,7 +1,8 @@
 ﻿namespace RFL.Scripts.GameLogic.Player
 {
     using RFL.Scripts.Extensions;
-    using RFL.Scripts.GameManager;
+    using RFL.Scripts.GlobalServices;
+    using RFL.Scripts.GlobalServices.GameManager.MonoBeh;
     using UnityEngine;
 
     [RequireComponent(typeof(Rigidbody2D))]
@@ -15,7 +16,7 @@
         private float _startJumpTime = float.MinValue;
 
 
-        public bool IsJumping =>
+        private bool IsJumping =>
             _startJumpTime + jumpTime >= Services.TimeService.Time && Services.InputService.Jump &&
             !GroundChecker.IsGrounded;
 

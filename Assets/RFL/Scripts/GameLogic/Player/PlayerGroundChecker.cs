@@ -1,7 +1,8 @@
 ﻿namespace RFL.Scripts.GameLogic.Player
 {
     using RFL.Scripts.Extensions;
-    using RFL.Scripts.GameManager;
+    using RFL.Scripts.GlobalServices;
+    using RFL.Scripts.GlobalServices.GameManager.MonoBeh;
     using RFL.Scripts.Helpers;
     using RFL.Scripts.Tags;
     using UnityEngine;
@@ -11,7 +12,7 @@
         [SerializeField] private float coyoteTime = 0.2f;
 
         private readonly ContactFilter2D _contactFilter2D = new() { useTriggers = false };
-        private readonly Collider2D[] _results = new Collider2D[CollisionsManager.MaxCollisionsCount];
+        private readonly Collider2D[] _results = new Collider2D[CollectionsLength.MaxCollisionsCount];
 
         private float _timeWhenIsGroundedWasTrue = float.NegativeInfinity;
 

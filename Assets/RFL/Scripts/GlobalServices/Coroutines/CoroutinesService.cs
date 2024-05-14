@@ -5,10 +5,10 @@
     using System.Linq;
     using JetBrains.Annotations;
     using RFL.Scripts.Extensions;
-    using RFL.Scripts.GameManager;
     using RFL.Scripts.GlobalServices.Coroutines.Waitings;
+    using RFL.Scripts.GlobalServices.GameManager.MonoBeh;
 
-    public class CoroutinesManager : MonoBeh
+    public class CoroutinesService : MonoBeh
     {
         private readonly List<(string name, List<CoroutineObj> cors)> _coroutines = new();
 

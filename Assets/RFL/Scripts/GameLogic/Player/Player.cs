@@ -2,7 +2,7 @@
 {
     using RFL.Scripts.DI;
     using RFL.Scripts.DI.Scopes;
-    using RFL.Scripts.GameManager;
+    using RFL.Scripts.GlobalServices.GameManager.MonoBeh;
     using UnityEngine;
 
     [RequireComponent(typeof(PlayerStepper))]

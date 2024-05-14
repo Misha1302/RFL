@@ -1,6 +1,6 @@
 ﻿namespace RFL.Scripts.Tags
 {
-    using RFL.Scripts.GameManager;
+    using RFL.Scripts.GlobalServices.GameManager.MonoBeh;
 
     public class NotAGroundTag : MonoBeh
     {

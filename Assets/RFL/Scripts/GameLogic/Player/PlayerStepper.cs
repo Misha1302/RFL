@@ -1,6 +1,6 @@
 namespace RFL.Scripts.GameLogic.Player
 {
-    using RFL.Scripts.GameManager;
+    using RFL.Scripts.GlobalServices.GameManager.MonoBeh;
     using UnityEngine;
 
     [RequireComponent(typeof(Rigidbody2D))]

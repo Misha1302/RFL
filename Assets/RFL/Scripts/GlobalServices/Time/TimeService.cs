@@ -1,6 +1,6 @@
 ﻿namespace RFL.Scripts.GlobalServices.Time
 {
-    using RFL.Scripts.GameManager;
+    using RFL.Scripts.GlobalServices.GameManager.MonoBeh;
 
     public class TimeService : MonoBeh
     {

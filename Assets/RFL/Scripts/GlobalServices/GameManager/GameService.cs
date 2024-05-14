@@ -1,4 +1,4 @@
-﻿namespace RFL.Scripts.GameManager
+﻿namespace RFL.Scripts.GlobalServices.GameManager
 {
     using System.Collections.Generic;
     using RFL.Scripts.Extensions;
@@ -6,7 +6,10 @@
 
     public class GameService : MonoBehaviour
     {
-        private readonly List<MonoBeh> _monoBehs = new();
+        private readonly List<MonoBeh.MonoBeh> _monoBehs = new();
+
+
+        private void Awake() => Services.PauseService.OnPausedChanged += OnPausedChanged;
 
         private void Start() => _monoBehs.ForAll(x => x.OnStart());
 
@@ -17,14 +20,11 @@
         private void LateUpdate() => _monoBehs.ForAll(x => x.LateTick());
 
 
-        private void Awake() => Services.PauseService.OnPausedChanged += OnPausedChanged;
-
-
         private void OnPausedChanged(bool isPaused) => enabled = !isPaused;
 
 
-        public void AddMonoBeh(MonoBeh monoBeh) => _monoBehs.Add(monoBeh);
+        public void AddMonoBeh(MonoBeh.MonoBeh monoBeh) => _monoBehs.Add(monoBeh);
 
-        public void RemoveMonoBeh(MonoBeh monoBeh) => _monoBehs.Remove(monoBeh);
+        public void RemoveMonoBeh(MonoBeh.MonoBeh monoBeh) => _monoBehs.Remove(monoBeh);
     }
 }

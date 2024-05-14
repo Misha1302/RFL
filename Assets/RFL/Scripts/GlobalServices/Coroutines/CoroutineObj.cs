@@ -3,7 +3,6 @@
     using System;
     using System.Collections.Generic;
     using JetBrains.Annotations;
-    using RFL.Scripts.GameManager;
     using RFL.Scripts.GlobalServices.Coroutines.Waitings;
 
     public class CoroutineObj

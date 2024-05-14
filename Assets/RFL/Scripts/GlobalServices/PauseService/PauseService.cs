@@ -1,4 +1,4 @@
-﻿namespace RFL.Scripts.GameManager
+﻿namespace RFL.Scripts.GlobalServices.PauseService
 {
     using System;
 

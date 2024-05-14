@@ -1,7 +1,5 @@
 ﻿namespace RFL.Scripts.GlobalServices.Coroutines.Waitings
 {
-    using RFL.Scripts.GameManager;
-
     public class WaitSeconds : ICoroutineWaiting
     {
         private readonly float _startTime;

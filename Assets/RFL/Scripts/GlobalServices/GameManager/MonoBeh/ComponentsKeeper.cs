@@ -1,4 +1,4 @@
-﻿namespace RFL.Scripts.GameManager
+﻿namespace RFL.Scripts.GlobalServices.GameManager.MonoBeh
 {
     using System;
     using UnityEngine;

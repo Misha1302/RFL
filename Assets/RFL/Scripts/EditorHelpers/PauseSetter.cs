@@ -1,6 +1,6 @@
 ﻿namespace RFL.Scripts.EditorHelpers
 {
-    using RFL.Scripts.GameManager;
+    using RFL.Scripts.GlobalServices;
     using UnityEngine;
 
     public class PauseSetter : MonoBehaviour

@@ -3,7 +3,8 @@
     using System;
     using System.Linq;
     using RFL.Scripts.Extensions;
-    using RFL.Scripts.GameManager;
+    using RFL.Scripts.GlobalServices;
+    using RFL.Scripts.GlobalServices.GameManager.MonoBeh;
     using UnityEngine;
 
     public class PlayerUpStepper : MonoBeh
