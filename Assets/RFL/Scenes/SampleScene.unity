@@ -1387,7 +1387,7 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   jumpTime: 0.75
-  jumpHeight: 9.5
+  jumpHeight: 8
 --- !u!114 &1118593084
 MonoBehaviour:
   m_ObjectHideFlags: 0
