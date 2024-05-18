@@ -21,8 +21,11 @@
             if (!Player.PlayerJumper.GroundChecker.IsGroundedWithOutCoyote)
                 return;
 
-            var point = other.contacts.OrderByDescending(x => x.point.y)
-                .First(x => !x.collider.HasComponent<PlayerTag>() && !x.collider.isTrigger).point;
+            var point = other.contacts
+                .OrderByDescending(x => x.point.y)
+                .First(x => PlayerStepper.RightCollider(x.collider))
+                .point;
+
             TryPickUp(point);
         }
 

@@ -8,7 +8,7 @@
         public WaitSeconds(float seconds)
         {
             _seconds = seconds;
-            _startTime = Services.TimeService.Time;
+            _startTime = Services.TimeService.TotalTime;
         }
 
         public float EndTime => _startTime + _seconds;

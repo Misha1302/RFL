@@ -1,5 +1,6 @@
 namespace RFL.Scripts.GameLogic.Player
 {
+    using RFL.Scripts.Extensions;
     using RFL.Scripts.GlobalServices.GameManager.MonoBeh;
     using UnityEngine;
 
@@ -30,5 +31,7 @@ namespace RFL.Scripts.GameLogic.Player
             GetComponent<PlayerUpStepper>().Init(this);
             GetComponent<PlayerDownStepper>().Init(this);
         }
+
+        public static bool RightCollider(Collider2D x) => !x.HasComponent<PlayerTag>() && !x.isTrigger;
     }
 }

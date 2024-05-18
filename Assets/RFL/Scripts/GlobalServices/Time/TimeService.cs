@@ -4,11 +4,11 @@
 
     public class TimeService : MonoBeh
     {
-        public float Time { get; private set; }
+        public float TotalTime { get; private set; }
 
         public override void Tick()
         {
-            Time += UnityEngine.Time.deltaTime;
+            TotalTime += UnityEngine.Time.deltaTime;
         }
     }
 }

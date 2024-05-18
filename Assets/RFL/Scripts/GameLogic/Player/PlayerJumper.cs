@@ -21,7 +21,7 @@
                                   && !GroundChecker.IsGroundedWithOutCoyote;
 
 
-        private float PassedTime => Services.TimeService.Time - _startJumpTime;
+        private float PassedTime => Time - _startJumpTime;
 
         public PlayerGroundChecker GroundChecker { get; private set; }
 
@@ -63,7 +63,7 @@
 
         private void HandleJump()
         {
-            _startJumpTime = Services.TimeService.Time;
+            _startJumpTime = Time;
             _jumped = true;
 
             Rb.velocity = Rb.velocity.WithY(GetYForce());

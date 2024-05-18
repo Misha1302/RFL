@@ -17,8 +17,9 @@
 
         public override void Tick()
         {
-            if (Input.x != 0 && Player.PlayerJumper.GroundChecker.IsGroundedWithOutCoyote &&
-                !Services.InputService.Jump)
+            if (Input.x != 0
+                && Player.PlayerJumper.GroundChecker.IsGroundedWithOutCoyote
+                && !Services.InputService.Jump)
                 TryPeekDown(_playerStepper.RightRayPoint, _playerStepper.LeftRayPoint);
         }
 
@@ -29,14 +30,14 @@
 
         private void TryPeekDown(Transform point1, Transform point2)
         {
-            if (!Ray(point1, out var topPoint1)) return;
-            if (!Ray(point2, out var topPoint2)) return;
+            if (!Raycast(point1, out var topPoint1)) return;
+            if (!Raycast(point2, out var topPoint2)) return;
             if (!Satisfies(point1, topPoint1) || !Satisfies(point2, topPoint2)) return;
 
             PeekDown(point1.position.y > point2.position.y ? topPoint1 : topPoint2);
         }
 
-        private bool Ray(Transform point1, out Vector2 topPoint)
+        private bool Raycast(Transform point1, out Vector2 topPoint)
         {
             topPoint = default;
 
@@ -44,17 +45,13 @@
             if (count == 0)
                 return false;
 
-            var sec = _result.Slice(0, count)
+            var hit = _result
+                .Slice(0, count)
                 .OrderByDescending(x => x.point.y)
-                .Where(x => !x.transform.HasComponent<PlayerTag>() && !x.collider.isTrigger)
-                .ToArray();
+                .FirstOrDefault(x => PlayerStepper.RightCollider(x.collider));
 
-            if (sec.Length == 0)
-                return false;
-
-            print(string.Join(",", sec.Select(x => x.transform.name)));
-            topPoint = sec.First().point;
-            return true;
+            topPoint = hit.point;
+            return hit != default;
         }
 
         private bool Satisfies(Transform rayPoint, Vector2 topPoint)
@@ -66,7 +63,6 @@
         private void PeekDown(Vector2 topPoint)
         {
             _playerStepper.Rb2D.position = _playerStepper.Rb2D.position
-                // .WithX(_playerStepper.Rb2D.position.x - Input.x * _playerStepper.XTeleportOffset)
                 .WithY(topPoint.y - _playerStepper.Player2FootsDelta);
         }
     }

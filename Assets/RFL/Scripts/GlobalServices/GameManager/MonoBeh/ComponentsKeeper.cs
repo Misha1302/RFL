@@ -14,7 +14,7 @@
             _spriteRenderer = new Lazy<SpriteRenderer>(GetComponent<SpriteRenderer>);
         }
 
-        protected static float Time => Services.TimeService.Time;
+        protected static float Time => Services.TimeService.TotalTime;
 
         protected Rigidbody2D Rb => _lazyRb.Value;
         protected SpriteRenderer SpriteRenderer => _spriteRenderer.Value;
