@@ -16,7 +16,7 @@
         private float _startJumpTime = float.MinValue;
 
 
-        private bool IsJumping => jumpTime >= PassedTime && Services.InputService.Jump && !GroundChecker.IsGrounded;
+        private bool IsJumping => jumpTime >= PassedTime && Services.InputService.Jump && !GroundChecker.IsGroundedWithOutCoyote;
 
         private float PassedTime => Services.TimeService.Time - _startJumpTime;
 
@@ -30,6 +30,7 @@
 
         public override void Tick()
         {
+            print(IsJumping);
             HandleJumpIfNeed();
             HandleJumpingIfNeed();
             HandleEndOfJumpingIfNeed();
@@ -37,7 +38,7 @@
 
         private void HandleJumpIfNeed()
         {
-            if (jumpTime >= PassedTime || !Services.InputService.Jump || !GroundChecker.IsGrounded) return;
+            if (jumpTime >= PassedTime || !Services.InputService.Jump || !GroundChecker.IsGroundedWithCoyote) return;
             HandleJump();
         }
 

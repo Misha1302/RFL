@@ -18,7 +18,7 @@ namespace RFL.Scripts
             Di.Instance.AddGlobalSingleton(new PauseService());
             Di.Instance.AddGlobalSingleton(Creator.Create<GameService>());
 
-            Di.Instance.AddGlobalSingleton(FindObjectOfType<Player>());
+            Di.Instance.AddGlobalSingleton(FindObjectOfType<Player>(true));
             Di.Instance.AddGlobalSingleton<IInputService>(Creator.Create<PcInputService>());
             Di.Instance.AddGlobalSingleton(Creator.Create<TimeService>());
             Di.Instance.AddGlobalSingleton(Creator.Create<CoroutinesService>());

@@ -1,5 +1,6 @@
 ﻿namespace RFL.Scripts.GameLogic.Player
 {
+    using System;
     using RFL.Scripts.Extensions;
     using RFL.Scripts.GlobalServices;
     using RFL.Scripts.GlobalServices.GameManager.MonoBeh;
@@ -16,7 +17,8 @@
 
         private float _timeWhenIsGroundedWasTrue = float.NegativeInfinity;
 
-        public bool IsGrounded => _timeWhenIsGroundedWasTrue + coyoteTime >= Time;
+        public bool IsGroundedWithCoyote => _timeWhenIsGroundedWasTrue + coyoteTime >= Time;
+        public bool IsGroundedWithOutCoyote => Math.Abs(_timeWhenIsGroundedWasTrue - Time) < 0.01f;
 
         private static float Time => Services.TimeService.Time;
 

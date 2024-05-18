@@ -22,7 +22,8 @@ namespace RFL.Scripts.DI
             AddScopedSingleton<TScope, TSingleton>(() => singleton);
 
         public TSingleton GetScopedSingleton<TScope, TSingleton>() where TScope : IScope =>
-            Scope<TScope>()[typeof(TSingleton)].Value.Get<TSingleton>();
+            Scope<TScope>()[typeof(TSingleton)].Value.Get<TSingleton>() ??
+            Thrower.InvalidOpEx("Value is null").Get<TSingleton>();
 
         public void AddGlobalSingleton<TSingleton>(Func<TSingleton> lazyFunc) =>
             AddScopedSingleton<GlobalScope, TSingleton>(lazyFunc);

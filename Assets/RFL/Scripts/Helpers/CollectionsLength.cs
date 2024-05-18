@@ -3,5 +3,6 @@
     public static class CollectionsLength
     {
         public const int MaxCollisionsCount = 256;
+        public const int MaxHitsCount = 256;
     }
 }
