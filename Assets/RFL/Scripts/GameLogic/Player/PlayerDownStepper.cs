@@ -17,7 +17,6 @@
 
         public override void Tick()
         {
-            return;
             if (Input.x != 0 && Player.PlayerJumper.GroundChecker.IsGroundedWithOutCoyote &&
                 !Services.InputService.Jump)
                 TryPeekDown(_playerStepper.RightRayPoint, _playerStepper.LeftRayPoint);

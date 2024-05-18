@@ -18,7 +18,6 @@
 
         public override void OnColStay2D(Collision2D other)
         {
-            return;
             if (!Player.PlayerJumper.GroundChecker.IsGroundedWithOutCoyote)
                 return;
 

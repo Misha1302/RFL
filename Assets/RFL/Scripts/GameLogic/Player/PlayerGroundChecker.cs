@@ -2,7 +2,6 @@
 {
     using System;
     using RFL.Scripts.Extensions;
-    using RFL.Scripts.GlobalServices;
     using RFL.Scripts.GlobalServices.GameManager.MonoBeh;
     using RFL.Scripts.Helpers;
     using RFL.Scripts.Tags;
@@ -20,7 +19,6 @@
         public bool IsGroundedWithCoyote => _timeWhenIsGroundedWasTrue + coyoteTime >= Time;
         public bool IsGroundedWithOutCoyote => Math.Abs(_timeWhenIsGroundedWasTrue - Time) < 0.01f;
 
-        private static float Time => Services.TimeService.Time;
 
         public override void FixedTick()
         {
