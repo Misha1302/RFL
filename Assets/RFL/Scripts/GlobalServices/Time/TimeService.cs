@@ -5,6 +5,7 @@
     public class TimeService : MonoBeh
     {
         public float TotalTime { get; private set; }
+        public static float DeltaTime => UnityEngine.Time.deltaTime;
 
         public override void Tick()
         {

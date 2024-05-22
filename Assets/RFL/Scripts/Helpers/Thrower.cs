@@ -7,6 +7,9 @@
     public static class Thrower
     {
         [DoesNotReturn]
-        public static Any InvalidOpEx(string s) => throw new InvalidOperationException(s);
+        public static Any InvalidOpEx(string msg) => throw new InvalidOperationException(msg);
+
+        public static Any InvalidOpExIf([DoesNotReturnIf(true)] bool isNeedToThrow, string msg) =>
+            isNeedToThrow ? InvalidOpEx(msg) : new Any(null);
     }
 }

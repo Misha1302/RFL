@@ -5,15 +5,21 @@
 
     public class PcInputService : MonoBeh, IInputService
     {
-        public Vector2 Input { get; private set; }
+        public Axis2D Input { get; } = new(IInputService.InputSpeed);
         public bool Jump { get; private set; }
 
         public override void Tick()
         {
-            var input = Input;
-            input.x = UnityEngine.Input.GetAxis("Horizontal");
-            input.y = UnityEngine.Input.GetAxis("Vertical");
-            Input = input;
+            var hor = UnityEngine.Input.GetAxisRaw("Horizontal");
+            var ver = UnityEngine.Input.GetAxisRaw("Vertical");
+
+            if (hor > 0) Input.X.Increase();
+            else if (hor < 0) Input.X.Decrease();
+            else Input.X.Zero();
+
+            if (ver > 0) Input.Y.Increase();
+            else if (ver < 0) Input.Y.Decrease();
+            else Input.Y.Zero();
 
             Jump = UnityEngine.Input.GetKey(KeyCode.Space);
         }

@@ -48,7 +48,7 @@
             return delta < _playerStepper.MaxStep && delta > _playerStepper.MinStep;
         }
 
-        private static int InputDirection() => Math.Sign(-Services.InputService.Input.x);
+        private static int InputDirection() => Math.Sign(-Services.InputService.Input.X);
 
         private int PointDirection(Vector2 point) => Math.Sign(transform.position.x - point.x);
     }

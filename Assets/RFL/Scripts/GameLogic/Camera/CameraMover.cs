@@ -17,7 +17,7 @@
 
         public override void FixedTick()
         {
-            cameraFollowPoint.localPosition = _stdPosition + (Vector3)Services.InputService.Input;
+            cameraFollowPoint.localPosition = _stdPosition + Services.InputService.Input;
         }
     }
 }
