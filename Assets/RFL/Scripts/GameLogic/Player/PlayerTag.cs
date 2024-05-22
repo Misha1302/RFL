@@ -2,7 +2,5 @@
 {
     using RFL.Scripts.GlobalServices.GameManager.MonoBeh;
 
-    public class PlayerTag : MonoBeh
-    {
-    }
+    public class PlayerTag : MonoBeh { }
 }

@@ -15,7 +15,7 @@
         public override void Tick()
         {
             Jump = _canvas.Jump.WasPressed;
-            
+
             if (_canvas.Left.WasPressed) Input.X.Decrease();
             else if (_canvas.Right.WasPressed) Input.X.Increase();
             else Input.X.Zero();

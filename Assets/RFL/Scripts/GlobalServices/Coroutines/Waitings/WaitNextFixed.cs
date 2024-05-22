@@ -2,7 +2,5 @@
 {
     using RFL.Scripts.Singletons;
 
-    public class WaitNextFixed : SingletonBase<WaitNextFixed>, ICoroutineWaiting
-    {
-    }
+    public class WaitNextFixed : SingletonBase<WaitNextFixed>, ICoroutineWaiting { }
 }

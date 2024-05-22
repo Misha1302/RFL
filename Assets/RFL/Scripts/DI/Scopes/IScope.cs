@@ -1,6 +1,4 @@
 ﻿namespace RFL.Scripts.DI.Scopes
 {
-    public interface IScope
-    {
-    }
+    public interface IScope { }
 }

@@ -31,33 +31,19 @@
                 OnColStay2D(other);
         }
 
-        public virtual void OnStart()
-        {
-        }
+        public virtual void OnStart() { }
 
-        public virtual void Tick()
-        {
-        }
+        public virtual void Tick() { }
 
-        public virtual void LateTick()
-        {
-        }
+        public virtual void LateTick() { }
 
-        public virtual void FixedTick()
-        {
-        }
+        public virtual void FixedTick() { }
 
-        public virtual void OnColEnter2D(Collision2D other)
-        {
-        }
+        public virtual void OnColEnter2D(Collision2D other) { }
 
-        public virtual void OnColStay2D(Collision2D other)
-        {
-        }
+        public virtual void OnColStay2D(Collision2D other) { }
 
-        public virtual void OnColExit2D(Collision2D other)
-        {
-        }
+        public virtual void OnColExit2D(Collision2D other) { }
 
         public virtual void SelfDestroy()
         {

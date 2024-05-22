@@ -2,7 +2,5 @@
 {
     using RFL.Scripts.GlobalServices.GameManager.MonoBeh;
 
-    public class NotAGroundTag : MonoBeh
-    {
-    }
+    public class NotAGroundTag : MonoBeh { }
 }

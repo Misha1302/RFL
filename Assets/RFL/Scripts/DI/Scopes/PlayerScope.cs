@@ -1,6 +1,4 @@
 ﻿namespace RFL.Scripts.DI.Scopes
 {
-    public abstract class PlayerScope : IScope
-    {
-    }
+    public abstract class PlayerScope : IScope { }
 }
