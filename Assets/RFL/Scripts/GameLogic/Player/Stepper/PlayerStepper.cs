@@ -1,7 +1,8 @@
-namespace RFL.Scripts.GameLogic.Player
+namespace RFL.Scripts.GameLogic.Player.Stepper
 {
     using RFL.Scripts.Extensions;
     using RFL.Scripts.GlobalServices.GameManager.MonoBeh;
+    using RFL.Scripts.Tags;
     using UnityEngine;
 
     [RequireComponent(typeof(Rigidbody2D))]

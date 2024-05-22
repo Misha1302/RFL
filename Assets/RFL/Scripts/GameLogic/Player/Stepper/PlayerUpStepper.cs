@@ -1,4 +1,4 @@
-﻿namespace RFL.Scripts.GameLogic.Player
+﻿namespace RFL.Scripts.GameLogic.Player.Stepper
 {
     using System;
     using System.Linq;

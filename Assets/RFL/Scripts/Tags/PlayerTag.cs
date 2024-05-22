@@ -1,4 +1,4 @@
-﻿namespace RFL.Scripts.GameLogic.Player
+﻿namespace RFL.Scripts.Tags
 {
     using RFL.Scripts.GlobalServices.GameManager.MonoBeh;
 

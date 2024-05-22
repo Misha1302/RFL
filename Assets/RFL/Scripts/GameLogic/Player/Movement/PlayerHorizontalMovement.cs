@@ -1,4 +1,4 @@
-﻿namespace RFL.Scripts.GameLogic.Player
+﻿namespace RFL.Scripts.GameLogic.Player.Movement
 {
     using RFL.Scripts.GlobalServices;
     using RFL.Scripts.GlobalServices.GameManager.MonoBeh;

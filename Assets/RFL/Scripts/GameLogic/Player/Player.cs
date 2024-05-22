@@ -2,6 +2,8 @@
 {
     using RFL.Scripts.DI;
     using RFL.Scripts.DI.Scopes;
+    using RFL.Scripts.GameLogic.Player.Movement;
+    using RFL.Scripts.GameLogic.Player.Stepper;
     using RFL.Scripts.GlobalServices.GameManager.MonoBeh;
     using UnityEngine;
 
