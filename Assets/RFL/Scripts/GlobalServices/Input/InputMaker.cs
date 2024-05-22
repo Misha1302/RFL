@@ -1,10 +1,10 @@
-﻿namespace RFL.Scripts
+﻿namespace RFL.Scripts.GlobalServices.Input
 {
-    using RFL.Scripts.GlobalServices.Input;
+    using RFL.Scripts.GlobalServices.Input.Services;
     using RFL.Scripts.Helpers;
     using UnityEngine;
 
-    public static class InputService
+    public static class InputMaker
     {
         public static IInputService MakeInput()
         {

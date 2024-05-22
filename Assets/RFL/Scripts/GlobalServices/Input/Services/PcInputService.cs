@@ -1,6 +1,7 @@
-﻿namespace RFL.Scripts.GlobalServices.Input
+﻿namespace RFL.Scripts.GlobalServices.Input.Services
 {
     using RFL.Scripts.GlobalServices.GameManager.MonoBeh;
+    using RFL.Scripts.GlobalServices.Input.Axis;
     using UnityEngine;
 
     public class PcInputService : MonoBeh, IInputService

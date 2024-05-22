@@ -1,4 +1,4 @@
-﻿namespace RFL.Scripts
+﻿namespace RFL.Scripts.GlobalServices.Input.UI
 {
     using UnityEngine.UI;
 

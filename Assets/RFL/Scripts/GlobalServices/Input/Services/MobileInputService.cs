@@ -1,8 +1,8 @@
-﻿namespace RFL.Scripts
+﻿namespace RFL.Scripts.GlobalServices.Input.Services
 {
     using RFL.Scripts.GlobalServices.GameManager.MonoBeh;
-    using RFL.Scripts.GlobalServices.Input;
-    using Unity.VisualScripting;
+    using RFL.Scripts.GlobalServices.Input.Axis;
+    using RFL.Scripts.GlobalServices.Input.UI;
     using UnityEngine;
 
     public class MobileInputService : MonoBeh, IInputService

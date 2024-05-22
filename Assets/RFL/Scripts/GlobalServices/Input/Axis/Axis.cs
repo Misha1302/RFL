@@ -1,4 +1,4 @@
-﻿namespace RFL.Scripts
+﻿namespace RFL.Scripts.GlobalServices.Input.Axis
 {
     using RFL.Scripts.GlobalServices.Time;
     using UnityEngine;
