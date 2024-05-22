@@ -13,7 +13,7 @@
 
         public override void Tick()
         {
-            Rb.velocity = Rb.velocity.WithX(Services.InputService.Input.X * speed);
+            Player.PlayerTransform.SetVelocityX(Services.InputService.Input.X * speed);
         }
     }
 }

@@ -17,7 +17,7 @@
         private float _timeWhenIsGroundedWasTrue = float.NegativeInfinity;
 
         public bool IsGroundedWithCoyote => _timeWhenIsGroundedWasTrue + coyoteTime >= Time;
-        public bool IsGroundedWithOutCoyote => Math.Abs(_timeWhenIsGroundedWasTrue - Time) < 0.01f;
+        public bool IsGroundedWithOutCoyote => Math.Abs(_timeWhenIsGroundedWasTrue - Time) < 0.000001f;
 
 
         public override void FixedTick()

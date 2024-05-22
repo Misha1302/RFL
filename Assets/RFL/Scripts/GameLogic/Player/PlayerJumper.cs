@@ -1,6 +1,5 @@
 ﻿namespace RFL.Scripts.GameLogic.Player
 {
-    using RFL.Scripts.Extensions;
     using RFL.Scripts.GlobalServices;
     using RFL.Scripts.GlobalServices.GameManager.MonoBeh;
     using UnityEngine;
@@ -58,7 +57,7 @@
 
         private void HandleJumping()
         {
-            Rb.AddForce(Vector2.up * (GetYForce() * UnityEngine.Time.deltaTime));
+            Player.PlayerTransform.AddForce(Vector2.up * (GetYForce() * UnityEngine.Time.deltaTime));
         }
 
         private void HandleJump()
@@ -66,7 +65,7 @@
             _startJumpTime = Time;
             _jumped = true;
 
-            Rb.velocity = Rb.velocity.WithY(GetYForce());
+            Player.PlayerTransform.SetVelocityY(GetYForce());
         }
 
         private void HandleEndOfJumping()
@@ -79,13 +78,13 @@
 
         private void SlowDownIfNeed()
         {
-            if (Rb.velocity.y <= 0) return;
+            if (Player.PlayerTransform.Vel.y <= 0) return;
             SlowDown();
         }
 
         private void SlowDown()
         {
-            Rb.velocity = Rb.velocity.WithY(Rb.velocity.y / 2f);
+            Player.PlayerTransform.SetVelocityY(Player.PlayerTransform.Vel.y / 2f);
         }
 
         private float GetYForce() => jumpVelocityCurve.Evaluate(PassedTime / jumpTime) * jumpHeight;

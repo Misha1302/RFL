@@ -5,12 +5,12 @@
     using RFL.Scripts.GlobalServices.GameManager.MonoBeh;
     using UnityEngine;
 
+    [RequireComponent(typeof(PlayerTransform))]
     [RequireComponent(typeof(PlayerStepper))]
     [RequireComponent(typeof(PlayerHorizontalMovement))]
     [RequireComponent(typeof(PlayerJumper))]
     [RequireComponent(typeof(PlayerImageFlipper))]
     [RequireComponent(typeof(PlayerPhysicMaterial))]
-    [RequireComponent(typeof(Rigidbody2D))]
     [RequireComponent(typeof(PlayerPauseHandler))]
     public class Player : MonoBeh
     {
@@ -21,20 +21,20 @@
             Di.AddScopedSingleton<PlayerScope, PlayerPauseHandler>(GetComponent<PlayerPauseHandler>);
             Di.AddScopedSingleton<PlayerScope, PlayerPhysicMaterial>(GetComponent<PlayerPhysicMaterial>);
             Di.AddScopedSingleton<PlayerScope, PlayerStepper>(GetComponent<PlayerStepper>);
-            Di.AddScopedSingleton<PlayerScope, Rigidbody2D>(GetComponent<Rigidbody2D>);
             Di.AddScopedSingleton<PlayerScope, PlayerHorizontalMovement>(GetComponent<PlayerHorizontalMovement>);
+            Di.AddScopedSingleton<PlayerScope, PlayerTransform>(GetComponent<PlayerTransform>);
         }
 
         private static Di Di => Di.Instance;
 
         public static PlayerStepper PlayerStepper => Di.GetScopedSingleton<PlayerScope, PlayerStepper>();
+        public static PlayerTransform PlayerTransform => Di.GetScopedSingleton<PlayerScope, PlayerTransform>();
         public static PlayerJumper PlayerJumper => Di.GetScopedSingleton<PlayerScope, PlayerJumper>();
         public static PlayerImageFlipper PlayerImageFlipper => Di.GetScopedSingleton<PlayerScope, PlayerImageFlipper>();
 
         public static PlayerPhysicMaterial PlayerPhysicMaterial =>
             Di.GetScopedSingleton<PlayerScope, PlayerPhysicMaterial>();
 
-        public static Rigidbody2D Rigidbody2D => Di.Instance.GetScopedSingleton<PlayerScope, Rigidbody2D>();
         public static PlayerPauseHandler PlayerPauseHandler => Di.GetScopedSingleton<PlayerScope, PlayerPauseHandler>();
 
         public PlayerHorizontalMovement PlayerHorizontalMovement =>

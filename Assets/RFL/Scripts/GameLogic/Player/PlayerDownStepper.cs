@@ -18,7 +18,7 @@
         public override void Tick()
         {
             if (Input.x != 0
-                && Player.PlayerJumper.GroundChecker.IsGroundedWithOutCoyote
+                && Player.PlayerJumper.GroundChecker.IsGroundedWithCoyote
                 && !Services.InputService.Jump)
                 TryPeekDown(_playerStepper.RightRayPoint, _playerStepper.LeftRayPoint);
         }
@@ -62,8 +62,7 @@
 
         private void PeekDown(Vector2 topPoint)
         {
-            _playerStepper.Rb2D.position = _playerStepper.Rb2D.position
-                .WithY(topPoint.y - _playerStepper.Player2FootsDelta);
+            Player.PlayerTransform.MoveToY(topPoint.y - _playerStepper.Player2FootsDelta);
         }
     }
 }

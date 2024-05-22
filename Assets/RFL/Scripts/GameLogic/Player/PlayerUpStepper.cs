@@ -2,7 +2,6 @@
 {
     using System;
     using System.Linq;
-    using RFL.Scripts.Extensions;
     using RFL.Scripts.GlobalServices;
     using RFL.Scripts.GlobalServices.GameManager.MonoBeh;
     using UnityEngine;
@@ -23,8 +22,11 @@
 
             var point = other.contacts
                 .OrderByDescending(x => x.point.y)
-                .First(x => PlayerStepper.RightCollider(x.collider))
+                .FirstOrDefault(x => PlayerStepper.RightCollider(x.collider))
                 .point;
+
+            if (point == default)
+                return;
 
             TryPickUp(point);
         }
@@ -37,15 +39,15 @@
 
         private void PickUpPlayer(Vector2 point)
         {
-            _playerStepper.Rb2D.position = _playerStepper.Rb2D.position
-                .WithX(_playerStepper.Rb2D.position.x - InputDirection() * _playerStepper.XTeleportOffset)
-                .WithY(point.y - _playerStepper.Player2FootsDelta);
+            var t = Player.PlayerTransform;
+            t.MoveToX(t.Pos.x - InputDirection() * _playerStepper.XTeleportOffset);
+            t.MoveToY(point.y - _playerStepper.Player2FootsDelta);
         }
 
         private bool IsFeasibleHeight(Vector2 point)
         {
             var delta = point.y - _playerStepper.PlayerFoot.position.y;
-            return delta < _playerStepper.MaxStep && delta > _playerStepper.MinStep;
+            return delta >= _playerStepper.MinStep && delta <= _playerStepper.MaxStep;
         }
 
         private static int InputDirection() => Math.Sign(-Services.InputService.Input.X);

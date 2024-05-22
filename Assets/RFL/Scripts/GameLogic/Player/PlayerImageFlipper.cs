@@ -14,8 +14,8 @@
 
         private void Flip()
         {
-            if (Rb.velocity.x != 0)
-                SpriteRenderer.flipX = Rb.velocity.x < 0;
+            if (Player.PlayerTransform.Vel.x != 0)
+                SpriteRenderer.flipX = Player.PlayerTransform.Vel.x < 0;
         }
     }
 }

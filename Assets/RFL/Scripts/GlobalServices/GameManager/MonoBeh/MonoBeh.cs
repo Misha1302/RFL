@@ -5,24 +5,30 @@
 
     public abstract class MonoBeh : ComponentsKeeper
     {
+        public bool isEnabled = true;
+
         private void Awake()
         {
-            Services.GameService.AddMonoBeh(this);
+            if (isEnabled)
+                Services.GameService.AddMonoBeh(this);
         }
 
         public virtual void OnCollisionEnter2D(Collision2D other)
         {
-            OnColEnter2D(other);
+            if (isEnabled)
+                OnColEnter2D(other);
         }
 
         public virtual void OnCollisionExit2D(Collision2D other)
         {
-            OnColExit2D(other);
+            if (isEnabled)
+                OnColExit2D(other);
         }
 
         public virtual void OnCollisionStay2D(Collision2D other)
         {
-            OnColStay2D(other);
+            if (isEnabled)
+                OnColStay2D(other);
         }
 
         public virtual void OnStart()

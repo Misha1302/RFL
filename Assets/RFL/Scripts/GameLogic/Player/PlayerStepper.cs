@@ -20,7 +20,6 @@ namespace RFL.Scripts.GameLogic.Player
         public float MinStep => minStep;
         public float MaxStep => maxStep;
         public Transform PlayerFoot => playerFoot;
-        public Rigidbody2D Rb2D => Rb;
         public Transform LeftRayPoint => leftRayPoint;
         public Transform RightRayPoint => rightRayPoint;
 

@@ -18,13 +18,13 @@
         {
             if (isPaused)
             {
-                _savedDirection = Rb.velocity;
-                Rb.constraints = RigidbodyConstraints2D.FreezeAll;
+                _savedDirection = Player.PlayerTransform.Vel;
+                Player.PlayerTransform.Freeze();
             }
             else
             {
-                Rb.constraints = RigidbodyConstraints2D.None;
-                Rb.velocity = _savedDirection;
+                Player.PlayerTransform.UnFreeze();
+                Player.PlayerTransform.Vel = _savedDirection;
             }
         }
     }

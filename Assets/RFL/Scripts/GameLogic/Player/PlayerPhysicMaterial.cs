@@ -7,10 +7,7 @@
     {
         public override void OnStart()
         {
-            Rb.sharedMaterial = new PhysicsMaterial2D
-            {
-                friction = 0f
-            };
+            Player.PlayerTransform.SetPhysicsMaterial(new PhysicsMaterial2D { friction = 0f });
         }
     }
 }
