@@ -15,6 +15,11 @@
             OnColEnter2D(other);
         }
 
+        public virtual void OnCollisionExit2D(Collision2D other)
+        {
+            OnColExit2D(other);
+        }
+
         public virtual void OnCollisionStay2D(Collision2D other)
         {
             OnColStay2D(other);
@@ -44,13 +49,8 @@
         {
         }
 
-        public virtual void OnColLeave2D(Collision2D other)
+        public virtual void OnColExit2D(Collision2D other)
         {
-        }
-
-        public virtual void OnCollisionLeave2D(Collision2D other)
-        {
-            OnColLeave2D(other);
         }
 
         public virtual void SelfDestroy()

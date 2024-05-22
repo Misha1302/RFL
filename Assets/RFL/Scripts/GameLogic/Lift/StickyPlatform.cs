@@ -1,0 +1,29 @@
+namespace RFL.Scripts.GameLogic.Lift
+{
+    using System.Collections.Generic;
+    using RFL.Scripts.Extensions;
+    using RFL.Scripts.GlobalServices.GameManager.MonoBeh;
+    using UnityEngine;
+
+    public class StickyPlatform : MonoBeh
+    {
+        private readonly Dictionary<Transform, Transform> parentsOfTransforms = new();
+
+        public override void OnColEnter2D(Collision2D other)
+        {
+            var t = other.transform;
+            if (!t.HasComponent<Rigidbody2D>()) return;
+
+            parentsOfTransforms[t] = t.parent;
+            t.SetParent(transform);
+        }
+
+        public override void OnColExit2D(Collision2D other)
+        {
+            var t = other.transform;
+            if (!t.HasComponent<Rigidbody2D>()) return;
+
+            t.SetParent(parentsOfTransforms[t]);
+        }
+    }
+}
