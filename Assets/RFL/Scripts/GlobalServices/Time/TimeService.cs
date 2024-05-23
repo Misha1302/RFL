@@ -2,11 +2,12 @@
 {
     using RFL.Scripts.GlobalServices.GameManager.MonoBeh;
 
+    // ReSharper disable MemberCanBeMadeStatic.Global
     public class TimeService : MonoBeh
     {
         public float TotalTime { get; private set; }
-        public static float DeltaTime => UnityEngine.Time.deltaTime;
-        public static float FixedDeltaTime => UnityEngine.Time.fixedDeltaTime;
+        public new float DeltaTime => UnityEngine.Time.deltaTime;
+        public new float FixedDeltaTime => UnityEngine.Time.fixedDeltaTime;
 
         protected override void Tick()
         {

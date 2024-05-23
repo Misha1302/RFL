@@ -9,7 +9,7 @@
     {
         [SerializeField] private AnimationCurve jumpVelocityCurve;
         [SerializeField] private float jumpTime = 0.75f;
-        [SerializeField] private float jumpHeight = 8f;
+        [SerializeField] private float jumpHeight = 10f;
 
         private bool _jumped;
         private float _startJumpTime = float.MinValue;
@@ -75,13 +75,13 @@
             SlowDownIfNeed();
         }
 
-        private void SlowDownIfNeed()
+        private static void SlowDownIfNeed()
         {
             if (Player.PlayerTransform.Vel.y <= 0) return;
             SlowDown();
         }
 
-        private void SlowDown()
+        private static void SlowDown()
         {
             Player.PlayerTransform.SetVelocityY(Player.PlayerTransform.Vel.y / 2f);
         }

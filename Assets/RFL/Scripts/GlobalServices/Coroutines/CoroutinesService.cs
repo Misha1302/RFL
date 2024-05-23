@@ -37,6 +37,11 @@
             _coroutines.ForAll(x => x.cors.ForAll(y => y.Tick()));
         }
 
+        protected override void FixedTick()
+        {
+            _coroutines.ForAll(x => x.cors.ForAll(y => y.FixedTick()));
+        }
+
         private List<CoroutineObj> GetCors(string corName)
         {
             var value = _coroutines.FirstOrDefault(x => x.name == corName).cors;

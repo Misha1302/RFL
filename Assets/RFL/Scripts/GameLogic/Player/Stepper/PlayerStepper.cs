@@ -8,9 +8,9 @@ namespace RFL.Scripts.GameLogic.Player.Stepper
     {
         public static readonly ContactFilter2D ContactFilter2D;
 
-        [SerializeField] private float minStep = 0.02f;
+        [SerializeField] private float minStep = 0.05f;
         [SerializeField] private float maxStep = 0.7f;
-        [SerializeField] private float xOffset;
+        [SerializeField] private float xOffset = 0.05f;
         [SerializeField] private Transform playerFoot;
 
         [SerializeField] private Transform leftDownRayPoint;

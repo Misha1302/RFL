@@ -8,7 +8,7 @@ namespace RFL.Scripts.GameLogic.Lift
         [SerializeField] private AnimationCurve movementCurve;
         [SerializeField] private Transform aPoint;
         [SerializeField] private Transform bPoint;
-        [SerializeField] private float speed;
+        [SerializeField] private float speed = 0.2f;
 
         private Vector3 CurPoint => Vector3.Lerp(aPoint.position, bPoint.position, T);
         private float T => movementCurve.Evaluate(Mathf.PingPong(Time * speed, 1f));

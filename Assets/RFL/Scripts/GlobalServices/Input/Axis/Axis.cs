@@ -1,7 +1,7 @@
 ﻿namespace RFL.Scripts.GlobalServices.Input.Axis
 {
-    using RFL.Scripts.GlobalServices.Time;
     using UnityEngine;
+    using Services = RFL.Scripts.GlobalServices.Services;
 
     public class Axis
     {
@@ -14,6 +14,13 @@
         }
 
         public float Value { get; private set; }
+
+        public void HandleDirection(float dir)
+        {
+            if (dir < 0) Decrease();
+            else if (dir > 0) Increase();
+            else Zero();
+        }
 
         public void Increase() => MoveTo(_speed, 1f);
         public void Decrease() => MoveTo(_speed, -1f);
@@ -28,7 +35,7 @@
                 _ => Value
             };
 
-            Value = Mathf.MoveTowards(Value, target, speed * TimeService.DeltaTime);
+            Value = Mathf.MoveTowards(Value, target, speed * Services.TimeService.DeltaTime);
         }
 
         public static implicit operator float(Axis axis) => axis.Value;

@@ -16,13 +16,21 @@
         {
             Jump = _canvas.Jump.WasPressed;
 
-            if (_canvas.Left.WasPressed) Input.X.Decrease();
-            else if (_canvas.Right.WasPressed) Input.X.Increase();
-            else Input.X.Zero();
+            Input.X.HandleDirection(CalcXDir());
+            Input.X.HandleDirection(CalcYDir());
+        }
 
-            if (_canvas.Up.WasPressed) Input.Y.Increase();
-            else if (_canvas.Down.WasPressed) Input.Y.Decrease();
-            else Input.Y.Zero();
+        private float CalcYDir() => CalcDir(_canvas.Left.WasPressed, _canvas.Right.WasPressed);
+
+        private float CalcXDir() => CalcDir(_canvas.Down.WasPressed, _canvas.Up.WasPressed);
+
+
+        private static float CalcDir(bool neg, bool pos)
+        {
+            float dir = 0;
+            if (pos) dir++;
+            if (neg) dir--;
+            return dir;
         }
 
         protected override void OnStart()

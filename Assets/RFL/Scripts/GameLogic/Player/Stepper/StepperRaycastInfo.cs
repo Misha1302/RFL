@@ -1,10 +1,11 @@
 ﻿namespace RFL.Scripts.GameLogic.Player.Stepper
 {
+    using RFL.Scripts.Extensions;
     using UnityEngine;
 
     public readonly struct StepperRaycastInfo
     {
-        public bool WasHit => !float.IsNaN(HitPoint.x);
+        public bool WasHit => !HitPoint.IsNan();
 
         public readonly Vector2 HitPoint;
         public readonly bool WasAnyHitOnPath;
