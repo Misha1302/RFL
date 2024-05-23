@@ -39,6 +39,7 @@
                 y = castRight.HitPoint.y;
             else if (castRight.WasHit && castLeft.WasHit)
                 y = Mathf.Max(castLeft.HitPoint.y, castRight.HitPoint.y);
+            else return;
 
             Player.PlayerTransform.MoveToY(CalcY(y));
         }
