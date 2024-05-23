@@ -8,7 +8,7 @@
     {
         public static IInputService MakeInput()
         {
-            if (Input.touchSupported)
+            if (Input.touchSupported || RunMode.Current == RunMode.ApplicationRunMode.Simulator)
                 return Creator.Create<MobileInputService>();
             return Creator.Create<PcInputService>();
         }

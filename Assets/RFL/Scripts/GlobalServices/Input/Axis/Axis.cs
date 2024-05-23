@@ -1,5 +1,6 @@
 ﻿namespace RFL.Scripts.GlobalServices.Input.Axis
 {
+    using System;
     using UnityEngine;
     using Services = RFL.Scripts.GlobalServices.Services;
 
@@ -15,16 +16,7 @@
 
         public float Value { get; private set; }
 
-        public void HandleDirection(float dir)
-        {
-            if (dir < 0) Decrease();
-            else if (dir > 0) Increase();
-            else Zero();
-        }
-
-        public void Increase() => MoveTo(_speed, 1f);
-        public void Decrease() => MoveTo(_speed, -1f);
-        public void Zero() => MoveTo(_speed, 0f);
+        public void HandleDirection(float dir) => MoveTo(_speed, Math.Sign(dir));
 
         private void MoveTo(float speed, float target)
         {
