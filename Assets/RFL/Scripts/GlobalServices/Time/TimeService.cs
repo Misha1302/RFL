@@ -6,6 +6,7 @@
     {
         public float TotalTime { get; private set; }
         public static float DeltaTime => UnityEngine.Time.deltaTime;
+        public static float FixedDeltaTime => UnityEngine.Time.fixedDeltaTime;
 
         public override void Tick()
         {

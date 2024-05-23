@@ -15,5 +15,8 @@
             vec.y = y;
             return vec;
         }
+
+        public static bool IsNan(this Vector2 vec) => float.IsNaN(vec.x) || float.IsNaN(vec.y);
+        public static Vector2 MakeNan(this Vector2 vec) => new(float.NaN, float.NaN);
     }
 }

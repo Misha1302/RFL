@@ -24,7 +24,7 @@ namespace RFL.Scripts.GameLogic.Player.Stepper
         public Transform LeftRayPoint => leftRayPoint;
         public Transform RightRayPoint => rightRayPoint;
 
-        public float Player2FootsDelta => PlayerFoot.localPosition.y * Player.PlayerSingleton.transform.lossyScale.y;
+        public float Player2FootsDelta => -PlayerFoot.localPosition.y * Player.PlayerSingleton.transform.lossyScale.y;
 
         public override void OnStart()
         {

@@ -1,26 +1,23 @@
 ﻿namespace RFL.Scripts.GameLogic.Player.Stepper
 {
-    using System;
     using System.Linq;
     using RFL.Scripts.Extensions;
-    using RFL.Scripts.GlobalServices;
     using RFL.Scripts.GlobalServices.GameManager.MonoBeh;
     using RFL.Scripts.Helpers;
+    using RFL.Scripts.Tags;
     using UnityEngine;
 
     public class PlayerDownStepper : MonoBeh
     {
-        private readonly RaycastHit2D[] _result = new RaycastHit2D[CollectionsLength.MaxHitsCount];
+        private static readonly ContactFilter2D _contactFilter2D;
+        private readonly RaycastHit2D[] _hits = new RaycastHit2D[CollectionsLength.MaxHitsCount];
+
         private PlayerStepper _playerStepper;
 
-        private static Vector2 Input => Services.InputService.Input;
-
-        public override void Tick()
+        static PlayerDownStepper()
         {
-            if (Input.x != 0
-                && Player.PlayerJumper.GroundChecker.IsGroundedWithCoyote
-                && !Services.InputService.Jump)
-                TryPeekDown(_playerStepper.RightRayPoint, _playerStepper.LeftRayPoint);
+            _contactFilter2D = new ContactFilter2D().NoFilter();
+            _contactFilter2D.useTriggers = false;
         }
 
         public void Init(PlayerStepper playerStepper)
@@ -28,41 +25,30 @@
             _playerStepper = playerStepper;
         }
 
-        private void TryPeekDown(Transform point1, Transform point2)
+        public override void FixedTick()
         {
-            if (!Raycast(point1, out var topPoint1)) return;
-            if (!Raycast(point2, out var topPoint2)) return;
-            if (!Satisfies(point1, topPoint1) || !Satisfies(point2, topPoint2)) return;
+            if (!Player.PlayerJumper.GroundChecker.IsGroundedWithOutCoyote) return;
 
-            PeekDown(point1.position.y > point2.position.y ? topPoint1 : topPoint2);
+            var castLeft = Raycast(_playerStepper.LeftRayPoint.position);
+            var castRight = Raycast(_playerStepper.RightRayPoint.position);
+
+            if (castLeft.WasHit && !castRight.WasAnyHitOnPath) Player.PlayerTransform.MoveToY(castLeft.HitPoint.y);
+            if (castRight.WasHit && !castLeft.WasAnyHitOnPath) Player.PlayerTransform.MoveToY(castRight.HitPoint.y);
+            if (castRight.WasHit && castLeft.WasHit)
+                Player.PlayerTransform.MoveToY(Mathf.Max(castLeft.HitPoint.y, castRight.HitPoint.y) + (Player.PlayerStepper.Player2FootsDelta));
         }
 
-        private bool Raycast(Transform point1, out Vector2 topPoint)
+        private StepperRaycastInfo Raycast(Vector3 point)
         {
-            topPoint = default;
-
-            var count = Physics2D.RaycastNonAlloc(point1.position, Vector2.down, _result, _playerStepper.MaxStep);
-            if (count == 0)
-                return false;
-
-            var hit = _result
-                .Slice(0, count)
+            var count = Physics2D.Raycast(point, Vector2.down, _contactFilter2D, _hits, _playerStepper.MaxStep);
+            var hit = _hits.Slice(0, count)
                 .OrderByDescending(x => x.point.y)
-                .FirstOrDefault(x => PlayerStepper.RightCollider(x.collider));
+                .FirstOrDefault(x => point.y - x.point.y > _playerStepper.MinStep && !x.transform.HasComponent<PlayerTag>());
 
-            topPoint = hit.point;
-            return hit != default;
-        }
+            Debug.DrawLine(point, point + Vector3.down * _playerStepper.MaxStep, Color.red);
+            Debug.DrawLine(point, hit.point, Color.green);
 
-        private bool Satisfies(Transform rayPoint, Vector2 topPoint)
-        {
-            var delta = Math.Abs(topPoint.y - rayPoint.position.y);
-            return delta >= _playerStepper.MinStep && delta <= _playerStepper.MaxStep;
-        }
-
-        private void PeekDown(Vector2 topPoint)
-        {
-            Player.PlayerTransform.MoveToY(topPoint.y - _playerStepper.Player2FootsDelta);
+            return new StepperRaycastInfo(hit ? hit.point : Vector2.zero.MakeNan(), count != 0);
         }
     }
 }

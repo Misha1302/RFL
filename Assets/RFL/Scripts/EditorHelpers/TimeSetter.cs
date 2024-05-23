@@ -4,7 +4,7 @@
 
     public class TimeSetter : MonoBehaviour
     {
-        [Range(0.1f, 2f)] [SerializeField] private float scale;
+        [Range(0.002f, 2f)] [SerializeField] private float scale = 1;
 
         private void OnValidate()
         {

@@ -15,9 +15,8 @@
         private float _startJumpTime = float.MinValue;
 
 
-        private bool IsJumping => jumpTime >= PassedTime
-                                  && Services.InputService.Jump
-                                  && !GroundChecker.IsGroundedWithOutCoyote;
+        private bool IsJumping =>
+            jumpTime >= PassedTime && Services.InputService.Jump && !GroundChecker.IsGroundedWithOutCoyote;
 
 
         private float PassedTime => Time - _startJumpTime;
