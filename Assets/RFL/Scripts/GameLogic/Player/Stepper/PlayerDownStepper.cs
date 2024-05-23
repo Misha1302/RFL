@@ -10,6 +10,10 @@
     public class PlayerDownStepper : MonoBeh
     {
         private static readonly ContactFilter2D _contactFilter2D;
+
+        [SerializeField] private Transform leftRayPoint;
+        [SerializeField] private Transform rightRayPoint;
+
         private readonly RaycastHit2D[] _hits = new RaycastHit2D[CollectionsLength.MaxHitsCount];
 
         private PlayerStepper _playerStepper;
@@ -29,8 +33,8 @@
         {
             if (!Player.PlayerJumper.GroundChecker.IsGroundedWithOutCoyote) return;
 
-            var castLeft = Raycast(_playerStepper.LeftRayPoint.position);
-            var castRight = Raycast(_playerStepper.RightRayPoint.position);
+            var castLeft = Raycast(leftRayPoint.position);
+            var castRight = Raycast(rightRayPoint.position);
 
             float y = 0;
             if (castLeft.WasHit && !castRight.WasAnyHitOnPath)

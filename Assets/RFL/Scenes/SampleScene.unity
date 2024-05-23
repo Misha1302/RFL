@@ -1565,10 +1565,7 @@ MonoBehaviour:
   isEnabled: 1
   minStep: 0.02
   maxStep: 0.7
-  xTeleportOffset: 0.14
   playerFoot: {fileID: 1793687825}
-  leftRayPoint: {fileID: 1076751744}
-  rightRayPoint: {fileID: 1993265562}
 --- !u!114 &1118593092
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1595,6 +1592,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isEnabled: 1
+  leftRayPoint: {fileID: 1076751744}
+  rightRayPoint: {fileID: 1993265562}
 --- !u!114 &1118593094
 MonoBehaviour:
   m_ObjectHideFlags: 0
