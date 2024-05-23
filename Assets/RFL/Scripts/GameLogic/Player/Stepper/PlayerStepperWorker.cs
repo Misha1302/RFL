@@ -4,31 +4,31 @@
     using System.Linq;
     using RFL.Scripts.Extensions;
     using RFL.Scripts.GlobalServices;
-    using RFL.Scripts.GlobalServices.GameManager.MonoBeh;
     using RFL.Scripts.Helpers;
     using RFL.Scripts.Tags;
     using UnityEngine;
 
-    public class PlayerUpStepper : MonoBeh
+    public class PlayerStepperWorker
     {
-        [SerializeField] private Transform leftRayPoint;
-        [SerializeField] private Transform rightRayPoint;
-
         private readonly RaycastHit2D[] _hits = new RaycastHit2D[CollectionsLength.MaxHitsCount];
+        private Transform _leftRayPoint;
 
         private PlayerStepper _playerStepper;
+        private Transform _rightRayPoint;
 
-        public void Init(PlayerStepper playerStepper)
+        public void Init(PlayerStepper playerStepper, Transform leftRayPoint, Transform rightRayPoint)
         {
             _playerStepper = playerStepper;
+            _leftRayPoint = leftRayPoint;
+            _rightRayPoint = rightRayPoint;
         }
 
-        protected override void FixedTick()
+        public void TryWork()
         {
             if (!Player.PlayerJumper.GroundChecker.IsGroundedWithOutCoyote) return;
 
-            var castLeft = Raycast(leftRayPoint.position);
-            var castRight = Raycast(rightRayPoint.position);
+            var castLeft = Raycast(_leftRayPoint.position);
+            var castRight = Raycast(_rightRayPoint.position);
 
             float y;
             if (castLeft.WasHit && !castRight.WasAnyHitOnPath)
@@ -40,7 +40,8 @@
             else return;
 
             Player.PlayerTransform.MoveToY(CalcY(y));
-            Player.PlayerTransform.MoveToX(Player.PlayerTransform.Pos.x + Math.Sign(Services.InputService.Input.X) * _playerStepper.XOffset);
+            Player.PlayerTransform.MoveToX(Player.PlayerTransform.Pos.x +
+                                           Math.Sign(Services.InputService.Input.X) * _playerStepper.XOffset);
         }
 
         private static float CalcY(float y) => y + Player.PlayerStepper.Player2FootsDelta;

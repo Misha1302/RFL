@@ -1001,7 +1001,7 @@ GameObject:
   - component: {fileID: 591531584}
   - component: {fileID: 591531585}
   m_Layer: 0
-  m_Name: Right
+  m_Name: RightUp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1307,7 +1307,7 @@ GameObject:
   - component: {fileID: 1076751744}
   - component: {fileID: 1076751745}
   m_Layer: 0
-  m_Name: Left
+  m_Name: LeftDown
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1361,8 +1361,6 @@ GameObject:
   - component: {fileID: 1118593088}
   - component: {fileID: 1118593089}
   - component: {fileID: 1118593090}
-  - component: {fileID: 1118593092}
-  - component: {fileID: 1118593093}
   - component: {fileID: 1118593094}
   - component: {fileID: 1118593095}
   m_Layer: 0
@@ -1660,36 +1658,10 @@ MonoBehaviour:
   maxStep: 0.7
   xOffset: 0.05
   playerFoot: {fileID: 1793687825}
---- !u!114 &1118593092
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1118593076}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 22b12ebbb12346e483ccdf7946859cae, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isEnabled: 1
-  leftRayPoint: {fileID: 1444059628}
-  rightRayPoint: {fileID: 591531584}
---- !u!114 &1118593093
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1118593076}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 76fd0dd9f3994ca0bdc259962ae49700, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isEnabled: 1
-  leftRayPoint: {fileID: 1076751744}
-  rightRayPoint: {fileID: 1993265562}
+  leftDownRayPoint: {fileID: 1076751744}
+  rightDownRayPoint: {fileID: 1993265562}
+  leftUpRayPoint: {fileID: 1444059628}
+  rightUpRayPoint: {fileID: 591531584}
 --- !u!114 &1118593094
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2197,7 +2169,7 @@ GameObject:
   - component: {fileID: 1444059628}
   - component: {fileID: 1444059629}
   m_Layer: 0
-  m_Name: Left
+  m_Name: LeftUp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2789,7 +2761,7 @@ GameObject:
   - component: {fileID: 1993265562}
   - component: {fileID: 1993265563}
   m_Layer: 0
-  m_Name: Right
+  m_Name: RightDown
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

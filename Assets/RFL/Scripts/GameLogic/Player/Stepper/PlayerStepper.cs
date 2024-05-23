@@ -1,13 +1,9 @@
 namespace RFL.Scripts.GameLogic.Player.Stepper
 {
-    using RFL.Scripts.Extensions;
     using RFL.Scripts.GlobalServices.GameManager.MonoBeh;
-    using RFL.Scripts.Tags;
     using UnityEngine;
 
     [RequireComponent(typeof(Rigidbody2D))]
-    [RequireComponent(typeof(PlayerUpStepper))]
-    [RequireComponent(typeof(PlayerDownStepper))]
     public class PlayerStepper : MonoBeh
     {
         public static readonly ContactFilter2D ContactFilter2D;
@@ -17,6 +13,15 @@ namespace RFL.Scripts.GameLogic.Player.Stepper
         [SerializeField] private float xOffset;
         [SerializeField] private Transform playerFoot;
 
+        [SerializeField] private Transform leftDownRayPoint;
+        [SerializeField] private Transform rightDownRayPoint;
+
+        [SerializeField] private Transform leftUpRayPoint;
+        [SerializeField] private Transform rightUpRayPoint;
+
+        private PlayerStepperWorker _stepperDown;
+        private PlayerStepperWorker _stepperUp;
+
         static PlayerStepper()
         {
             ContactFilter2D = new ContactFilter2D().NoFilter();
@@ -25,17 +30,23 @@ namespace RFL.Scripts.GameLogic.Player.Stepper
 
         public float MinStep => minStep;
         public float MaxStep => maxStep;
-        public Transform PlayerFoot => playerFoot;
 
-        public float Player2FootsDelta => -PlayerFoot.localPosition.y * Player.PlayerSingleton.transform.lossyScale.y;
+        public float Player2FootsDelta => -playerFoot.localPosition.y * Player.PlayerSingleton.transform.lossyScale.y;
         public float XOffset => xOffset;
 
         protected override void OnStart()
         {
-            GetComponent<PlayerUpStepper>().Init(this);
-            GetComponent<PlayerDownStepper>().Init(this);
+            _stepperDown = new PlayerStepperWorker();
+            _stepperUp = new PlayerStepperWorker();
+
+            _stepperDown.Init(this, leftDownRayPoint, rightDownRayPoint);
+            _stepperUp.Init(this, leftUpRayPoint, rightUpRayPoint);
         }
 
-        public static bool RightCollider(Collider2D x) => !x.HasComponent<PlayerTag>() && !x.isTrigger;
+        protected override void FixedTick()
+        {
+            _stepperDown.TryWork();
+            _stepperUp.TryWork();
+        }
     }
 }
