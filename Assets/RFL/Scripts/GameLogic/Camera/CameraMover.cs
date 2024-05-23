@@ -10,12 +10,12 @@
 
         private Vector3 _stdPosition;
 
-        public override void OnStart()
+        protected override void OnStart()
         {
             _stdPosition = cameraFollowPoint.localPosition;
         }
 
-        public override void FixedTick()
+        protected override void FixedTick()
         {
             cameraFollowPoint.localPosition = _stdPosition + Services.InputService.Input;
         }

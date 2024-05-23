@@ -10,7 +10,7 @@
         [SerializeField] private float speed = 5f;
 
 
-        public override void Tick()
+        protected override void Tick()
         {
             Player.PlayerTransform.SetVelocityX(Services.InputService.Input.X * speed);
         }

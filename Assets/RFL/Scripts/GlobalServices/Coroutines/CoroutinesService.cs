@@ -32,7 +32,7 @@
             _coroutines.FirstOrDefault(x => x.name == corsGroup).cors.ForAll(x => x.Stop());
         }
 
-        public override void Tick()
+        protected override void Tick()
         {
             _coroutines.ForAll(x => x.cors.ForAll(y => y.Tick()));
         }

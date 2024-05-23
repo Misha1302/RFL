@@ -9,7 +9,7 @@ namespace RFL.Scripts.GameLogic.Lift
     {
         private readonly Dictionary<Transform, Transform> parentsOfTransforms = new();
 
-        public override void OnColEnter2D(Collision2D other)
+        protected override void OnColEnter2D(Collision2D other)
         {
             var t = other.transform;
             if (!t.HasComponent<Rigidbody2D>()) return;
@@ -18,7 +18,7 @@ namespace RFL.Scripts.GameLogic.Lift
             t.SetParent(transform);
         }
 
-        public override void OnColExit2D(Collision2D other)
+        protected override void OnColExit2D(Collision2D other)
         {
             var t = other.transform;
             if (!t.HasComponent<Rigidbody2D>()) return;

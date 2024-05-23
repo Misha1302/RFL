@@ -6,7 +6,7 @@
     [RequireComponent(typeof(SpriteRenderer))]
     public class PlayerImageFlipper : MonoBeh
     {
-        public override void LateTick()
+        protected override void LateTick()
         {
             Flip();
         }

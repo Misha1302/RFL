@@ -5,7 +5,7 @@
 
     public class PlayerPhysicMaterial : MonoBeh
     {
-        public override void OnStart()
+        protected override void OnStart()
         {
             Player.PlayerTransform.SetPhysicsMaterial(new PhysicsMaterial2D { friction = 0f });
         }

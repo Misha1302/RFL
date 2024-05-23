@@ -31,19 +31,37 @@
                 OnColStay2D(other);
         }
 
-        public virtual void OnStart() { }
+        public void PubOnStart()
+        {
+            if (isEnabled)
+                OnStart();
+        }
 
-        public virtual void Tick() { }
+        public void PubTick()
+        {
+            if (isEnabled)
+                Tick();
+        }
 
-        public virtual void LateTick() { }
+        public void PubLateTick()
+        {
+            if (isEnabled)
+                LateTick();
+        }
 
-        public virtual void FixedTick() { }
+        public void PubFixedTick()
+        {
+            if (isEnabled)
+                FixedTick();
+        }
 
-        public virtual void OnColEnter2D(Collision2D other) { }
-
-        public virtual void OnColStay2D(Collision2D other) { }
-
-        public virtual void OnColExit2D(Collision2D other) { }
+        protected virtual void OnStart() { }
+        protected virtual void Tick() { }
+        protected virtual void LateTick() { }
+        protected virtual void FixedTick() { }
+        protected virtual void OnColEnter2D(Collision2D other) { }
+        protected virtual void OnColStay2D(Collision2D other) { }
+        protected virtual void OnColExit2D(Collision2D other) { }
 
         public virtual void SelfDestroy()
         {

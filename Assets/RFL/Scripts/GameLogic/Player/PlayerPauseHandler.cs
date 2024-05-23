@@ -9,7 +9,7 @@
     {
         private Vector3 _savedDirection;
 
-        public override void OnStart()
+        protected override void OnStart()
         {
             Services.PauseService.OnPausedChanged += OnPauseChanged;
         }

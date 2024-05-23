@@ -11,13 +11,13 @@
 
         private void Awake() => Services.PauseService.OnPausedChanged += OnPausedChanged;
 
-        private void Start() => _monoBehs.ForAll(x => x.OnStart());
+        private void Start() => _monoBehs.ForAll(x => x.PubOnStart());
 
-        private void Update() => _monoBehs.ForAll(x => x.Tick());
+        private void Update() => _monoBehs.ForAll(x => x.PubTick());
 
-        private void FixedUpdate() => _monoBehs.ForAll(x => x.FixedTick());
+        private void FixedUpdate() => _monoBehs.ForAll(x => x.PubFixedTick());
 
-        private void LateUpdate() => _monoBehs.ForAll(x => x.LateTick());
+        private void LateUpdate() => _monoBehs.ForAll(x => x.PubLateTick());
 
 
         private void OnPausedChanged(bool isPaused) => enabled = !isPaused;

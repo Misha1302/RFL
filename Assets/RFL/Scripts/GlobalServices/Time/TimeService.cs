@@ -8,7 +8,7 @@
         public static float DeltaTime => UnityEngine.Time.deltaTime;
         public static float FixedDeltaTime => UnityEngine.Time.fixedDeltaTime;
 
-        public override void Tick()
+        protected override void Tick()
         {
             TotalTime += UnityEngine.Time.deltaTime;
         }

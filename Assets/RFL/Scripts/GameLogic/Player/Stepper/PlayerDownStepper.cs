@@ -1,7 +1,9 @@
 ﻿namespace RFL.Scripts.GameLogic.Player.Stepper
 {
+    using System;
     using System.Linq;
     using RFL.Scripts.Extensions;
+    using RFL.Scripts.GlobalServices;
     using RFL.Scripts.GlobalServices.GameManager.MonoBeh;
     using RFL.Scripts.Helpers;
     using RFL.Scripts.Tags;
@@ -9,8 +11,6 @@
 
     public class PlayerDownStepper : MonoBeh
     {
-        private static readonly ContactFilter2D _contactFilter2D;
-
         [SerializeField] private Transform leftRayPoint;
         [SerializeField] private Transform rightRayPoint;
 
@@ -18,25 +18,19 @@
 
         private PlayerStepper _playerStepper;
 
-        static PlayerDownStepper()
-        {
-            _contactFilter2D = new ContactFilter2D().NoFilter();
-            _contactFilter2D.useTriggers = false;
-        }
-
         public void Init(PlayerStepper playerStepper)
         {
             _playerStepper = playerStepper;
         }
 
-        public override void FixedTick()
+        protected override void FixedTick()
         {
             if (!Player.PlayerJumper.GroundChecker.IsGroundedWithOutCoyote) return;
 
             var castLeft = Raycast(leftRayPoint.position);
             var castRight = Raycast(rightRayPoint.position);
 
-            float y = 0;
+            float y;
             if (castLeft.WasHit && !castRight.WasAnyHitOnPath)
                 y = castLeft.HitPoint.y;
             else if (!castLeft.WasAnyHitOnPath && castRight.WasHit)
@@ -46,13 +40,16 @@
             else return;
 
             Player.PlayerTransform.MoveToY(CalcY(y));
+            Player.PlayerTransform.MoveToX(Player.PlayerTransform.Pos.x + Math.Sign(Services.InputService.Input.X) * _playerStepper.XOffset);
         }
 
         private static float CalcY(float y) => y + Player.PlayerStepper.Player2FootsDelta;
 
         private StepperRaycastInfo Raycast(Vector3 point)
         {
-            var count = Physics2D.Raycast(point, Vector2.down, _contactFilter2D, _hits, _playerStepper.MaxStep);
+            var count =
+                Physics2D.Raycast(point, Vector2.down, PlayerStepper.ContactFilter2D, _hits, _playerStepper.MaxStep);
+
             var hits = _hits.Slice(0, count)
                 .Where(x => !x.transform.HasComponent<PlayerTag>())
                 .OrderByDescending(x => x.point.y)

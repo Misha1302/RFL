@@ -9,7 +9,7 @@
         public Axis2D Input { get; } = new(IInputService.InputSpeed);
         public bool Jump { get; private set; }
 
-        public override void Tick()
+        protected override void Tick()
         {
             var hor = UnityEngine.Input.GetAxisRaw("Horizontal");
             var ver = UnityEngine.Input.GetAxisRaw("Vertical");

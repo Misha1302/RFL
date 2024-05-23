@@ -13,7 +13,7 @@ namespace RFL.Scripts.GameLogic.Lift
         private Vector3 CurPoint => Vector3.Lerp(aPoint.position, bPoint.position, T);
         private float T => movementCurve.Evaluate(Mathf.PingPong(Time * speed, 1f));
 
-        public override void Tick()
+        protected override void Tick()
         {
             transform.position = CurPoint;
         }

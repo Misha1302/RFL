@@ -23,7 +23,7 @@
             Math.Abs(_timeWhenIsGroundedWasTrue - Time) <= TimeService.FixedDeltaTime * 2;
 
 
-        public override void FixedTick()
+        protected override void FixedTick()
         {
             var count = GetComponent<BoxCollider2D>().OverlapCollider(_contactFilter2D, _results);
 

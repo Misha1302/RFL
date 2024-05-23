@@ -12,7 +12,7 @@
         public Axis2D Input { get; } = new(IInputService.InputSpeed);
         public bool Jump { get; private set; }
 
-        public override void Tick()
+        protected override void Tick()
         {
             Jump = _canvas.Jump.WasPressed;
 
@@ -25,7 +25,7 @@
             else Input.Y.Zero();
         }
 
-        public override void OnStart()
+        protected override void OnStart()
         {
             var prefab = Resources.Load<MobileInputCanvas>("UI/CanvasMobileController");
             _canvas = Instantiate(prefab);

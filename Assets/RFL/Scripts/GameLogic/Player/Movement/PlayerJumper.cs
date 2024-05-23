@@ -24,12 +24,12 @@
         public PlayerGroundChecker GroundChecker { get; private set; }
 
 
-        public override void OnStart()
+        protected override void OnStart()
         {
             GroundChecker = GetComponentInChildren<PlayerGroundChecker>();
         }
 
-        public override void Tick()
+        protected override void Tick()
         {
             HandleJumpIfNeed();
             HandleJumpingIfNeed();
