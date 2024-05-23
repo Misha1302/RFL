@@ -62,7 +62,7 @@
 
             DrawDownStepper(point, hit);
 
-            return new StepperRaycastInfo(hit ? hit.point : Vector2.zero.MakeNan(), hits.Length != 0);
+            return new StepperRaycastInfo(hit ? hit.point : Vectors2Extensions.MakeNan(), hits.Length != 0);
         }
 
         private void DrawDownStepper(Vector3 point, RaycastHit2D hit)
