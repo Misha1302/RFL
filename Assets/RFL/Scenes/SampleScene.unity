@@ -1564,7 +1564,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isEnabled: 1
   minStep: 0.02
-  maxStep: 1.2
+  maxStep: 0.7
   xTeleportOffset: 0.14
   playerFoot: {fileID: 1793687825}
   leftRayPoint: {fileID: 1076751744}
