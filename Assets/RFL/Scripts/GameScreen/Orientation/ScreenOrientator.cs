@@ -1,4 +1,4 @@
-﻿namespace RFL.Scripts.GameScreen
+﻿namespace RFL.Scripts.GameScreen.Orientation
 {
     using RFL.Scripts.GlobalServices.GameManager.MonoBeh;
 

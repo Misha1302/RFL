@@ -1,7 +1,8 @@
-﻿namespace RFL.Scripts.GameScreen
+﻿namespace RFL.Scripts.GameScreen.SafeArea
 {
     using RFL.Scripts.Extensions;
     using RFL.Scripts.GlobalServices.GameManager.MonoBeh;
+    using RFL.Scripts.Tags;
     using Unity.VisualScripting;
     using UnityEngine;
 
@@ -11,7 +12,7 @@
     ///     </a>
     /// </summary>
     [RequireComponent(typeof(Canvas))]
-    public class CanvasHelper : MonoBeh
+    public class CanvasSafeArea : MonoBeh
     {
         private static bool _screenChangeVarsInitialized;
         private static ScreenOrientation _lastOrientation;

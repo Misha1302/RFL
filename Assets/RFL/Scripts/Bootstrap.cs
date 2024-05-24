@@ -2,7 +2,7 @@ namespace RFL.Scripts
 {
     using RFL.Scripts.DI;
     using RFL.Scripts.GameLogic.Player;
-    using RFL.Scripts.GameScreen;
+    using RFL.Scripts.GameScreen.Orientation;
     using RFL.Scripts.GlobalServices.Coroutines;
     using RFL.Scripts.GlobalServices.GameManager;
     using RFL.Scripts.GlobalServices.Input;
