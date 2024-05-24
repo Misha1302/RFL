@@ -1,5 +1,6 @@
 namespace RFL.Scripts.GameLogic.Lift
 {
+    using RFL.Scripts.Extensions;
     using RFL.Scripts.GlobalServices.GameManager.MonoBeh;
     using UnityEngine;
 
@@ -11,7 +12,7 @@ namespace RFL.Scripts.GameLogic.Lift
         [SerializeField] private float speed = 0.2f;
 
         private Vector3 CurPoint => Vector3.Lerp(aPoint.position, bPoint.position, T);
-        private float T => movementCurve.Evaluate(Mathf.PingPong(Time * speed, 1f));
+        private float T => movementCurve.Evaluate((Time * speed).PingPong(1f));
 
         protected override void Tick()
         {

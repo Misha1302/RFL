@@ -4,7 +4,7 @@
 
     public class FramesSetter : MonoBehaviour
     {
-        [Range(0, 300)] [SerializeField] private int framesCount = 300;
+        [Range(-1, 100)] [SerializeField] private int framesCount = -1;
 
         private void OnValidate()
         {

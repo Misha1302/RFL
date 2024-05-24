@@ -1,7 +1,7 @@
 ﻿namespace RFL.Scripts.GlobalServices.Input.Axis
 {
     using System;
-    using UnityEngine;
+    using RFL.Scripts.Extensions;
     using Services = RFL.Scripts.GlobalServices.Services;
 
     public class Axis
@@ -22,12 +22,12 @@
         {
             Value = target switch
             {
-                < 0 => Mathf.Clamp(Value, -1, 0),
-                > 0 => Mathf.Clamp(Value, 0, 1),
+                < 0 => Value.ClampNeg10(),
+                > 0 => Value.Clamp01(),
                 _ => Value
             };
 
-            Value = Mathf.MoveTowards(Value, target, speed * Services.TimeService.DeltaTime);
+            Value = Value.MoveTowards(target, speed * Services.TimeService.DeltaTime);
         }
 
         public static implicit operator float(Axis axis) => axis.Value;

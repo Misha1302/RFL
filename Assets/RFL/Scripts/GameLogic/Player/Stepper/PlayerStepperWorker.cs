@@ -3,32 +3,28 @@
     using System;
     using System.Linq;
     using RFL.Scripts.Extensions;
+    using RFL.Scripts.GameLogic.Tags;
     using RFL.Scripts.GlobalServices;
     using RFL.Scripts.Helpers;
-    using RFL.Scripts.Tags;
     using UnityEngine;
 
     public class PlayerStepperWorker
     {
+        private readonly StepperInfo _stepperInfo;
         private readonly RaycastHit2D[] _hits = new RaycastHit2D[CollectionsLength.MaxHitsCount];
-        private Transform _leftRayPoint;
 
-        private PlayerStepper _playerStepper;
-        private Transform _rightRayPoint;
 
-        public void Init(PlayerStepper playerStepper, Transform leftRayPoint, Transform rightRayPoint)
+        public PlayerStepperWorker(StepperInfo stepperInfo)
         {
-            _playerStepper = playerStepper;
-            _leftRayPoint = leftRayPoint;
-            _rightRayPoint = rightRayPoint;
+            _stepperInfo = stepperInfo;
         }
 
         public void TryWork()
         {
             if (!Player.PlayerJumper.GroundChecker.IsGroundedWithOutCoyote) return;
 
-            var castLeft = Raycast(_leftRayPoint.position);
-            var castRight = Raycast(_rightRayPoint.position);
+            var castLeft = Raycast(_stepperInfo.LeftRayPoint.position);
+            var castRight = Raycast(_stepperInfo.RightRayPoint.position);
 
             float y;
             if (castLeft.WasHit && !castRight.WasAnyHitOnPath)
@@ -36,12 +32,12 @@
             else if (!castLeft.WasAnyHitOnPath && castRight.WasHit)
                 y = castRight.HitPoint.y;
             else if (castRight.WasHit && castLeft.WasHit)
-                y = Mathf.Max(castLeft.HitPoint.y, castRight.HitPoint.y);
+                y = castLeft.HitPoint.y.Max(castRight.HitPoint.y);
             else return;
 
             Player.PlayerTransform.MoveToY(CalcY(y));
             Player.PlayerTransform.MoveToX(Player.PlayerTransform.Pos.x +
-                                           Math.Sign(Services.InputService.Input.X) * _playerStepper.XOffset);
+                                           Math.Sign(Services.InputService.Input.X) * _stepperInfo.XOffset);
         }
 
         private static float CalcY(float y) => y + Player.PlayerStepper.Player2FootsDelta;
@@ -49,7 +45,7 @@
         private StepperRaycastInfo Raycast(Vector3 point)
         {
             var count =
-                Physics2D.Raycast(point, Vector2.down, PlayerStepper.ContactFilter2D, _hits, _playerStepper.MaxStep);
+                Physics2D.Raycast(point, Vector2.down, PlayerStepper.ContactFilter2D, _hits, _stepperInfo.MaxStep);
 
             var hits = _hits.Slice(0, count)
                 .Where(x => !x.transform.HasComponent<PlayerTag>())
@@ -57,18 +53,19 @@
                 .ToArray();
 
             var hit = hits.FirstOrDefault();
-            if (point.y - hit.point.y < _playerStepper.MinStep)
+            if (point.y - hit.point.y < _stepperInfo.MinStep)
                 hit = default;
 
-            DrawDownStepper(point, hit);
-
-            return new StepperRaycastInfo(hit ? hit.point : Vectors2Extensions.MakeNan(), hits.Length != 0);
+            var hitPoint = hit ? hit.point : Vectors2Extensions.MakeNan();
+            DrawRay(point, hitPoint);
+            return new StepperRaycastInfo(hitPoint, hits.Length != 0);
         }
 
-        private void DrawDownStepper(Vector3 point, RaycastHit2D hit)
+        private void DrawRay(Vector3 point, Vector2 end)
         {
-            Debug.DrawLine(point, point + Vector3.down * _playerStepper.MaxStep, Color.red);
-            Debug.DrawLine(point, hit.point, Color.green);
+            Debug.DrawLine(point, point + Vector3.down * _stepperInfo.MaxStep, Color.red);
+            if (!end.IsNan())
+                Debug.DrawLine(point, end, Color.green);
         }
     }
 }

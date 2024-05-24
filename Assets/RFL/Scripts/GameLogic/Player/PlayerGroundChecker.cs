@@ -2,9 +2,9 @@
 {
     using System;
     using RFL.Scripts.Extensions;
+    using RFL.Scripts.GameLogic.Tags;
     using RFL.Scripts.GlobalServices.GameManager.MonoBeh;
     using RFL.Scripts.Helpers;
-    using RFL.Scripts.Tags;
     using UnityEngine;
 
     public class PlayerGroundChecker : MonoBeh

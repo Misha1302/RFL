@@ -1,9 +1,9 @@
 ﻿namespace RFL.Scripts.GameScreen.SafeArea
 {
     using RFL.Scripts.Extensions;
+    using RFL.Scripts.GameLogic.Tags;
     using RFL.Scripts.GlobalServices.GameManager.MonoBeh;
-    using RFL.Scripts.Tags;
-    using Unity.VisualScripting;
+    using RFL.Scripts.Helpers;
     using UnityEngine;
 
     /// <summary>
@@ -16,7 +16,7 @@
     {
         private static bool _screenChangeVarsInitialized;
         private static ScreenOrientation _lastOrientation;
-        private static Vector2 _lastResolution;
+        private static Vector2Int _lastResolution;
         private static Rect _lastSafeArea;
 
         private Canvas _canvas;
@@ -28,15 +28,13 @@
             SetSafeAreaCharacteristics(safeArea);
         }
 
-        private void SetSafeAreaCharacteristics(SafeAreaTag safeArea)
+        private static void SetSafeAreaCharacteristics(SafeAreaTag safeArea)
         {
             safeArea.name = "Safe area";
-            safeArea.transform.SetParent(transform);
+            // commented 'cause it invokes an error in editor
+            // safeArea.transform.SetParent(transform);
 
-            if (!safeArea.HasComponent<RectTransform>())
-                safeArea.AddComponent<RectTransform>();
-
-            var rectTransform = safeArea.GetComponent<RectTransform>();
+            var rectTransform = safeArea.GetOrAddComponent<RectTransform>();
             rectTransform.sizeDelta = Vector2.zero;
             rectTransform.anchorMin = new Vector2(0, 0);
             rectTransform.anchorMax = new Vector2(1, 1);
@@ -47,7 +45,7 @@
         {
             var safeArea = transform.GetComponentInChildren<SafeAreaTag>(true);
             if (!safeArea)
-                safeArea = new GameObject().AddComponent<SafeAreaTag>();
+                safeArea = Creator.Create<SafeAreaTag>();
             return safeArea;
         }
 
@@ -59,8 +57,7 @@
             if (Screen.safeArea != _lastSafeArea)
                 ApplySafeArea();
 
-            if (Mathf.Approximately(Screen.width, _lastResolution.x) ||
-                Mathf.Approximately(Screen.height, _lastResolution.y))
+            if (Screen.width != _lastResolution.x || Screen.height != _lastResolution.y)
                 OnResolutionChanged();
         }
 
@@ -88,9 +85,6 @@
 
         private void ApplySafeArea()
         {
-            if (_safeAreaTransform == null)
-                return;
-
             GetAnchors(out var anchorMin, out var anchorMax);
 
             _safeAreaTransform.anchorMin = anchorMin;
@@ -114,8 +108,7 @@
         private static void OnOrientationChanged()
         {
             _lastOrientation = Screen.orientation;
-            _lastResolution.x = Screen.width;
-            _lastResolution.y = Screen.height;
+            OnResolutionChanged();
         }
 
         private static void OnResolutionChanged()

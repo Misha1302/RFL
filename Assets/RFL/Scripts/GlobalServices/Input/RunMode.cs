@@ -1,7 +1,9 @@
-﻿using UnityEngine.Device;
-
-namespace RFL.Scripts.GlobalServices.Input
+﻿namespace RFL.Scripts.GlobalServices.Input
 {
+#if UNITY_EDITOR
+    using UnityEngine;
+#endif
+
     public static class RunMode
     {
         public enum ApplicationRunMode
@@ -20,7 +22,7 @@ namespace RFL.Scripts.GlobalServices.Input
                     ? ApplicationRunMode.Editor
                     : ApplicationRunMode.Simulator;
 #else
-      return ApplicationRunMode.Device;
+                return ApplicationRunMode.Device;
 #endif
             }
         }
