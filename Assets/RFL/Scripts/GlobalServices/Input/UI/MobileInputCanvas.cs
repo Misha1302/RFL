@@ -1,8 +1,10 @@
 namespace RFL.Scripts.GlobalServices.Input.UI
 {
+    using RFL.Scripts.GameScreen;
     using RFL.Scripts.GlobalServices.GameManager.MonoBeh;
     using UnityEngine;
 
+    [RequireComponent(typeof(CanvasHelper))]
     public class MobileInputCanvas : MonoBeh
     {
         [SerializeField] private ExtendedButton up;

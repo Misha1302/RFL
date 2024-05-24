@@ -7,7 +7,7 @@
     {
         public bool isEnabled = true;
 
-        private void Awake()
+        protected virtual void Awake()
         {
             if (isEnabled)
                 Services.GameService.AddMonoBeh(this);
