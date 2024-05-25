@@ -1,6 +1,7 @@
 namespace RFL.Scripts
 {
     using RFL.Scripts.DI;
+    using RFL.Scripts.GameLogic.Fps;
     using RFL.Scripts.GameLogic.Player;
     using RFL.Scripts.GameScreen.Orientation;
     using RFL.Scripts.GlobalServices.Coroutines;
@@ -21,13 +22,15 @@ namespace RFL.Scripts
             Di.Instance.AddGlobalSingleton(Creator.Create<GameService>());
 
             Di.Instance.AddGlobalSingleton(new RepositoryService());
-            Di.Instance.AddGlobalSingleton(Creator.Create<FpsSetter>());
             Di.Instance.AddGlobalSingleton(FindObjectOfType<Player>(true));
-            Di.Instance.AddGlobalSingleton(InputMaker.MakeInput());
+            Di.Instance.AddGlobalSingleton(InputMaker.MakeInputService());
             Di.Instance.AddGlobalSingleton(Creator.Create<ScreenOrientator>());
             Di.Instance.AddGlobalSingleton(Creator.Create<TimeService>());
             Di.Instance.AddGlobalSingleton(Creator.Create<CoroutinesService>());
             Di.Instance.AddGlobalSingleton(Creator.Create<FpsCounterService>());
+
+            Creator.Create<FpsSetter>();
+            Creator.Create<UiInitializer>();
         }
     }
 }

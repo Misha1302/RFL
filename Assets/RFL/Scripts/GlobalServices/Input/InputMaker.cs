@@ -6,9 +6,9 @@
 
     public static class InputMaker
     {
-        public static IInputService MakeInput()
+        public static IInputService MakeInputService()
         {
-            if (Input.touchSupported || RunMode.Current == RunMode.ApplicationRunMode.Simulator)
+            if (Input.touchSupported || RunMode.IsEditorSimulator())
                 return Creator.Create<MobileInputService>();
             return Creator.Create<PcInputService>();
         }

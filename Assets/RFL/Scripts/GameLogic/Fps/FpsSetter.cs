@@ -1,4 +1,4 @@
-﻿namespace RFL.Scripts
+﻿namespace RFL.Scripts.GameLogic.Fps
 {
     using RFL.Scripts.GlobalServices;
     using RFL.Scripts.GlobalServices.GameManager.MonoBeh;

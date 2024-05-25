@@ -1,9 +1,8 @@
 ﻿namespace RFL.Scripts.GameScreen.SafeArea
 {
     using RFL.Scripts.Extensions;
-    using RFL.Scripts.GameLogic.Tags;
     using RFL.Scripts.GlobalServices.GameManager.MonoBeh;
-    using RFL.Scripts.Helpers;
+    using UnityEditor;
     using UnityEngine;
 
     /// <summary>
@@ -11,7 +10,6 @@
     ///         code taken from here
     ///     </a>
     /// </summary>
-    [RequireComponent(typeof(Canvas))]
     public class CanvasSafeArea : MonoBeh
     {
         private static bool _screenChangeVarsInitialized;
@@ -20,33 +18,19 @@
         private static Rect _lastSafeArea;
 
         private Canvas _canvas;
-        private RectTransform _safeAreaTransform;
 
         private void OnValidate()
         {
-            var safeArea = GetSafeAreaObject();
-            SetSafeAreaCharacteristics(safeArea);
+            EditorApplication.delayCall += SetSafeAreaCharacteristics;
         }
 
-        private static void SetSafeAreaCharacteristics(SafeAreaTag safeArea)
+        private void SetSafeAreaCharacteristics()
         {
-            safeArea.name = "Safe area";
-            // commented 'cause it invokes an error in editor
-            // safeArea.transform.SetParent(transform);
-
-            var rectTransform = safeArea.GetOrAddComponent<RectTransform>();
+            var rectTransform = transform.GetOrAddComponent<RectTransform>();
             rectTransform.sizeDelta = Vector2.zero;
             rectTransform.anchorMin = new Vector2(0, 0);
             rectTransform.anchorMax = new Vector2(1, 1);
             rectTransform.pivot = new Vector2(0.5f, 0.5f);
-        }
-
-        private SafeAreaTag GetSafeAreaObject()
-        {
-            var safeArea = transform.GetComponentInChildren<SafeAreaTag>(true);
-            if (!safeArea)
-                safeArea = Creator.Create<SafeAreaTag>();
-            return safeArea;
         }
 
         protected override void Tick()
@@ -63,8 +47,9 @@
 
         protected override void OnStart()
         {
-            _safeAreaTransform = GetSafeAreaObject().GetComponent<RectTransform>();
-            _canvas = GetComponent<Canvas>();
+            SetSafeAreaCharacteristics();
+
+            _canvas = GetComponentInParent<Canvas>();
 
             SetStaticsIfNeed();
 
@@ -85,10 +70,14 @@
 
         private void ApplySafeArea()
         {
+            if (this == null || gameObject == null)
+                return;
+
             GetAnchors(out var anchorMin, out var anchorMax);
 
-            _safeAreaTransform.anchorMin = anchorMin;
-            _safeAreaTransform.anchorMax = anchorMax;
+            var safeAreaTransform = GetComponent<RectTransform>();
+            safeAreaTransform.anchorMin = anchorMin;
+            safeAreaTransform.anchorMax = anchorMax;
         }
 
         private void GetAnchors(out Vector2 anchorMin, out Vector2 anchorMax)

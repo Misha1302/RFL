@@ -1,6 +1,7 @@
 ﻿namespace RFL.Scripts.GlobalServices.Input.Services
 {
     using RFL.Scripts.GlobalServices.Input.UI;
+    using RFL.Scripts.Helpers;
     using UnityEngine;
 
     public class MobileInputService : InputServiceBase
@@ -22,7 +23,7 @@
         protected override void OnStart()
         {
             var prefab = Resources.Load<MobileInputCanvas>("UI/CanvasMobileController");
-            _canvas = Instantiate(prefab);
+            _canvas = Creator.Instantiate(prefab);
         }
     }
 }

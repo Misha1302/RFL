@@ -2,5 +2,5 @@
 {
     using RFL.Scripts.GlobalServices.GameManager.MonoBeh;
 
-    public class SafeAreaTag : MonoBeh { }
+    public class FpsTextTag : MonoBeh { }
 }

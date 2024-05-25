@@ -2,29 +2,19 @@
 {
 #if UNITY_EDITOR
     using UnityEngine;
+    using SystemInfo = UnityEngine.Device.SystemInfo;
 #endif
+
 
     public static class RunMode
     {
-        public enum ApplicationRunMode
+        public static bool IsEditorSimulator()
         {
-            Device,
-            Editor,
-            Simulator
-        }
-
-        public static ApplicationRunMode Current
-        {
-            get
-            {
 #if UNITY_EDITOR
-                return Application.isEditor && !Application.isMobilePlatform
-                    ? ApplicationRunMode.Editor
-                    : ApplicationRunMode.Simulator;
+            return SystemInfo.deviceType != DeviceType.Desktop;
 #else
-                return ApplicationRunMode.Device;
+            return false;
 #endif
-            }
         }
     }
 }
