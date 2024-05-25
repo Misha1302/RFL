@@ -5,13 +5,16 @@
     // ReSharper disable MemberCanBeMadeStatic.Global
     public class TimeService : MonoBeh
     {
-        public float TotalTime { get; private set; }
+        private double _totalFixedTime;
+
+        public float TotalFixedTime => (float)_totalFixedTime;
         public new float DeltaTime => UnityEngine.Time.deltaTime;
         public new float FixedDeltaTime => UnityEngine.Time.fixedDeltaTime;
 
-        protected override void Tick()
+
+        protected override void FixedTick()
         {
-            TotalTime += UnityEngine.Time.deltaTime;
+            _totalFixedTime += FixedDeltaTime;
         }
     }
 }

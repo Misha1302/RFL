@@ -43,7 +43,7 @@
             if (_enumerator.Current is WaitNextFrame) Next();
 
             if (_enumerator.Current is WaitSeconds s)
-                if (Services.TimeService.TotalTime >= s.EndTime)
+                if (Services.TimeService.TotalFixedTime >= s.EndTime)
                     Next();
         }
 

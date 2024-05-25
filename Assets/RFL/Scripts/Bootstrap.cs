@@ -24,6 +24,7 @@ namespace RFL.Scripts
             Di.Instance.AddGlobalSingleton(Creator.Create<ScreenOrientator>());
             Di.Instance.AddGlobalSingleton(Creator.Create<TimeService>());
             Di.Instance.AddGlobalSingleton(Creator.Create<CoroutinesService>());
+            Di.Instance.AddGlobalSingleton(Creator.Create<FpsCounterService>());
         }
     }
 }

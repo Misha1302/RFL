@@ -1,9 +1,12 @@
 ﻿namespace RFL.Scripts.Extensions
 {
+    using System;
     using UnityEngine;
 
     public static class MathExtensions
     {
+        private const float DefaultTolerance = 0.0001f;
+
         public static float Abs(this float value) => Mathf.Abs(value);
         public static float ClampNeg10(this float value) => Mathf.Clamp(value, -1, 0);
         public static float Clamp01(this float value) => Mathf.Clamp(value, 0, 1);
@@ -12,5 +15,14 @@
 
         public static float MoveTowards(this float current, float target, float maxDelta) =>
             Mathf.MoveTowards(current, target, maxDelta);
+
+        public static bool ApproxEq(this float value, float value2, float tolerance = DefaultTolerance) =>
+            Math.Abs(value - value2) < tolerance;
+
+        public static bool IsDivisibleBy(this float value, float mod, float tolerance = DefaultTolerance)
+        {
+            var rem = value % mod;
+            return rem.ApproxEq(mod, tolerance) || rem.ApproxEq(0, tolerance);
+        }
     }
 }

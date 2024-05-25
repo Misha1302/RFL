@@ -7,6 +7,7 @@ namespace RFL.Scripts.EditorHelpers
 
     public class RandomChildrenImagesFlipper : MonoBehaviour
     {
+        [SerializeField] private Transform parentOfSprites;
         [SerializeField] private bool changeToFlip;
         [SerializeField] private bool changeToReset;
 
@@ -33,7 +34,7 @@ namespace RFL.Scripts.EditorHelpers
 
         private void ForAllSprites(Action<SpriteRenderer> act)
         {
-            GetComponentsInChildren<SpriteRenderer>().ForAll(act);
+            parentOfSprites.GetComponentsInChildren<SpriteRenderer>().ForAll(act);
         }
     }
 }
