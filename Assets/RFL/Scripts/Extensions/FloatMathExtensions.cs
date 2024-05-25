@@ -3,7 +3,7 @@
     using System;
     using UnityEngine;
 
-    public static class MathExtensions
+    public static class FloatMathExtensions
     {
         private const float DefaultTolerance = 0.0001f;
 
@@ -21,8 +21,8 @@
 
         public static bool IsDivisibleBy(this float value, float mod, float tolerance = DefaultTolerance)
         {
-            var rem = value % mod;
-            return rem.ApproxEq(mod, tolerance) || rem.ApproxEq(0, tolerance);
+            var rem = value % mod.Abs();
+            return rem.ApproxEq(mod.Abs(), tolerance) || rem.ApproxEq(0, tolerance);
         }
     }
 }

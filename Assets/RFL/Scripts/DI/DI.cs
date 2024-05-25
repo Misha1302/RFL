@@ -2,6 +2,7 @@ namespace RFL.Scripts.DI
 {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics.Contracts;
     using RFL.Scripts.DI.Scopes;
     using RFL.Scripts.Helpers;
     using RFL.Scripts.Singletons;
@@ -14,14 +15,14 @@ namespace RFL.Scripts.DI
         public void AddGlobalSingleton<TSingleton>(TSingleton singleton) =>
             AddScopedSingleton<GlobalScope, TSingleton>(singleton);
 
-        public TSingleton GetGlobalSingleton<TSingleton>() =>
+        [Pure] public TSingleton GetGlobalSingleton<TSingleton>() =>
             GetScopedSingleton<GlobalScope, TSingleton>();
 
 
         public void AddScopedSingleton<TScope, TSingleton>(TSingleton singleton) where TScope : IScope =>
             AddScopedSingleton<TScope, TSingleton>(() => singleton);
 
-        public TSingleton GetScopedSingleton<TScope, TSingleton>() where TScope : IScope =>
+        [Pure] public TSingleton GetScopedSingleton<TScope, TSingleton>() where TScope : IScope =>
             Scope<TScope>()[typeof(TSingleton)].Value.Get<TSingleton>() ??
             Thrower.InvalidOpEx("Value is null").Get<TSingleton>();
 
@@ -44,6 +45,6 @@ namespace RFL.Scripts.DI
             _scopes[typeof(TScope)] ??
             Thrower.InvalidOpEx($"Scope {typeof(TScope)} does not exists").Get<Dictionary<Type, Lazy<Any>>>();
 
-        public static T Get<T>() => Instance.GetGlobalSingleton<T>();
+        [Pure] public static T Get<T>() => Instance.GetGlobalSingleton<T>();
     }
 }
