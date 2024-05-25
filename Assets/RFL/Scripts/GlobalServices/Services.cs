@@ -6,6 +6,7 @@
     using RFL.Scripts.GlobalServices.Input.Services;
     using RFL.Scripts.GlobalServices.Pause;
     using RFL.Scripts.GlobalServices.Time;
+    using RFL.Scripts.Repository;
 
     public static class Services
     {
@@ -15,5 +16,6 @@
         public static GameService GameService => Di.Instance.GetGlobalSingleton<GameService>();
         public static PauseService PauseService => Di.Instance.GetGlobalSingleton<PauseService>();
         public static CoroutinesService CoroutinesService => Di.Instance.GetGlobalSingleton<CoroutinesService>();
+        public static RepositoryService RepositoryService => Di.Instance.GetGlobalSingleton<RepositoryService>();
     }
 }

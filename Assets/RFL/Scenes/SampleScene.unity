@@ -169,51 +169,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 161612178}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &142014024
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 142014026}
-  - component: {fileID: 142014025}
-  m_Layer: 0
-  m_Name: '[FramesSetter]'
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &142014025
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 142014024}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 649e8ef2e4dd44658297b0aa2005cd6f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  framesCount: 60
---- !u!4 &142014026
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 142014024}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 161612178}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &161612177
 GameObject:
   m_ObjectHideFlags: 0
@@ -244,7 +199,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 106070646}
-  - {fileID: 142014026}
   - {fileID: 534083191}
   - {fileID: 1409316225}
   m_Father: {fileID: 0}
@@ -1610,7 +1564,7 @@ GameObject:
   - component: {fileID: 1409316225}
   - component: {fileID: 1409316226}
   m_Layer: 0
-  m_Name: '[TimeSetter] (1)'
+  m_Name: '[ImagesFlipper]'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2882,8 +2836,7 @@ PrefabInstance:
       propertyPath: m_FlipY
       value: 1
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 779672324422291181, guid: e34f6ebc94401e3489e03be3f70b38de, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []

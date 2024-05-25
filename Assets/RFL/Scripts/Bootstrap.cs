@@ -9,6 +9,7 @@ namespace RFL.Scripts
     using RFL.Scripts.GlobalServices.Pause;
     using RFL.Scripts.GlobalServices.Time;
     using RFL.Scripts.Helpers;
+    using RFL.Scripts.Repository;
     using UnityEngine;
 
     public class Bootstrap : MonoBehaviour
@@ -19,6 +20,8 @@ namespace RFL.Scripts
             Di.Instance.AddGlobalSingleton(new PauseService());
             Di.Instance.AddGlobalSingleton(Creator.Create<GameService>());
 
+            Di.Instance.AddGlobalSingleton(new RepositoryService());
+            Di.Instance.AddGlobalSingleton(Creator.Create<FpsSetter>());
             Di.Instance.AddGlobalSingleton(FindObjectOfType<Player>(true));
             Di.Instance.AddGlobalSingleton(InputMaker.MakeInput());
             Di.Instance.AddGlobalSingleton(Creator.Create<ScreenOrientator>());
