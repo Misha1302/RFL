@@ -3,7 +3,9 @@
     using System;
     using System.Collections.Generic;
     using JetBrains.Annotations;
+    using RFL.Scripts.DI;
     using RFL.Scripts.GlobalServices.Coroutines.Waitings;
+    using RFL.Scripts.GlobalServices.Time;
 
     public class CoroutineObj
     {
@@ -43,7 +45,7 @@
             if (_enumerator.Current is WaitNextFrame) Next();
 
             if (_enumerator.Current is WaitSeconds s)
-                if (Services.TimeService.TotalFixedTime >= s.EndTime)
+                if (Di.Get<TimeService>().TotalFixedTime >= s.EndTime)
                     Next();
         }
 

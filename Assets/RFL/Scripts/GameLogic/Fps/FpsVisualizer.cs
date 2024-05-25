@@ -1,9 +1,10 @@
 namespace RFL.Scripts.GameLogic.Fps
 {
+    using RFL.Scripts.DI;
     using RFL.Scripts.Extensions;
     using RFL.Scripts.GameLogic.Tags;
-    using RFL.Scripts.GlobalServices;
     using RFL.Scripts.GlobalServices.GameManager.MonoBeh;
+    using RFL.Scripts.GlobalServices.Time;
     using RFL.Scripts.Helpers;
     using TMPro;
     using Unity.VisualScripting;
@@ -19,7 +20,7 @@ namespace RFL.Scripts.GameLogic.Fps
                 .GetComponentInChildren<FpsTextTag>()
                 .GetComponent<TMP_Text>();
 
-            Services.FpsCounterService.OnFpsChanged += ShowFps;
+            Di.Get<FpsCounterService>().OnFpsChanged += ShowFps;
         }
 
         private static Object CreateCanvas() => Creator.Instantiate(Resources.Load("UI/FpsCanvas"));

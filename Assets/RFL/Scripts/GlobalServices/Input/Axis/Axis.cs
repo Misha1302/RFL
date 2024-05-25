@@ -1,8 +1,9 @@
 ﻿namespace RFL.Scripts.GlobalServices.Input.Axis
 {
     using System;
+    using RFL.Scripts.DI;
     using RFL.Scripts.Extensions;
-    using Services = RFL.Scripts.GlobalServices.Services;
+    using RFL.Scripts.GlobalServices.Time;
 
     public class Axis
     {
@@ -27,7 +28,7 @@
                 _ => Value
             };
 
-            Value = Value.MoveTowards(target, speed * Services.TimeService.DeltaTime);
+            Value = Value.MoveTowards(target, speed * Di.Get<TimeService>().DeltaTime);
         }
 
         public static implicit operator float(Axis axis) => axis.Value;

@@ -6,7 +6,7 @@
     {
         protected override void OnStart()
         {
-            OrientationAllower.AllowOrientation(AutoOrientation.Landscape);
+            OrientationAllower.AllowOrientation(AutoOrientation.Landscape, AutoOrientation.LandscapeRight);
         }
     }
 }

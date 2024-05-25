@@ -1,7 +1,8 @@
 ﻿namespace RFL.Scripts.GameLogic.Player
 {
-    using RFL.Scripts.GlobalServices;
+    using RFL.Scripts.DI;
     using RFL.Scripts.GlobalServices.GameManager.MonoBeh;
+    using RFL.Scripts.GlobalServices.Pause;
     using UnityEngine;
 
     [RequireComponent(typeof(Rigidbody2D))]
@@ -11,7 +12,7 @@
 
         protected override void OnStart()
         {
-            Services.PauseService.OnPausedChanged += OnPauseChanged;
+            Di.Get<PauseService>().OnPausedChanged += OnPauseChanged;
         }
 
         private void OnPauseChanged(bool isPaused)

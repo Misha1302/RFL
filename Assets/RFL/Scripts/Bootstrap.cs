@@ -8,9 +8,10 @@ namespace RFL.Scripts
     using RFL.Scripts.GlobalServices.GameManager;
     using RFL.Scripts.GlobalServices.Input;
     using RFL.Scripts.GlobalServices.Pause;
+    using RFL.Scripts.GlobalServices.Repository;
     using RFL.Scripts.GlobalServices.Time;
     using RFL.Scripts.Helpers;
-    using RFL.Scripts.Repository;
+    using RFL.Scripts.Initializers;
     using UnityEngine;
 
     public class Bootstrap : MonoBehaviour

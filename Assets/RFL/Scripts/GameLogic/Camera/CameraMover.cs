@@ -1,7 +1,8 @@
 ﻿namespace RFL.Scripts.GameLogic.Camera
 {
-    using RFL.Scripts.GlobalServices;
+    using RFL.Scripts.DI;
     using RFL.Scripts.GlobalServices.GameManager.MonoBeh;
+    using RFL.Scripts.GlobalServices.Input.Services;
     using UnityEngine;
 
     public class CameraMover : MonoBeh
@@ -17,7 +18,7 @@
 
         protected override void FixedTick()
         {
-            cameraFollowPoint.localPosition = _stdPosition + Services.InputService.Input;
+            cameraFollowPoint.localPosition = _stdPosition + Di.Get<IInputService>().Input;
         }
     }
 }

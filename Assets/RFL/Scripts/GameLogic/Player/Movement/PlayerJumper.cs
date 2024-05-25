@@ -1,7 +1,8 @@
 ﻿namespace RFL.Scripts.GameLogic.Player.Movement
 {
-    using RFL.Scripts.GlobalServices;
+    using RFL.Scripts.DI;
     using RFL.Scripts.GlobalServices.GameManager.MonoBeh;
+    using RFL.Scripts.GlobalServices.Input.Services;
     using UnityEngine;
 
     [RequireComponent(typeof(Rigidbody2D))]
@@ -16,7 +17,7 @@
 
 
         private bool IsJumping =>
-            jumpTime >= PassedTime && Services.InputService.Jump && !GroundChecker.IsGroundedWithOutCoyote;
+            jumpTime >= PassedTime && Di.Get<IInputService>().Jump && !GroundChecker.IsGroundedWithOutCoyote;
 
 
         private float PassedTime => Time - _startJumpTime;
@@ -38,7 +39,7 @@
 
         private void HandleJumpIfNeed()
         {
-            if (jumpTime >= PassedTime || !Services.InputService.Jump || !GroundChecker.IsGroundedWithCoyote) return;
+            if (jumpTime >= PassedTime || !Di.Get<IInputService>().Jump || !GroundChecker.IsGroundedWithCoyote) return;
             HandleJump();
         }
 

@@ -2,9 +2,10 @@
 {
     using System;
     using System.Linq;
+    using RFL.Scripts.DI;
     using RFL.Scripts.Extensions;
     using RFL.Scripts.GameLogic.Tags;
-    using RFL.Scripts.GlobalServices;
+    using RFL.Scripts.GlobalServices.Input.Services;
     using RFL.Scripts.Helpers;
     using UnityEngine;
 
@@ -37,7 +38,7 @@
 
             Player.PlayerTransform.MoveToY(CalcY(y));
             Player.PlayerTransform.MoveToX(Player.PlayerTransform.Pos.x +
-                                           Math.Sign(Services.InputService.Input.X) * _stepperInfo.XOffset);
+                                           Math.Sign(Di.Get<IInputService>().Input.X) * _stepperInfo.XOffset);
         }
 
         private static float CalcY(float y) => y + Player.PlayerStepper.Player2FootsDelta;

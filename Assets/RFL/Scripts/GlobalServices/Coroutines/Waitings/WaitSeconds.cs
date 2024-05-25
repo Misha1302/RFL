@@ -1,5 +1,8 @@
 ﻿namespace RFL.Scripts.GlobalServices.Coroutines.Waitings
 {
+    using RFL.Scripts.DI;
+    using RFL.Scripts.GlobalServices.Time;
+
     public class WaitSeconds : ICoroutineWaiting
     {
         private readonly float _startTime;
@@ -8,7 +11,7 @@
         public WaitSeconds(float seconds)
         {
             _seconds = seconds;
-            _startTime = Services.TimeService.TotalFixedTime;
+            _startTime = Di.Get<TimeService>().TotalFixedTime;
         }
 
         public float EndTime => _startTime + _seconds;

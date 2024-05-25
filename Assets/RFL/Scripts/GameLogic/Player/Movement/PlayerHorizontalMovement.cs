@@ -1,7 +1,8 @@
 ﻿namespace RFL.Scripts.GameLogic.Player.Movement
 {
-    using RFL.Scripts.GlobalServices;
+    using RFL.Scripts.DI;
     using RFL.Scripts.GlobalServices.GameManager.MonoBeh;
+    using RFL.Scripts.GlobalServices.Input.Services;
     using UnityEngine;
 
     [RequireComponent(typeof(Rigidbody2D))]
@@ -12,7 +13,7 @@
 
         protected override void Tick()
         {
-            Player.PlayerTransform.SetVelocityX(Services.InputService.Input.X * speed);
+            Player.PlayerTransform.SetVelocityX(Di.Get<IInputService>().Input.X * speed);
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿namespace RFL.Scripts
+﻿namespace RFL.Scripts.Initializers
 {
     using RFL.Scripts.GlobalServices.GameManager.MonoBeh;
     using RFL.Scripts.Helpers;

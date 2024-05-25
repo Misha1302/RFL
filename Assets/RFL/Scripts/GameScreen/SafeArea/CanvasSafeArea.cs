@@ -21,7 +21,9 @@
 
         private void OnValidate()
         {
+#if UNITY_EDITOR
             EditorApplication.delayCall += SetSafeAreaCharacteristics;
+#endif
         }
 
         private void SetSafeAreaCharacteristics()
@@ -35,14 +37,15 @@
 
         protected override void Tick()
         {
-            if (Application.isMobilePlatform && Screen.orientation != _lastOrientation)
-                OnOrientationChanged();
+            var a = Screen.orientation == _lastOrientation;
+            var b = Screen.safeArea == _lastSafeArea;
+            var c = Screen.width == _lastResolution.x && Screen.height == _lastResolution.y;
 
-            if (Screen.safeArea != _lastSafeArea)
-                ApplySafeArea();
+            if (a && b && c) return;
 
-            if (Screen.width != _lastResolution.x || Screen.height != _lastResolution.y)
-                OnResolutionChanged();
+            OnOrientationChanged();
+            ApplySafeArea();
+            OnResolutionChanged();
         }
 
         protected override void OnStart()
@@ -97,7 +100,6 @@
         private static void OnOrientationChanged()
         {
             _lastOrientation = Screen.orientation;
-            OnResolutionChanged();
         }
 
         private static void OnResolutionChanged()

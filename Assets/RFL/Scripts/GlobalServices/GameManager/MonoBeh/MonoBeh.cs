@@ -10,7 +10,7 @@
         protected void Awake()
         {
             if (isEnabled)
-                Services.GameService.AddMonoBeh(this);
+                Di.Get<GameService>().AddMonoBeh(this);
         }
 
         public virtual void OnCollisionEnter2D(Collision2D other)

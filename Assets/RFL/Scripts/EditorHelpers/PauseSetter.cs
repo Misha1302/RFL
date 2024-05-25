@@ -1,6 +1,7 @@
 ﻿namespace RFL.Scripts.EditorHelpers
 {
-    using RFL.Scripts.GlobalServices;
+    using RFL.Scripts.DI;
+    using RFL.Scripts.GlobalServices.Pause;
     using UnityEngine;
 
     public class PauseSetter : MonoBehaviour
@@ -12,8 +13,8 @@
         {
             if (Application.isPlaying)
             {
-                if (changeToPause) Services.PauseService.Pause = true;
-                if (changeToUnPause) Services.PauseService.Pause = false;
+                if (changeToPause) Di.Get<PauseService>().Pause = true;
+                if (changeToUnPause) Di.Get<PauseService>().Pause = false;
             }
 
             changeToPause = changeToUnPause = false;

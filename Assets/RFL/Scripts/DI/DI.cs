@@ -43,5 +43,7 @@ namespace RFL.Scripts.DI
         private Dictionary<Type, Lazy<Any>> Scope<TScope>() where TScope : IScope =>
             _scopes[typeof(TScope)] ??
             Thrower.InvalidOpEx($"Scope {typeof(TScope)} does not exists").Get<Dictionary<Type, Lazy<Any>>>();
+
+        public static T Get<T>() => Instance.GetGlobalSingleton<T>();
     }
 }

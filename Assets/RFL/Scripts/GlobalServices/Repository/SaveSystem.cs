@@ -1,4 +1,4 @@
-﻿namespace RFL.Scripts.Repository
+﻿namespace RFL.Scripts.GlobalServices.Repository
 {
     using System.IO;
 
