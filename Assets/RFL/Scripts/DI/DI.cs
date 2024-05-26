@@ -1,16 +1,18 @@
 namespace RFL.Scripts.DI
 {
     using System;
-    using System.Collections.Generic;
     using System.Diagnostics.Contracts;
     using RFL.Scripts.DI.Scopes;
     using RFL.Scripts.Helpers;
     using RFL.Scripts.Singletons;
+    using SingletonsT = System.Collections.Generic.Dictionary<System.Type, System.Lazy<Any>>;
+    using ScopesT =
+        System.Collections.Generic.Dictionary<System.Type,
+            System.Collections.Generic.Dictionary<System.Type, System.Lazy<Any>>>;
 
     public class Di : SingletonBase<Di>
     {
-        private readonly Dictionary<Type, Dictionary<Type, Lazy<Any>>> _scopes = new();
-
+        private readonly ScopesT _scopes = new();
 
         public void AddGlobalSingleton<TSingleton>(TSingleton singleton) =>
             AddScopedSingleton<GlobalScope, TSingleton>(singleton);
@@ -34,16 +36,16 @@ namespace RFL.Scripts.DI
             GetOrAddScope<TScope>()[typeof(TSingleton)] = new Lazy<Any>(() => new Any(lazyFunc()));
 
 
-        private Dictionary<Type, Lazy<Any>> GetOrAddScope<TScope>() where TScope : IScope
+        private SingletonsT GetOrAddScope<TScope>() where TScope : IScope
         {
             if (!_scopes.TryGetValue(typeof(TScope), out var value))
-                _scopes[typeof(TScope)] = value = new Dictionary<Type, Lazy<Any>>();
+                _scopes[typeof(TScope)] = value = new SingletonsT();
             return value;
         }
 
-        private Dictionary<Type, Lazy<Any>> Scope<TScope>() where TScope : IScope =>
+        private SingletonsT Scope<TScope>() where TScope : IScope =>
             _scopes[typeof(TScope)] ??
-            Thrower.InvalidOpEx($"Scope {typeof(TScope)} does not exists").Get<Dictionary<Type, Lazy<Any>>>();
+            Thrower.InvalidOpEx($"Scope {typeof(TScope)} does not exists").Get<SingletonsT>();
 
 
         [Pure] public static TSingleton Get<TSingleton>() => Instance.GetGlobalSingleton<TSingleton>();

@@ -1,6 +1,7 @@
 ﻿namespace RFL.Scripts.GameLogic.Player
 {
     using System;
+    using System.Linq;
     using RFL.Scripts.Extensions;
     using RFL.Scripts.GameLogic.Tags;
     using RFL.Scripts.GlobalServices.GameManager.MonoBeh;
@@ -26,7 +27,7 @@
         {
             var count = GetComponent<BoxCollider2D>().OverlapCollider(_contactFilter2D, _results);
 
-            if (_results.Any(x => !x.HasComponent<NotAGroundTag>(), count))
+            if (_results.Slice(0, count).Any(x => !x.HasComponent<NotAGroundTag>()))
                 _timeWhenIsGroundedWasTrue = Time;
         }
     }

@@ -7,14 +7,14 @@ namespace RFL.Scripts.GameLogic.Lift
 
     public class StickyPlatform : MonoBeh
     {
-        private readonly Dictionary<Transform, Transform> parentsOfTransforms = new();
+        private readonly Dictionary<Transform, Transform> _parentsOfTransforms = new();
 
         protected override void OnColEnter2D(Collision2D other)
         {
             var t = other.transform;
             if (!t.HasComponent<Rigidbody2D>()) return;
 
-            parentsOfTransforms[t] = t.parent;
+            _parentsOfTransforms[t] = t.parent;
             t.SetParent(transform);
         }
 
@@ -23,7 +23,7 @@ namespace RFL.Scripts.GameLogic.Lift
             var t = other.transform;
             if (!t.HasComponent<Rigidbody2D>()) return;
 
-            t.SetParent(parentsOfTransforms[t]);
+            t.SetParent(_parentsOfTransforms[t]);
         }
     }
 }

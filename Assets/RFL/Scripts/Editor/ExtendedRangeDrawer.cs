@@ -29,7 +29,7 @@
 
         private static bool IsTypeCorrect(Rect position, SerializedProperty property, GUIContent label)
         {
-            if (property.propertyType == SerializedPropertyType.Integer) 
+            if (property.propertyType == SerializedPropertyType.Integer)
                 return true;
 
             EditorGUI.LabelField(position, label.text, "Use Extended Range with int.");
