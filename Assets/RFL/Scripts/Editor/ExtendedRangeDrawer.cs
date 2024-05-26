@@ -1,6 +1,7 @@
 ﻿namespace RFL.Scripts.Editor
 {
     using RFL.Scripts.Attributes;
+    using RFL.Scripts.Extensions;
     using UnityEditor;
     using UnityEngine;
 
@@ -16,18 +17,23 @@
         {
             var attr = (ExtendedRangeAttribute)attribute;
 
-            if (property.propertyType != SerializedPropertyType.Integer)
-            {
-                EditorGUI.LabelField(position, label.text, "Use Extended Range with int.");
+            if (!IsTypeCorrect(position, property, label))
                 return;
-            }
 
             var max = attr.Max - (attr.Max - attr.Min) % attr.Step;
             var value = EditorGUI.IntSlider(position, label, property.intValue, attr.Min, max);
 
-            // NOT a bug, 'cause division rounding value to floor 
-            value = Mathf.Min(value / attr.Step * attr.Step + attr.Min % attr.Step, max);
+            value = max.Min(value.RoundStep(attr.Step) + attr.Min % attr.Step);
             property.intValue = value;
+        }
+
+        private static bool IsTypeCorrect(Rect position, SerializedProperty property, GUIContent label)
+        {
+            if (property.propertyType == SerializedPropertyType.Integer) 
+                return true;
+
+            EditorGUI.LabelField(position, label.text, "Use Extended Range with int.");
+            return false;
         }
     }
 }

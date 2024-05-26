@@ -29,19 +29,12 @@
 
         private static Di Di => Di.Instance;
 
-        public static PlayerStepper PlayerStepper => Di.GetScopedSingleton<PlayerScope, PlayerStepper>();
-        public static PlayerTransform PlayerTransform => Di.GetScopedSingleton<PlayerScope, PlayerTransform>();
-        public static PlayerJumper PlayerJumper => Di.GetScopedSingleton<PlayerScope, PlayerJumper>();
-        public static PlayerImageFlipper PlayerImageFlipper => Di.GetScopedSingleton<PlayerScope, PlayerImageFlipper>();
-
-        public static PlayerPhysicMaterial PlayerPhysicMaterial =>
-            Di.GetScopedSingleton<PlayerScope, PlayerPhysicMaterial>();
-
-        public static PlayerPauseHandler PlayerPauseHandler => Di.GetScopedSingleton<PlayerScope, PlayerPauseHandler>();
-
-        public PlayerHorizontalMovement PlayerHorizontalMovement =>
-            Di.GetScopedSingleton<PlayerScope, PlayerHorizontalMovement>();
-
-        public static Player PlayerSingleton => Di.Instance.GetGlobalSingleton<Player>();
+        public static PlayerStepper PlayerStepper => Di.Get<PlayerScope, PlayerStepper>();
+        public static PlayerTransform PlayerTransform => Di.Get<PlayerScope, PlayerTransform>();
+        public static PlayerJumper PlayerJumper => Di.Get<PlayerScope, PlayerJumper>();
+        public static PlayerImageFlipper PlayerImageFlipper => Di.Get<PlayerScope, PlayerImageFlipper>();
+        public static PlayerPhysicMaterial PlayerPhysicMaterial => Di.Get<PlayerScope, PlayerPhysicMaterial>();
+        public static PlayerPauseHandler PlayerPauseHandler => Di.Get<PlayerScope, PlayerPauseHandler>();
+        public PlayerHorizontalMovement PlayerHorizontalMovement => Di.Get<PlayerScope, PlayerHorizontalMovement>();
     }
 }

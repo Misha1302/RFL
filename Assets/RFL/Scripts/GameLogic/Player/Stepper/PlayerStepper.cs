@@ -1,5 +1,6 @@
 namespace RFL.Scripts.GameLogic.Player.Stepper
 {
+    using RFL.Scripts.DI;
     using RFL.Scripts.Extensions;
     using RFL.Scripts.GlobalServices.GameManager.MonoBeh;
     using UnityEngine;
@@ -30,7 +31,7 @@ namespace RFL.Scripts.GameLogic.Player.Stepper
         }
 
         public float Player2FootsDelta =>
-            playerFoot.localPosition.y.Abs() * Player.PlayerSingleton.transform.lossyScale.y;
+            playerFoot.localPosition.y.Abs() * Di.Get<Player>().transform.lossyScale.y;
 
 
         protected override void OnStart()

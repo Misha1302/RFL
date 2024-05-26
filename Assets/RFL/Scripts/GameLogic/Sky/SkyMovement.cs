@@ -25,11 +25,19 @@ namespace RFL.Scripts.GameLogic.Sky
 
         protected override void Tick()
         {
-            // ReSharper disable PossibleLossOfFraction
-            transform.Translate(Vector3.right * speed * FixedDeltaTime);
+            Move();
+            TeleportBackIfNeed();
+        }
 
+        private void TeleportBackIfNeed()
+        {
             if (transform.localPosition.x < -_width || transform.localPosition.x > _width)
                 transform.localPosition = transform.localPosition.WithX(0);
+        }
+
+        private void Move()
+        {
+            transform.Translate(Vector3.right * (speed * FixedDeltaTime));
         }
 
         private void SpawnBackgrounds()

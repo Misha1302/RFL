@@ -24,7 +24,6 @@ namespace RFL.Scripts
 
             Di.Instance.AddGlobalSingleton(new RepositoryService());
             Di.Instance.AddGlobalSingleton(FindObjectOfType<Player>(true));
-            Di.Instance.AddGlobalSingleton(FindObjectOfType<Camera>(true));
             Di.Instance.AddGlobalSingleton(InputMaker.MakeInputService());
             Di.Instance.AddGlobalSingleton(Creator.Create<ScreenOrientator>());
             Di.Instance.AddGlobalSingleton(Creator.Create<TimeService>());

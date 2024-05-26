@@ -7,7 +7,7 @@ namespace RFL.Scripts.DI
     using RFL.Scripts.Helpers;
     using RFL.Scripts.Singletons;
 
-    public class Di : SingletonBase<Di>, IDi
+    public class Di : SingletonBase<Di>
     {
         private readonly Dictionary<Type, Dictionary<Type, Lazy<Any>>> _scopes = new();
 
@@ -45,6 +45,10 @@ namespace RFL.Scripts.DI
             _scopes[typeof(TScope)] ??
             Thrower.InvalidOpEx($"Scope {typeof(TScope)} does not exists").Get<Dictionary<Type, Lazy<Any>>>();
 
-        [Pure] public static T Get<T>() => Instance.GetGlobalSingleton<T>();
+
+        [Pure] public static TSingleton Get<TSingleton>() => Instance.GetGlobalSingleton<TSingleton>();
+
+        [Pure] public static TSingleton Get<TScope, TSingleton>() where TScope : IScope =>
+            Instance.GetScopedSingleton<TScope, TSingleton>();
     }
 }
