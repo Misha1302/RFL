@@ -8,6 +8,7 @@
     {
         [SerializeField] private int targetFps = 60;
         [SerializeField] private float inputSpeed = 1f / 0.4f;
+        [SerializeField] private bool needToShowFps = true;
 
         [NonSerialized] public Action<GameData> OnChanged;
 
@@ -27,6 +28,16 @@
             set
             {
                 inputSpeed = value;
+                OnChanged(this);
+            }
+        }
+
+        public bool NeedToShowFps
+        {
+            get => needToShowFps;
+            set
+            {
+                needToShowFps = value;
                 OnChanged(this);
             }
         }

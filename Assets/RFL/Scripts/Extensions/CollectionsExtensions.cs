@@ -12,6 +12,12 @@
                 act(lst[index]);
         }
 
+        public static void ForAll<T>(this IEnumerable<T> lst, Action<T> act)
+        {
+            foreach (var item in lst)
+                act(item);
+        }
+
         public static ArraySegment<T> Slice<T>(this T[] arr, int start, int count) => new(arr, start, count);
     }
 }

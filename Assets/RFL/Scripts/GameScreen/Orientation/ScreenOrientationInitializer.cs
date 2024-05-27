@@ -1,10 +1,11 @@
 ﻿namespace RFL.Scripts.GameScreen.Orientation
 {
-    using RFL.Scripts.GlobalServices.GameManager.MonoBeh;
+    using RFL.Scripts.Attributes;
 
-    public class ScreenOrientator : MonoBeh
+    public class ScreenOrientationInitializer
     {
-        protected override void OnStart()
+        [InitializerMethod]
+        public static void Initialize()
         {
             OrientationAllower.AllowOrientation(AutoOrientation.Landscape, AutoOrientation.LandscapeRight);
         }

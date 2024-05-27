@@ -3,7 +3,6 @@
     using System;
     using UnityEngine;
 
-    // switch to generic mathematics?
     public static class FloatMathExtensions
     {
         private const float DefaultTolerance = 0.0001f;

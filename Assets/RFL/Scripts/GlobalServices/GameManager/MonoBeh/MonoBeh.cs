@@ -7,10 +7,12 @@
     {
         public bool isEnabled = true;
 
+
         protected void Awake()
         {
             if (isEnabled)
                 Di.Get<GameService>().AddMonoBeh(this);
+            OnCreated();
         }
 
         public virtual void OnCollisionEnter2D(Collision2D other)
@@ -30,6 +32,8 @@
             if (isEnabled)
                 OnColStay2D(other);
         }
+
+        protected virtual void OnCreated() { }
 
         public void PubOnStart()
         {
