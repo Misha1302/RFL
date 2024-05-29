@@ -1,4 +1,4 @@
-﻿namespace RFL.Scripts.GameLogic.GameLogicInitializers
+﻿namespace RFL.Scripts.GlobalServices.Fps
 {
     using RFL.Scripts.Attributes;
     using RFL.Scripts.DI;

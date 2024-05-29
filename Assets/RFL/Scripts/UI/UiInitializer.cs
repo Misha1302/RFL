@@ -1,4 +1,4 @@
-﻿namespace RFL.Scripts.GameLogic.GameLogicInitializers
+﻿namespace RFL.Scripts.UI
 {
     using RFL.Scripts.Attributes;
     using RFL.Scripts.Helpers;
