@@ -1,6 +1,8 @@
 ﻿namespace RFL.Scripts.GlobalServices.Time
 {
+    using RFL.Scripts.DI;
     using RFL.Scripts.GlobalServices.GameManager.MonoBeh;
+    using RFL.Scripts.GlobalServices.Pause;
 
     // ReSharper disable MemberCanBeMadeStatic.Global
     public class TimeService : MonoBeh, IService
@@ -14,7 +16,8 @@
 
         protected override void FixedTick()
         {
-            _totalFixedTime += FixedDeltaTime;
+            if (!Di.Get<PauseService>().IsPaused)
+                _totalFixedTime += FixedDeltaTime;
         }
     }
 }

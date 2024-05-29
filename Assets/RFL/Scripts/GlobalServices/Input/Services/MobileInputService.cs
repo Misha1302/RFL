@@ -6,24 +6,25 @@
 
     public class MobileInputService : InputServiceBase
     {
-        private MobileInputCanvas _canvas;
+        private MobileInputCanvas _inputCanvas;
 
-        protected override void Tick()
+        protected override void TickAnyway()
         {
             Input.X.HandleDirection(CalcXDir());
             Input.Y.HandleDirection(CalcYDir());
 
-            Jump = _canvas.Jump.WasPressed;
+            Jump = _inputCanvas.Jump.WasPressed;
         }
 
-        private float CalcXDir() => CalcDir(_canvas.Left.WasPressed, _canvas.Right.WasPressed);
+        private float CalcXDir() => CalcDir(_inputCanvas.Left.WasPressed, _inputCanvas.Right.WasPressed);
 
-        private float CalcYDir() => CalcDir(_canvas.Down.WasPressed, _canvas.Up.WasPressed);
+        private float CalcYDir() => CalcDir(_inputCanvas.Down.WasPressed, _inputCanvas.Up.WasPressed);
 
         protected override void OnStart()
         {
-            var prefab = Resources.Load<MobileInputCanvas>("UI/CanvasMobileController");
-            _canvas = Creator.Instantiate(prefab);
+            base.OnStart();
+            var mobileInputCanvas = Resources.Load<MobileInputCanvas>("UI/CanvasMobileController");
+            _inputCanvas = Creator.Instantiate(mobileInputCanvas);
         }
     }
 }

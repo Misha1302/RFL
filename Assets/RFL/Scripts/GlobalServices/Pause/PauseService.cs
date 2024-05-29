@@ -4,17 +4,22 @@
 
     public class PauseService : IService
     {
-        private bool _pause;
+        private bool _isPaused;
         public Action<bool> OnPausedChanged;
 
-        public bool Pause
+        public bool IsPaused
         {
-            get => _pause;
+            get => _isPaused;
             set
             {
-                _pause = value;
-                OnPausedChanged?.Invoke(_pause);
+                _isPaused = value;
+                OnPausedChanged?.Invoke(_isPaused);
             }
+        }
+
+        public void PauseOrUnPause()
+        {
+            IsPaused = !IsPaused;
         }
     }
 }

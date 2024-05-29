@@ -15,6 +15,11 @@
             OnCreated();
         }
 
+        private void Update()
+        {
+            TickAnyway();
+        }
+
         public virtual void OnCollisionEnter2D(Collision2D other)
         {
             if (isEnabled)
@@ -61,6 +66,7 @@
 
         protected virtual void OnStart() { }
         protected virtual void Tick() { }
+        protected virtual void TickAnyway() { }
         protected virtual void LateTick() { }
         protected virtual void FixedTick() { }
         protected virtual void OnColEnter2D(Collision2D other) { }

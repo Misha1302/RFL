@@ -1,4 +1,4 @@
-﻿namespace RFL.Scripts.GlobalServices.Input.Fps
+﻿namespace RFL.Scripts.GlobalServices.Fps
 {
     using System;
     using RFL.Scripts.Extensions;

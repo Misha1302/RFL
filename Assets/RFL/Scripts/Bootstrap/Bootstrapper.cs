@@ -2,9 +2,9 @@ namespace RFL.Scripts.Bootstrap
 {
     using RFL.Scripts.DI;
     using RFL.Scripts.GlobalServices.Coroutines;
+    using RFL.Scripts.GlobalServices.Fps;
     using RFL.Scripts.GlobalServices.GameManager;
     using RFL.Scripts.GlobalServices.Input;
-    using RFL.Scripts.GlobalServices.Input.Fps;
     using RFL.Scripts.GlobalServices.Pause;
     using RFL.Scripts.GlobalServices.Repository;
     using RFL.Scripts.GlobalServices.Scenes;

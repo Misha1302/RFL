@@ -40,7 +40,7 @@
 
         public void AddForce(Vector2 vec) => Rb2D.AddForce(vec);
 
-        public void UnFreeze() => Rb2D.constraints = RigidbodyConstraints2D.None;
+        public void UnFreeze() => Rb2D.constraints = RigidbodyConstraints2D.FreezeRotation;
 
         public void Freeze() => Rb2D.constraints = RigidbodyConstraints2D.FreezeAll;
 

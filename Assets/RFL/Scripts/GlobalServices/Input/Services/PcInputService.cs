@@ -4,12 +4,15 @@
 
     public class PcInputService : InputServiceBase
     {
-        protected override void Tick()
+        protected override void TickAnyway()
         {
             Input.X.HandleDirection(UnityEngine.Input.GetAxisRaw("Horizontal"));
             Input.Y.HandleDirection(UnityEngine.Input.GetAxisRaw("Vertical"));
 
             Jump = UnityEngine.Input.GetKey(KeyCode.Space);
+
+            if (UnityEngine.Input.GetKeyDown(KeyCode.Escape))
+                OnPause?.Invoke();
         }
     }
 }
