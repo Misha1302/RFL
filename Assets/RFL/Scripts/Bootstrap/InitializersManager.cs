@@ -5,7 +5,7 @@
     using RFL.Scripts.Attributes;
     using RFL.Scripts.Extensions;
 
-    public static class Initializers
+    public static class InitializersManager
     {
         public static void InitEvery()
         {

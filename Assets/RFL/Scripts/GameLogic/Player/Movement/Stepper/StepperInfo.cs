@@ -1,4 +1,4 @@
-﻿namespace RFL.Scripts.GameLogic.Player.Stepper
+﻿namespace RFL.Scripts.GameLogic.Player.Movement.Stepper
 {
     using UnityEngine;
 

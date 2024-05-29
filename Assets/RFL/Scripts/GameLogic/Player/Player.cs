@@ -3,7 +3,7 @@
     using System;
     using RFL.Scripts.DI;
     using RFL.Scripts.GameLogic.Player.Movement;
-    using RFL.Scripts.GameLogic.Player.Stepper;
+    using RFL.Scripts.GameLogic.Player.Movement.Stepper;
     using RFL.Scripts.GlobalServices.GameManager.MonoBeh;
     using UnityEngine;
 

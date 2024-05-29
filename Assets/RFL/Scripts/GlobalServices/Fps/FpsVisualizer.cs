@@ -2,7 +2,6 @@ namespace RFL.Scripts.GlobalServices.Fps
 {
     using RFL.Scripts.DI;
     using RFL.Scripts.Extensions;
-    using RFL.Scripts.GameLogic.Tags;
     using RFL.Scripts.GlobalServices.GameManager.MonoBeh;
     using TMPro;
 

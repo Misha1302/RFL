@@ -25,7 +25,7 @@ namespace RFL.Scripts.Bootstrap
             Di.Instance.AddGlobalSingleton(Creator.Create<CoroutinesService>());
             Di.Instance.AddGlobalSingleton(Creator.Create<FpsCounterService>());
 
-            Initializers.InitEvery();
+            InitializersManager.InitEvery();
         }
     }
 }
