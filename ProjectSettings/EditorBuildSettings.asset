@@ -6,9 +6,6 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/RFL/Scenes/Empty.unity
-    guid: 6b39c619312f7ae4d9ed2b7167318616
-  - enabled: 1
     path: Assets/RFL/Scenes/Core.unity
     guid: 66d605ac0b7ae8248b568d67de9dbccc
   m_configObjects: {}

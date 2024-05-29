@@ -1,4 +1,6 @@
-﻿namespace RFL.Scripts.EditorHelpers
+﻿#if UNITY_EDITOR
+
+namespace RFL.Scripts.EditorHelpers
 {
     using RFL.Scripts.GlobalServices.Repository;
     using UnityEngine;
@@ -21,3 +23,5 @@
         }
     }
 }
+
+#endif

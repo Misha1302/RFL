@@ -179,6 +179,14 @@ PrefabInstance:
       propertyPath: saveChanged
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 9020925414114499385, guid: c2f74c8624d1b7d42b5a33a81dd91589, type: 3}
+      propertyPath: scenes.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9020925414114499385, guid: c2f74c8624d1b7d42b5a33a81dd91589, type: 3}
+      propertyPath: scenes.Array.data[0]
+      value: 
+      objectReference: {fileID: 102900000, guid: 66d605ac0b7ae8248b568d67de9dbccc, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

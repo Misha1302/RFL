@@ -5,7 +5,7 @@
 
     public static class SceneInitializer
     {
-        [InitializerMethod]
+        [InitializerMethod(-100)]
         public static void Initialize()
         {
             Di.Get<SceneService>().Init();

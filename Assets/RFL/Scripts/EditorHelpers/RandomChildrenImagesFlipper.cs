@@ -1,3 +1,5 @@
+#if UNITY_EDITOR
+
 namespace RFL.Scripts.EditorHelpers
 {
     using System;
@@ -38,3 +40,5 @@ namespace RFL.Scripts.EditorHelpers
         }
     }
 }
+
+#endif

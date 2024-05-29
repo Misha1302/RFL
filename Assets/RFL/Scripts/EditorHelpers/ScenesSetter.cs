@@ -1,4 +1,6 @@
-﻿namespace RFL.Scripts.EditorHelpers
+﻿#if UNITY_EDITOR
+
+namespace RFL.Scripts.EditorHelpers
 {
     using System.Linq;
     using RFL.Scripts.GlobalServices.Repository;
@@ -34,3 +36,5 @@
         }
     }
 }
+
+#endif

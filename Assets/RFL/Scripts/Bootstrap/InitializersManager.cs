@@ -14,7 +14,7 @@
                 .SelectMany(type =>
                     type.GetMethods(BindingFlags.Static | BindingFlags.Public)
                         .Where(m => m.GetCustomAttributes<InitializerMethodAttribute>().Any())
-                );
+                ).OrderBy(x => x.GetCustomAttribute<InitializerMethodAttribute>().Priority);
 
 
             initializers.ForAll(x => x.Invoke(null, null));
