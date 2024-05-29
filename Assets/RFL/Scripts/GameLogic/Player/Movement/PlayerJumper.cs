@@ -57,7 +57,7 @@
 
         private void HandleJumping()
         {
-            Player.PlayerTransform.AddForce(Vector2.up * (GetYForce() * UnityEngine.Time.deltaTime));
+            Di.Get<Player>().PlayerTransform.AddForce(Vector2.up * (GetYForce() * UnityEngine.Time.deltaTime));
         }
 
         private void HandleJump()
@@ -65,7 +65,7 @@
             _startJumpTime = Time;
             _jumped = true;
 
-            Player.PlayerTransform.SetVelocityY(GetYForce());
+            Di.Get<Player>().PlayerTransform.SetVelocityY(GetYForce());
         }
 
         private void HandleEndOfJumping()
@@ -78,13 +78,13 @@
 
         private static void SlowDownIfNeed()
         {
-            if (Player.PlayerTransform.Vel.y <= 0) return;
+            if (Di.Get<Player>().PlayerTransform.Vel.y <= 0) return;
             SlowDown();
         }
 
         private static void SlowDown()
         {
-            Player.PlayerTransform.SetVelocityY(Player.PlayerTransform.Vel.y / 2f);
+            Di.Get<Player>().PlayerTransform.SetVelocityY(Di.Get<Player>().PlayerTransform.Vel.y / 2f);
         }
 
         private float GetYForce() => jumpVelocityCurve.Evaluate(PassedTime / jumpTime) * jumpHeight;

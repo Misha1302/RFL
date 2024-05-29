@@ -1,6 +1,7 @@
 ﻿namespace RFL.Scripts.GameLogic.Player
 {
     using System;
+    using RFL.Scripts.DI;
     using RFL.Scripts.GlobalServices.GameManager.MonoBeh;
     using UnityEngine;
 
@@ -21,8 +22,8 @@
 
         private void Flip()
         {
-            if (Player.PlayerTransform.Vel.x != 0)
-                _spriteRenderer.Value.flipX = Player.PlayerTransform.Vel.x < 0;
+            if (Di.Get<Player>().PlayerTransform.Vel.x != 0)
+                _spriteRenderer.Value.flipX = Di.Get<Player>().PlayerTransform.Vel.x < 0;
         }
     }
 }

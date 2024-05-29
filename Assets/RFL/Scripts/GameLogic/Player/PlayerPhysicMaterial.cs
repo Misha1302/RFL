@@ -1,5 +1,6 @@
 ﻿namespace RFL.Scripts.GameLogic.Player
 {
+    using RFL.Scripts.DI;
     using RFL.Scripts.GlobalServices.GameManager.MonoBeh;
     using UnityEngine;
 
@@ -7,7 +8,7 @@
     {
         protected override void OnStart()
         {
-            Player.PlayerTransform.SetPhysicsMaterial(new PhysicsMaterial2D { friction = 0f });
+            Di.Get<Player>().PlayerTransform.SetPhysicsMaterial(new PhysicsMaterial2D { friction = 0f });
         }
     }
 }
