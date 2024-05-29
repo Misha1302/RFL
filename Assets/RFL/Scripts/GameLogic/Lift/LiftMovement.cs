@@ -18,10 +18,5 @@ namespace RFL.Scripts.GameLogic.Lift
         {
             transform.position = CurPoint;
         }
-
-        protected override void LateTick()
-        {
-            transform.position = CurPoint;
-        }
     }
 }

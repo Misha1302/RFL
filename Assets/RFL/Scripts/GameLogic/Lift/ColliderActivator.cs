@@ -10,7 +10,7 @@ namespace RFL.Scripts.GameLogic.Lift
     [RequireComponent(typeof(Collider2D))]
     public class ColliderActivator : MonoBeh
     {
-        [SerializeField] private Collider2D colToActive;
+        [SerializeField] private Collider2D[] colsToActive;
 
         private readonly Lazy<Collider2D> _collider;
         private readonly Collider2D[] _results = new Collider2D[CollectionsLength.MaxCollisionsCount];
@@ -32,7 +32,7 @@ namespace RFL.Scripts.GameLogic.Lift
                 var bottomY = x.transform.position.y - halfYCollider;
                 return bottomY >= transform.position.y;
             });
-            colToActive.enabled = anyRightPosition;
+            colsToActive.ForAll(x => x.enabled = anyRightPosition);
         }
     }
 }
