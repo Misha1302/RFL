@@ -3,7 +3,7 @@
     using RFL.Scripts.GlobalServices.GameManager.MonoBeh;
 
     // ReSharper disable MemberCanBeMadeStatic.Global
-    public class TimeService : MonoBeh
+    public class TimeService : MonoBeh, IService
     {
         private double _totalFixedTime;
 

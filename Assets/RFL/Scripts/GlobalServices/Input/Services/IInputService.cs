@@ -2,7 +2,7 @@
 {
     using RFL.Scripts.GlobalServices.Input.Axis;
 
-    public interface IInputService
+    public interface IInputService : IService
     {
         public Axis2D Input { get; }
         public bool Jump { get; }

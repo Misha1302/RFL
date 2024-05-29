@@ -6,7 +6,7 @@
     using RFL.Scripts.GlobalServices.Pause;
     using UnityEngine;
 
-    public class GameService : MonoBehaviour
+    public class GameService : MonoBehaviour, IService
     {
         private readonly List<MonoBeh.MonoBeh> _monoBehs = new();
 
@@ -25,8 +25,14 @@
         private void OnPausedChanged(bool isPaused) => enabled = !isPaused;
 
 
-        public void AddMonoBeh(MonoBeh.MonoBeh monoBeh) => _monoBehs.Add(monoBeh);
+        public void AddMonoBeh(MonoBeh.MonoBeh monoBeh)
+        {
+            _monoBehs.Add(monoBeh);
+        }
 
-        public void RemoveMonoBeh(MonoBeh.MonoBeh monoBeh) => _monoBehs.Remove(monoBeh);
+        public void RemoveMonoBeh(MonoBeh.MonoBeh monoBeh)
+        {
+            _monoBehs.Remove(monoBeh);
+        }
     }
 }

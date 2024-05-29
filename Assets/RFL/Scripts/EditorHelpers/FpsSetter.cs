@@ -10,8 +10,14 @@
 
         private void OnValidate()
         {
-            new RepositoryService().GameData.TargetFps = targetFps;
-            new RepositoryService().GameData.NeedToShowFps = needToShowFps;
+            _ = new RepositoryService
+            {
+                GameData =
+                {
+                    TargetFps = targetFps,
+                    NeedToShowFps = needToShowFps
+                }
+            };
         }
     }
 }

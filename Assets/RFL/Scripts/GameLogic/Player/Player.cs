@@ -18,6 +18,7 @@
     {
         public Player()
         {
+            Di.AddGlobalSingleton(this);
             Di.AddScopedSingleton<PlayerScope, PlayerImageFlipper>(GetComponent<PlayerImageFlipper>);
             Di.AddScopedSingleton<PlayerScope, PlayerJumper>(GetComponent<PlayerJumper>);
             Di.AddScopedSingleton<PlayerScope, PlayerPauseHandler>(GetComponent<PlayerPauseHandler>);

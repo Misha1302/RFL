@@ -2,7 +2,7 @@
 {
     using System;
 
-    public class PauseService
+    public class PauseService : IService
     {
         private bool _pause;
         public Action<bool> OnPausedChanged;

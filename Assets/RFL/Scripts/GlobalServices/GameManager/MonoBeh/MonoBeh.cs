@@ -69,7 +69,8 @@
 
         public virtual void SelfDestroy()
         {
-            Di.Instance.GetGlobalSingleton<GameService>().RemoveMonoBeh(this);
+            isEnabled = false;
+            Di.Get<GameService>().RemoveMonoBeh(this);
         }
     }
 }

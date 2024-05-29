@@ -8,7 +8,7 @@
     using RFL.Scripts.GlobalServices.Coroutines.Waitings;
     using RFL.Scripts.GlobalServices.GameManager.MonoBeh;
 
-    public class CoroutinesService : MonoBeh
+    public class CoroutinesService : MonoBeh, IService
     {
         private readonly List<(string name, List<CoroutineObj> cors)> _coroutines = new();
 

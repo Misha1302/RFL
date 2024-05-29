@@ -1,10 +1,10 @@
-﻿namespace RFL.Scripts.GlobalServices.Time
+﻿namespace RFL.Scripts.GlobalServices.Input.Fps
 {
     using System;
     using RFL.Scripts.Extensions;
     using RFL.Scripts.GlobalServices.GameManager.MonoBeh;
 
-    public class FpsCounterService : MonoBeh
+    public class FpsCounterService : MonoBeh, IService
     {
         private const float UpdateTime = 1f;
         private int _fpsCount;

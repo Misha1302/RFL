@@ -2,6 +2,8 @@
 {
     using System;
     using System.Linq;
+    using RFL.Scripts.Extensions;
+    using RFL.Scripts.GlobalServices.GameManager.MonoBeh;
     using UnityEngine;
     using Object = UnityEngine.Object;
 
@@ -10,7 +12,6 @@
         private const string Prefix = "__";
 
         public static T Instantiate<T>(T prefab) where T : Object => Object.Instantiate(prefab);
-
 
         public static T Create<T>() where T : Component =>
             Create(typeof(T)).GetComponent<T>();
@@ -22,5 +23,12 @@
 
         private static string MakeName(params Type[] types) =>
             $"{Prefix}({string.Join("; ", types.Select(x => x.Name))})";
+
+        public static void Destroy(Transform transform)
+        {
+            var monoBehs = transform.GetComponentsInChildren<MonoBeh>(true);
+            monoBehs.ForAll(x => x.SelfDestroy());
+            Object.Destroy(transform.gameObject);
+        }
     }
 }

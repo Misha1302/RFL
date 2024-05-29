@@ -3,7 +3,7 @@
     using System;
     using UnityEngine;
 
-    public class RepositoryService
+    public class RepositoryService : IService
     {
         private const string Key = "GameDataKey";
 
@@ -12,7 +12,8 @@
 
         private static GameData LoadGameData()
         {
-            var gameData = SaveSystem.Get(Key, out var value) ? JsonUtility.FromJson<GameData>(value) : new GameData();
+            var gameData = SaveSystem.Get(Key, out var value) ? JsonUtility.FromJson<GameData>(value) : null;
+            gameData ??= new GameData();
             gameData.OnChanged += SaveGameData;
             return gameData;
         }

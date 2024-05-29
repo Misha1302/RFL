@@ -4,7 +4,7 @@ namespace RFL.Scripts.GameLogic.Fps
     using RFL.Scripts.Extensions;
     using RFL.Scripts.GameLogic.Tags;
     using RFL.Scripts.GlobalServices.GameManager.MonoBeh;
-    using RFL.Scripts.GlobalServices.Time;
+    using RFL.Scripts.GlobalServices.Input.Fps;
     using TMPro;
 
     public class FpsVisualizer : MonoBeh

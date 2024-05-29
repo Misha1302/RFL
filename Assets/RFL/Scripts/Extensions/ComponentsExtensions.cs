@@ -5,7 +5,7 @@
 
     public static class ComponentsExtensions
     {
-        public static bool HasComponent<T>(this Component component) where T : Component =>
+        public static bool HasComponent<T>(this Component component) =>
             component.TryGetComponent<T>(out _);
 
         public static T GetOrAddComponent<T>(this Component component) where T : Component

@@ -241,7 +241,7 @@ MonoBehaviour:
     m_RotationOrder: 4
   aPoint: {fileID: 9185138579324751643}
   bPoint: {fileID: 4041027111344674609}
-  speed: 0.2
+  speed: 1
 --- !u!61 &4418025589332327697
 BoxCollider2D:
   m_ObjectHideFlags: 0

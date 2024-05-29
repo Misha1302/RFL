@@ -4,8 +4,10 @@ namespace RFL.Scripts.Bootstrap
     using RFL.Scripts.GlobalServices.Coroutines;
     using RFL.Scripts.GlobalServices.GameManager;
     using RFL.Scripts.GlobalServices.Input;
+    using RFL.Scripts.GlobalServices.Input.Fps;
     using RFL.Scripts.GlobalServices.Pause;
     using RFL.Scripts.GlobalServices.Repository;
+    using RFL.Scripts.GlobalServices.Scenes;
     using RFL.Scripts.GlobalServices.Time;
     using RFL.Scripts.Helpers;
 
@@ -16,6 +18,7 @@ namespace RFL.Scripts.Bootstrap
             Di.Instance.AddGlobalSingleton(new PauseService());
             Di.Instance.AddGlobalSingleton(Creator.Create<GameService>());
 
+            Di.Instance.AddGlobalSingleton(new SceneService());
             Di.Instance.AddGlobalSingleton(new RepositoryService());
             Di.Instance.AddGlobalSingleton(InputMaker.MakeInputService());
             Di.Instance.AddGlobalSingleton(Creator.Create<TimeService>());
