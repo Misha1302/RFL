@@ -12,14 +12,9 @@ namespace RFL.Scripts.EditorHelpers
 
         private void OnValidate()
         {
-            _ = new RepositoryService
-            {
-                GameData =
-                {
-                    TargetFps = targetFps,
-                    NeedToShowFps = needToShowFps
-                }
-            };
+            var repository = new RepositoryService();
+            repository.GameData.targetFps.Value = targetFps;
+            repository.GameData.needToShowFps.Value = needToShowFps;
         }
     }
 }

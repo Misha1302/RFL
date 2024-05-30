@@ -12,9 +12,9 @@
         public static void Initialize()
         {
             QualitySettings.vSyncCount = 0;
-            Application.targetFrameRate = Di.Get<RepositoryService>().GameData.TargetFps;
+            Application.targetFrameRate = Di.Get<RepositoryService>().GameData.targetFps.Value;
 
-            if (Di.Get<RepositoryService>().GameData.NeedToShowFps)
+            if (Di.Get<RepositoryService>().GameData.needToShowFps.Value)
                 CreateFpsCanvas();
         }
 

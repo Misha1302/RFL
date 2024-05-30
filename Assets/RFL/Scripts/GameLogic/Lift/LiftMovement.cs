@@ -12,7 +12,7 @@ namespace RFL.Scripts.GameLogic.Lift
         [SerializeField] private float speed = 0.2f;
 
         private Vector3 CurPoint => Vector3.Lerp(aPoint.position, bPoint.position, T);
-        private float T => movementCurve.Evaluate((Time * speed).PingPong(1f));
+        private float T => movementCurve.Evaluate((TimeSinceStart * speed).PingPong(1f));
 
         protected override void FixedTick()
         {

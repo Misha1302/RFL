@@ -23,10 +23,10 @@
             _collider2D = new Lazy<Collider2D>(GetComponent<Collider2D>);
         }
 
-        public bool IsGroundedWithCoyote => _timeWhenIsGroundedWasTrue + coyoteTime >= Time;
+        public bool IsGroundedWithCoyote => _timeWhenIsGroundedWasTrue + coyoteTime >= TimeSinceStart;
 
         public bool IsGroundedWithOutCoyote =>
-            Math.Abs(_timeWhenIsGroundedWasTrue - Time) <= FixedDeltaTime * 2;
+            Math.Abs(_timeWhenIsGroundedWasTrue - TimeSinceStart) <= FixedDeltaTime * 2;
 
         private Collider2D Collider2D => _collider2D.Value;
 
@@ -35,7 +35,7 @@
             var count = Collider2D.OverlapCollider(_contactFilter2D, _results);
 
             if (_results.Slice(0, count).Any(x => !x.HasComponent<NotAGroundTag>()))
-                _timeWhenIsGroundedWasTrue = Time;
+                _timeWhenIsGroundedWasTrue = TimeSinceStart;
         }
     }
 }

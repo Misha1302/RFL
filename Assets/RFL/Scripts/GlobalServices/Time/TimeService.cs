@@ -1,23 +1,42 @@
 ﻿namespace RFL.Scripts.GlobalServices.Time
 {
     using RFL.Scripts.DI;
+    using RFL.Scripts.Extensions;
+    using RFL.Scripts.GlobalServices.ApplicationEvents;
     using RFL.Scripts.GlobalServices.GameManager.MonoBeh;
     using RFL.Scripts.GlobalServices.Pause;
+    using RFL.Scripts.GlobalServices.Repository;
+    using UnityEngine;
 
     // ReSharper disable MemberCanBeMadeStatic.Global
     public class TimeService : MonoBeh, IService
     {
-        private double _totalFixedTime;
+        private double _elapsedTime;
+        private double _startTotalTime;
 
-        public float TotalFixedTime => (float)_totalFixedTime;
-        public new float DeltaTime => UnityEngine.Time.deltaTime;
-        public new float FixedDeltaTime => UnityEngine.Time.fixedDeltaTime;
+        public new double TotalTime => _startTotalTime + _elapsedTime;
 
+        public float ElapsedTime => (float)_elapsedTime;
+        public new float DeltaTime => Time.deltaTime;
+        public new float FixedDeltaTime => Time.fixedDeltaTime;
+
+
+        protected override void OnStart()
+        {
+            _startTotalTime = Di.Get<RepositoryService>().GameData.totalTime.Value;
+            Di.Get<ApplicationEventsService>().OnAppQuit += SaveTime;
+        }
+
+        private void SaveTime()
+        {
+            Di.Get<RepositoryService>().GameData.totalTime.Value = TotalTime;
+        }
 
         protected override void FixedTick()
         {
             if (!Di.Get<PauseService>().IsPaused)
-                _totalFixedTime += FixedDeltaTime;
+                _elapsedTime += FixedDeltaTime;
+            print(TotalTime.ToStr());
         }
     }
 }

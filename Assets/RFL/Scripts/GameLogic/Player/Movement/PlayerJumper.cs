@@ -20,7 +20,7 @@
             jumpTime >= PassedTime && Di.Get<IInputService>().Jump && !GroundChecker.IsGroundedWithOutCoyote;
 
 
-        private float PassedTime => Time - _startJumpTime;
+        private float PassedTime => TimeSinceStart - _startJumpTime;
 
         public PlayerGroundChecker GroundChecker { get; private set; }
 
@@ -62,7 +62,7 @@
 
         private void HandleJump()
         {
-            _startJumpTime = Time;
+            _startJumpTime = TimeSinceStart;
             _jumped = true;
 
             Di.Get<Player>().PlayerTransform.SetVelocityY(GetYForce());

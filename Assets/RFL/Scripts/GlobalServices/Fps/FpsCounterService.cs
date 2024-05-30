@@ -24,7 +24,7 @@
 
         private void SetCurrentFpsIfNeed()
         {
-            if (!Time.IsDivisibleBy(UpdateTime)) return;
+            if (!TimeSinceStart.IsDivisibleBy(UpdateTime)) return;
 
             CurrentFps = _fpsCount / UpdateTime;
             OnFpsChanged?.Invoke(CurrentFps);

@@ -1,67 +1,42 @@
 ﻿namespace RFL.Scripts.GlobalServices.Repository
 {
     using System;
-    using UnityEngine;
 
     [Serializable]
     public class GameData
     {
-        [SerializeField] private int targetFps;
-        [SerializeField] private float inputSpeed;
-        [SerializeField] private bool needToShowFps;
-        [SerializeField] private EventList<string> scenesList;
+        public EventField<int> targetFps;
+        public EventField<float> inputSpeed;
+        public EventField<bool> needToShowFps;
+        public EventField<EventList<string>> scenesList;
+        public EventField<double> totalTime;
 
         [NonSerialized] public Action<GameData> OnChanged;
 
         public GameData()
         {
-            targetFps = 60;
-            inputSpeed = 1f / 0.4f;
-            needToShowFps = true;
-            scenesList = new EventList<string>();
+            inputSpeed = new EventField<float>();
+            inputSpeed.OnChanged += () => OnChanged?.Invoke(this);
 
-            scenesList.OnChanged += _ => OnChanged?.Invoke(this);
-        }
+            needToShowFps = new EventField<bool>();
+            needToShowFps.OnChanged += () => OnChanged?.Invoke(this);
 
-        public int TargetFps
-        {
-            get => targetFps;
-            set
-            {
-                targetFps = value;
-                OnChanged(this);
-            }
-        }
+            scenesList = new EventField<EventList<string>>();
+            scenesList.OnChanged += () => OnChanged?.Invoke(this);
 
-        public float InputSpeed
-        {
-            get => inputSpeed;
-            set
-            {
-                inputSpeed = value;
-                OnChanged(this);
-            }
-        }
+            totalTime = new EventField<double>();
+            totalTime.OnChanged += () => OnChanged?.Invoke(this);
 
-        public bool NeedToShowFps
-        {
-            get => needToShowFps;
-            set
-            {
-                needToShowFps = value;
-                OnChanged(this);
-            }
-        }
+            targetFps = new EventField<int>();
+            targetFps.OnChanged += () => OnChanged?.Invoke(this);
 
-        public EventList<string> ScenesList
-        {
-            get => scenesList;
-            set
-            {
-                scenesList = value;
-                scenesList.OnChanged += _ => OnChanged(this);
-                OnChanged(this);
-            }
+            targetFps.Value = 60;
+            inputSpeed.Value = 1f / 0.4f;
+            needToShowFps.Value = true;
+            scenesList.Value = new EventList<string>();
+            totalTime.Value = 0;
+
+            scenesList.Value.OnChanged += _ => OnChanged?.Invoke(this);
         }
     }
 }

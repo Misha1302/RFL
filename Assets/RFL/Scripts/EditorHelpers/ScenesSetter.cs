@@ -24,8 +24,8 @@ namespace RFL.Scripts.EditorHelpers
         private void InitRepository()
         {
             var repositoryService = new RepositoryService();
-            repositoryService.GameData.ScenesList.Clear();
-            repositoryService.GameData.ScenesList.AddRange(scenes.Select(x => x.name));
+            repositoryService.GameData.scenesList.Value.Clear();
+            repositoryService.GameData.scenesList.Value.AddRange(scenes.Select(x => x.name));
         }
 
         private void InitBuildSettings()

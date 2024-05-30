@@ -1,6 +1,7 @@
 namespace RFL.Scripts.Bootstrap
 {
     using RFL.Scripts.DI;
+    using RFL.Scripts.GlobalServices.ApplicationEvents;
     using RFL.Scripts.GlobalServices.Coroutines;
     using RFL.Scripts.GlobalServices.Fps;
     using RFL.Scripts.GlobalServices.GameManager;
@@ -24,6 +25,7 @@ namespace RFL.Scripts.Bootstrap
             Di.Instance.AddGlobalSingleton(Creator.Create<TimeService>());
             Di.Instance.AddGlobalSingleton(Creator.Create<CoroutinesService>());
             Di.Instance.AddGlobalSingleton(Creator.Create<FpsCounterService>());
+            Di.Instance.AddGlobalSingleton(Creator.Create<ApplicationEventsService>());
 
             InitializersManager.InitEvery();
         }

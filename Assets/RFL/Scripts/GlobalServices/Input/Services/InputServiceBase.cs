@@ -20,7 +20,7 @@
 
         protected override void OnCreated()
         {
-            Input = new Axis2D(Di.Get<RepositoryService>().GameData.InputSpeed);
+            Input = new Axis2D(Di.Get<RepositoryService>().GameData.inputSpeed.Value);
         }
 
         protected override void OnStart()
