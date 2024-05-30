@@ -1,7 +1,9 @@
 ﻿namespace RFL.Scripts.Extensions
 {
     using System;
+    using System.Collections;
     using System.Collections.Generic;
+    using System.Linq;
 
     public static class CollectionsExtensions
     {
@@ -16,6 +18,12 @@
         {
             foreach (var item in lst)
                 act(item);
+        }
+
+        public static void ForAll<T>(this IEnumerable lst, Action<T> act)
+        {
+            foreach (var item in lst)
+                act((T)item);
         }
 
         public static ArraySegment<T> Slice<T>(this T[] arr, int start, int count) => new(arr, start, count);
