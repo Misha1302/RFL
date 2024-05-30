@@ -24,7 +24,7 @@
         protected override void OnStart()
         {
             _startTotalTime = Di.Get<RepositoryService>().GameData.totalTime.Value;
-            Di.Get<ApplicationEventsService>().OnAppQuit += SaveTime;
+            Di.Get<ApplicationEventsService>().SubscribeOnAppQuit(SaveTime);
         }
 
         private void SaveTime()
@@ -36,7 +36,6 @@
         {
             if (!Di.Get<PauseService>().IsPaused)
                 _elapsedTime += FixedDeltaTime;
-            print(TotalTime.ToStr());
         }
     }
 }
