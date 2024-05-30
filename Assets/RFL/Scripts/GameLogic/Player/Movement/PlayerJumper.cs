@@ -57,7 +57,7 @@
 
         private void HandleJumping()
         {
-            Di.Get<Player>().PlayerTransform.AddForce(Vector2.up * (GetYForce() * UnityEngine.Time.deltaTime));
+            Di.Get<Player>().PlayerTransform.AddForce(Vector2.up * (GetYForce() * DeltaTime));
         }
 
         private void HandleJump()

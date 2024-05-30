@@ -21,5 +21,8 @@
             vec.z = z;
             return vec;
         }
+
+        public static Vector3 Round(this Vector3 vec, float step) =>
+            vec.WithX(vec.x.Round(step)).WithY(vec.y.Round(step)).WithZ(vec.z.Round(step));
     }
 }

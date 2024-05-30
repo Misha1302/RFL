@@ -5,14 +5,17 @@
     using System.Linq;
     using RFL.Scripts.Extensions;
     using RFL.Scripts.GlobalServices.GameManager.MonoBeh;
+    using UnityEngine;
 
     public class ApplicationEventsService : MonoBeh, IService
     {
         private readonly Dictionary<int, Action> _onAppQuit = new();
 
-        private void OnDestroy()
+        private void OnApplicationQuit()
         {
             _onAppQuit.OrderBy(x => x.Key).ForAll(x => x.Value.Invoke());
+            FindObjectsByType<MonoBeh>(FindObjectsInactive.Include, FindObjectsSortMode.None)
+                .ForAll(x => x.isEnabled = false);
         }
 
         public void SubscribeOnAppQuit(Action action, int priority = 0)

@@ -9,7 +9,7 @@ namespace RFL.Scripts.GameLogic.Lift
     {
         private readonly Dictionary<Transform, Transform> _parentsOfTransforms = new();
 
-        protected override void OnCreated()
+        protected override void OnStart()
         {
             CollisionDetector.OnTrigEnter2D += OnTrigEnter2D;
             CollisionDetector.OnTrigExit2D += OnTrigExit2D;

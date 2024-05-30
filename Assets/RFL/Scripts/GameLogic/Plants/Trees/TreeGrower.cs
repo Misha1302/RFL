@@ -6,7 +6,7 @@
     using RFL.Scripts.Helpers;
     using UnityEngine;
 
-    public class Tree : MonoBeh
+    public class TreeGrower : MonoBeh
     {
         private TreeTimeManager _treeTimeManager;
 
@@ -27,7 +27,8 @@
             var instance = Creator.Instantiate(resource);
             instance.transform.SetParent(transform);
             instance.transform.localPosition =
-                Vector3.zero.WithY(instance.GetComponentsInChildren<SpriteRenderer>().Max(r => r.size.y * r.transform.localScale.y) / 2);
+                Vector3.zero.WithY(instance.GetComponentsInChildren<SpriteRenderer>()
+                    .Max(r => r.size.y * r.transform.localScale.y) / 2);
         }
     }
 }

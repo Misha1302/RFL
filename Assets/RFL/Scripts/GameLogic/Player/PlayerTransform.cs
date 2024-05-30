@@ -21,7 +21,7 @@
         public Vector3 Pos
         {
             get => transform.position;
-            private set => transform.position = value;
+            set => transform.position = value;
         }
 
         public Vector3 Vel
