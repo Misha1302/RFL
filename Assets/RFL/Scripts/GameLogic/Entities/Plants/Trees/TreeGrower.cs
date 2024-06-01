@@ -1,9 +1,10 @@
-﻿namespace RFL.Scripts.GameLogic.Plants.Trees
+﻿namespace RFL.Scripts.GameLogic.Entities.Plants.Trees
 {
     using RFL.Scripts.DI;
     using RFL.Scripts.Extensions;
     using RFL.Scripts.GlobalServices.GameManager.MonoBeh;
     using RFL.Scripts.GlobalServices.Repository;
+    using RFL.Scripts.GlobalServices.Repository.DataContainers.Primitives;
     using RFL.Scripts.GlobalServices.Time;
     using RFL.Scripts.Helpers;
     using UnityEngine;
@@ -17,8 +18,8 @@
 
         public void Save()
         {
-            Di.Get<RepositoryService>().GameData.coreScene.Value.treesData[Id] =
-                new TreeData(_treeData.ticksCountWhenTreeWasGrown, transform.position, Id);
+            Di.Get<RepositoryService>().GameData.coreScene.Value.data[Id] =
+                new Any(new TreeData(_treeData?.ticksCountWhenTreeWasGrown ?? 0, transform.position, Id));
         }
 
         public void Init(TreeData treeData)

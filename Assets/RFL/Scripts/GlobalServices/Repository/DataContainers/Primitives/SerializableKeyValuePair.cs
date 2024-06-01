@@ -1,4 +1,4 @@
-﻿namespace RFL.Scripts.GlobalServices.Repository
+﻿namespace RFL.Scripts.GlobalServices.Repository.DataContainers.Primitives
 {
     using System;
 

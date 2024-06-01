@@ -1,4 +1,4 @@
-﻿namespace RFL.Scripts.GameLogic.Plants.Trees
+﻿namespace RFL.Scripts.GameLogic.Entities.Plants.Trees
 {
     using RFL.Scripts.Attributes;
     using RFL.Scripts.DI;
@@ -11,8 +11,12 @@
         [InitializerMethod]
         public static void Initialize()
         {
-            var data = Di.Get<RepositoryService>().GameData.coreScene.Value.treesData;
-            data.ForAll(x => Creator.Create<TreeGrower>().Init(x.value));
+            var data = Di.Get<RepositoryService>().GameData.coreScene.Value.data;
+            data.ForAll(x =>
+            {
+                if (x.value.Is<TreeData>())
+                    Creator.Create<TreeGrower>().Init(x.value.Get<TreeData>());
+            });
             data.Clear();
         }
     }

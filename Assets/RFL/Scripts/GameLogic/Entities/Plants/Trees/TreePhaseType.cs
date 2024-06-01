@@ -1,4 +1,4 @@
-﻿namespace RFL.Scripts.GameLogic.Plants.Trees
+﻿namespace RFL.Scripts.GameLogic.Entities.Plants.Trees
 {
     public enum TreePhaseType
     {

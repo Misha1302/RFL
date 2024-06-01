@@ -15,7 +15,7 @@ namespace RFL.Scripts.EditorHelpers
         private void OnValidate()
         {
             if (Application.isPlaying) return;
-            
+
             if (!saveChanged) return;
             saveChanged = false;
 

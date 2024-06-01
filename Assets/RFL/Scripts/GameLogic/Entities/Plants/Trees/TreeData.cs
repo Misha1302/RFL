@@ -1,6 +1,7 @@
-﻿namespace RFL.Scripts.GameLogic.Plants.Trees
+﻿namespace RFL.Scripts.GameLogic.Entities.Plants.Trees
 {
     using System;
+    using RFL.Scripts.GlobalServices.Repository.DataContainers.Primitives;
     using UnityEngine;
 
     [Serializable]

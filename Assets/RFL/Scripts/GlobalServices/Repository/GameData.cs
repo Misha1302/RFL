@@ -1,6 +1,8 @@
 ﻿namespace RFL.Scripts.GlobalServices.Repository
 {
     using System;
+    using RFL.Scripts.GlobalServices.Repository.DataContainers;
+    using RFL.Scripts.GlobalServices.Repository.DataContainers.Primitives;
     using UnityEngine;
 
     [Serializable]

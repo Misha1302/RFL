@@ -1,4 +1,4 @@
-﻿namespace RFL.Scripts.GameLogic.Plants.Trees
+﻿namespace RFL.Scripts.GlobalServices.Time
 {
     using System;
     using RFL.Scripts.GlobalServices.GameManager.MonoBeh;

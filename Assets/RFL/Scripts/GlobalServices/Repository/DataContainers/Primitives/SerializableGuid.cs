@@ -1,4 +1,4 @@
-﻿namespace RFL.Scripts.GameLogic.Plants.Trees
+﻿namespace RFL.Scripts.GlobalServices.Repository.DataContainers.Primitives
 {
     using System;
     using UnityEngine;
@@ -12,30 +12,20 @@
     [Serializable]
     public struct SerializableGuid : ISerializationCallbackReceiver
     {
-        [SerializeField] private string serializedGuid;
+        [SerializeField] private string guidAsStr;
         private Guid _guid;
 
         public SerializableGuid(Guid guid)
         {
             _guid = guid;
-            serializedGuid = null;
+            guidAsStr = null;
         }
 
-        public void OnAfterDeserialize()
-        {
-            _guid = Guid.Parse(serializedGuid);
-        }
+        public void OnAfterDeserialize() => _guid = Guid.Parse(guidAsStr);
+        public void OnBeforeSerialize() => guidAsStr = _guid.ToString();
 
-        public void OnBeforeSerialize()
-        {
-            serializedGuid = _guid.ToString();
-        }
-
-        public override bool Equals(object obj) =>
-            obj is SerializableGuid guid &&
-            _guid.Equals(guid._guid);
-
-        public override int GetHashCode() => -1324198676 + _guid.GetHashCode();
+        public override bool Equals(object obj) => obj is SerializableGuid guid && _guid.Equals(guid._guid);
+        public override int GetHashCode() => _guid.GetHashCode();
 
         public override string ToString() => _guid.ToString();
 
@@ -43,7 +33,5 @@
         public static bool operator !=(SerializableGuid a, SerializableGuid b) => a._guid != b._guid;
         public static implicit operator SerializableGuid(Guid guid) => new(guid);
         public static implicit operator Guid(SerializableGuid serializable) => serializable._guid;
-        public static implicit operator SerializableGuid(string serializedGuid) => new(Guid.Parse(serializedGuid));
-        public static implicit operator string(SerializableGuid serializedGuid) => serializedGuid.ToString();
     }
 }

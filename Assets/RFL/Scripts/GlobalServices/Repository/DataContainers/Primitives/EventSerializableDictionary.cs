@@ -1,11 +1,11 @@
-﻿namespace RFL.Scripts.GlobalServices.Repository
+﻿namespace RFL.Scripts.GlobalServices.Repository.DataContainers.Primitives
 {
     using System;
     using System.Collections;
     using System.Collections.Generic;
 
     [Serializable]
-    public class SerializableDictionary<TKey, TValue> : IEnumerable<SerializableKeyValuePair<TKey, TValue>>
+    public class EventSerializableDictionary<TKey, TValue> : IEnumerable<SerializableKeyValuePair<TKey, TValue>>
     {
         public List<SerializableKeyValuePair<TKey, TValue>> pairs = new();
 
@@ -29,7 +29,7 @@
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
         public SerializableKeyValuePair<TKey, TValue> GetPair(TKey key) =>
-            pairs.Find(x => EqualityComparer<TKey>.Default.Equals(x.key, key));
+            pairs.Find(x => x.key.Equals(key));
 
         public void Clear()
         {
