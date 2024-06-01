@@ -19,13 +19,13 @@
         {
             if (isPaused)
             {
-                _savedDirection = Di.Get<Player>().PlayerTransform.Vel;
-                Di.Get<Player>().PlayerTransform.Freeze();
+                _savedDirection = Di.Get<Player>().Get<PlayerTransform>().Vel;
+                Di.Get<Player>().Get<PlayerTransform>().Freeze();
             }
             else
             {
-                Di.Get<Player>().PlayerTransform.UnFreeze();
-                Di.Get<Player>().PlayerTransform.Vel = _savedDirection;
+                Di.Get<Player>().Get<PlayerTransform>().UnFreeze();
+                Di.Get<Player>().Get<PlayerTransform>().Vel = _savedDirection;
             }
         }
     }

@@ -57,7 +57,7 @@
 
         private void HandleJumping()
         {
-            Di.Get<Player>().PlayerTransform.AddForce(Vector2.up * (GetYForce() * DeltaTime));
+            Di.Get<Player>().Get<PlayerTransform>().AddForce(Vector2.up * (GetYForce() * DeltaTime));
         }
 
         private void HandleJump()
@@ -65,7 +65,7 @@
             _startJumpTime = TimeSinceStart;
             _jumped = true;
 
-            Di.Get<Player>().PlayerTransform.SetVelocityY(GetYForce());
+            Di.Get<Player>().Get<PlayerTransform>().SetVelocityY(GetYForce());
         }
 
         private void HandleEndOfJumping()
@@ -78,13 +78,14 @@
 
         private static void SlowDownIfNeed()
         {
-            if (Di.Get<Player>().PlayerTransform.Vel.y <= 0) return;
+            if (Di.Get<Player>().Get<PlayerTransform>().Vel.y <= 0) return;
             SlowDown();
         }
 
         private static void SlowDown()
         {
-            Di.Get<Player>().PlayerTransform.SetVelocityY(Di.Get<Player>().PlayerTransform.Vel.y / 2f);
+            Di.Get<Player>().Get<PlayerTransform>()
+                .SetVelocityY(Di.Get<Player>().Get<PlayerTransform>().Vel.y / 2f);
         }
 
         private float GetYForce() => jumpVelocityCurve.Evaluate(PassedTime / jumpTime) * jumpHeight;

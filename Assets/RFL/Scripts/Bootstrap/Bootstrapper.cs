@@ -16,16 +16,16 @@ namespace RFL.Scripts.Bootstrap
     {
         public static void Bootstrap()
         {
-            Di.Instance.AddGlobalSingleton(new PauseService());
-            Di.Instance.AddGlobalSingleton(Creator.Create<GameService>());
-            Di.Instance.AddGlobalSingleton(Creator.Create<ApplicationEventsService>());
+            Di.Instance.AddSingle(new PauseService());
+            Di.Instance.AddSingle(Creator.Create<GameService>());
+            Di.Instance.AddSingle(Creator.Create<ApplicationEventsService>());
 
-            Di.Instance.AddGlobalSingleton(new SceneService());
-            Di.Instance.AddGlobalSingleton(new RepositoryService());
-            Di.Instance.AddGlobalSingleton(InputMaker.MakeInputService());
-            Di.Instance.AddGlobalSingleton(Creator.Create<TimeService>());
-            Di.Instance.AddGlobalSingleton(Creator.Create<CoroutinesService>());
-            Di.Instance.AddGlobalSingleton(Creator.Create<FpsCounterService>());
+            Di.Instance.AddSingle(new SceneService());
+            Di.Instance.AddSingle(new RepositoryService());
+            Di.Instance.AddSingle(InputMaker.MakeInputService());
+            Di.Instance.AddSingle(Creator.Create<TimeService>());
+            Di.Instance.AddSingle(Creator.Create<CoroutinesService>());
+            Di.Instance.AddSingle(Creator.Create<FpsCounterService>());
 
             InitializersManager.InitEvery();
         }

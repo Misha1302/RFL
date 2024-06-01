@@ -10,14 +10,14 @@ namespace RFL.Scripts.DI
     {
         private readonly Dictionary<Type, Lazy<Any>> _singletons = new();
 
-        public void AddGlobalSingleton<TSingleton>(TSingleton singleton) =>
-            AddLazyGlobalSingleton(() => singleton);
+        public void AddSingle<TSingleton>(TSingleton singleton) =>
+            AddLazySingle(() => singleton);
 
-        public void AddLazyGlobalSingleton<TSingleton>(Func<TSingleton> lazyFunc) =>
+        public void AddLazySingle<TSingleton>(Func<TSingleton> lazyFunc) =>
             _singletons[typeof(TSingleton)] = new Lazy<Any>(() => new Any(lazyFunc()));
 
 
-        [Pure] public TSingleton GetGlobalSingleton<TSingleton>()
+        [Pure] public TSingleton GetSingle<TSingleton>()
         {
             if (!_singletons.TryGetValue(typeof(TSingleton), out var lazy))
                 Thrower.InvalidOpEx($"Could not found {typeof(TSingleton).Name}");
@@ -29,6 +29,6 @@ namespace RFL.Scripts.DI
             return value;
         }
 
-        [Pure] public static TSingleton Get<TSingleton>() => Instance.GetGlobalSingleton<TSingleton>();
+        [Pure] public static TSingleton Get<TSingleton>() => Instance.GetSingle<TSingleton>();
     }
 }

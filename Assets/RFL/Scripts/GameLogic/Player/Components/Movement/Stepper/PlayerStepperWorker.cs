@@ -22,7 +22,7 @@
 
         public void TryWork()
         {
-            if (!Di.Get<Player>().PlayerJumper.GroundChecker.IsGroundedWithOutCoyote) return;
+            if (!Di.Get<Player>().Get<PlayerJumper>().GroundChecker.IsGroundedWithOutCoyote) return;
 
             var castLeft = Raycast(_stepperInfo.LeftRayPoint.position);
             var castRight = Raycast(_stepperInfo.RightRayPoint.position);
@@ -36,14 +36,14 @@
                 y = castLeft.HitPoint.y.Max(castRight.HitPoint.y);
             else return;
 
-            Di.Get<Player>().PlayerTransform.MoveToY(CalcY(y));
-            Di.Get<Player>().PlayerTransform.MoveToX(
-                Di.Get<Player>().PlayerTransform.Pos.x +
+            Di.Get<Player>().Get<PlayerTransform>().MoveToY(CalcY(y));
+            Di.Get<Player>().Get<PlayerTransform>().MoveToX(
+                Di.Get<Player>().Get<PlayerTransform>().Pos.x +
                 Math.Sign(Di.Get<IInputService>().Input.X) * _stepperInfo.XOffset
             );
         }
 
-        private static float CalcY(float y) => y + Di.Get<Player>().PlayerStepper.Player2FootsDelta;
+        private static float CalcY(float y) => y + Di.Get<Player>().Get<PlayerStepper>().Player2FootsDelta;
 
         private StepperRaycastInfo Raycast(Vector3 point)
         {

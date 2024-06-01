@@ -22,8 +22,8 @@
 
         private void Flip()
         {
-            if (Di.Get<Player>().PlayerTransform.Vel.x != 0)
-                _spriteRenderer.Value.flipX = Di.Get<Player>().PlayerTransform.Vel.x < 0;
+            if (Di.Get<Player>().Get<PlayerTransform>().Vel.x != 0)
+                _spriteRenderer.Value.flipX = Di.Get<Player>().Get<PlayerTransform>().Vel.x < 0;
         }
     }
 }

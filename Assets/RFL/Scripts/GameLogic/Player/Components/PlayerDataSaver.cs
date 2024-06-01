@@ -9,13 +9,14 @@
     {
         public void Save()
         {
-            Di.Get<RepositoryService>().GameData.playerPos.Value = Di.Get<Player>().PlayerTransform.Pos.Round(0.5f);
+            Di.Get<RepositoryService>().GameData.playerPos.Value =
+                Di.Get<Player>().Get<PlayerTransform>().Pos.Round(0.5f);
         }
 
         protected override void OnStart()
         {
             var playerTransformPos = Di.Get<RepositoryService>().GameData.playerPos.Value;
-            Di.Get<Player>().PlayerTransform.Pos = playerTransformPos;
+            Di.Get<Player>().Get<PlayerTransform>().Pos = playerTransformPos;
         }
     }
 }
