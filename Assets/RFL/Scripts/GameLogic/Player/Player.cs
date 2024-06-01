@@ -1,8 +1,9 @@
 ﻿namespace RFL.Scripts.GameLogic.Player
 {
     using RFL.Scripts.DI;
-    using RFL.Scripts.GameLogic.Player.Movement;
-    using RFL.Scripts.GameLogic.Player.Movement.Stepper;
+    using RFL.Scripts.GameLogic.Player.Components;
+    using RFL.Scripts.GameLogic.Player.Components.Movement;
+    using RFL.Scripts.GameLogic.Player.Components.Movement.Stepper;
     using RFL.Scripts.GlobalServices.GameManager.MonoBeh;
     using UnityEngine;
 

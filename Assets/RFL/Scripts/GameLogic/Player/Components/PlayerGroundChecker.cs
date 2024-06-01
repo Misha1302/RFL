@@ -1,4 +1,4 @@
-﻿namespace RFL.Scripts.GameLogic.Player
+﻿namespace RFL.Scripts.GameLogic.Player.Components
 {
     using System;
     using System.Linq;
