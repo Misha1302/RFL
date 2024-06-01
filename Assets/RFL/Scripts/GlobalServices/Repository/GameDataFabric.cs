@@ -10,13 +10,22 @@
     {
         public static GameData MakeExampleGameData()
         {
-            var gd = new GameData();
-            gd.targetFps.Value = 60;
-            gd.inputSpeed.Value = 1f / 0.4f;
-            gd.needToShowFps.Value = true;
-            gd.playerPos.Value = new Vector2(9.75f, 0.93f);
+            var gd = new GameData
+            {
+                targetFps = { Value = 60 },
+                inputSpeed = { Value = 1f / 0.4f },
+                needToShowFps = { Value = true },
+                playerPos = { Value = new Vector2(9.75f, 0.93f) }
+            };
             gd.coreScene.Value.data = ExampleTrees();
 
+            SubscribeOnChanged(gd);
+
+            return gd;
+        }
+
+        public static void SubscribeOnChanged(GameData gd)
+        {
             gd.inputSpeed.OnChanged += () => gd.OnChanged?.Invoke(gd);
             gd.needToShowFps.OnChanged += () => gd.OnChanged?.Invoke(gd);
             gd.scenesList.OnChanged += () => gd.OnChanged?.Invoke(gd);
@@ -27,8 +36,6 @@
 
             gd.coreScene.Value.data.OnChanged += () => gd.OnChanged?.Invoke(gd);
             gd.scenesList.Value.OnChanged += _ => gd.OnChanged?.Invoke(gd);
-
-            return gd;
         }
 
         private static EventSerializableDictionary<SerializableGuid, Any> ExampleTrees()
@@ -48,16 +55,7 @@
                 needToShowFps = { Value = true }
             };
 
-            gd.inputSpeed.OnChanged += () => gd.OnChanged?.Invoke(gd);
-            gd.needToShowFps.OnChanged += () => gd.OnChanged?.Invoke(gd);
-            gd.scenesList.OnChanged += () => gd.OnChanged?.Invoke(gd);
-            gd.totalTicks.OnChanged += () => gd.OnChanged?.Invoke(gd);
-            gd.targetFps.OnChanged += () => gd.OnChanged?.Invoke(gd);
-            gd.playerPos.OnChanged += () => gd.OnChanged?.Invoke(gd);
-            gd.coreScene.OnChanged += () => gd.OnChanged?.Invoke(gd);
-
-            gd.coreScene.Value.data.OnChanged += () => gd.OnChanged?.Invoke(gd);
-            gd.scenesList.Value.OnChanged += _ => gd.OnChanged?.Invoke(gd);
+            SubscribeOnChanged(gd);
 
             return gd;
         }

@@ -1,5 +1,6 @@
-﻿namespace RFL.Scripts.Extensions
+﻿namespace RFL.Scripts.Extensions.Math.Vectors
 {
+    using RFL.Scripts.Extensions.Math.Numbers;
     using UnityEngine;
 
     public static class Vectors3Extensions

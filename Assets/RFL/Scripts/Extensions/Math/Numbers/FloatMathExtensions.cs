@@ -1,4 +1,4 @@
-﻿namespace RFL.Scripts.Extensions
+﻿namespace RFL.Scripts.Extensions.Math.Numbers
 {
     using System;
     using UnityEngine;

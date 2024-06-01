@@ -1,6 +1,6 @@
 namespace RFL.Scripts.GameLogic.Lift
 {
-    using RFL.Scripts.Extensions;
+    using RFL.Scripts.Extensions.Math.Numbers;
     using RFL.Scripts.GlobalServices.GameManager.MonoBeh;
     using UnityEngine;
 

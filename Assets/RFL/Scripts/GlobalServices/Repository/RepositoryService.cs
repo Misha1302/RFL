@@ -24,13 +24,20 @@
 
         private GameData LoadGameData()
         {
-            var gameData = SaveSystem.Get(Key, out var value) ? JsonUtility.FromJson<GameData>(value) : null;
-            gameData ??= GameDataFabric.MakeExampleGameData();
+            GameData gameData;
+            if (SaveSystem.Get(Key, out var value))
+            {
+                gameData = JsonUtility.FromJson<GameData>(value);
+                GameDataFabric.SubscribeOnChanged(gameData);
+            }
+            else
+            {
+                gameData = GameDataFabric.MakeExampleGameData();
+            }
 
             if (Application.isPlaying)
                 Di.Get<ApplicationEventsService>().SubscribeOnAppQuit(SaveGameData, 100);
-            else
-                gameData.OnChanged += _ => SaveGameData();
+            else gameData.OnChanged += _ => SaveGameData();
 
             return gameData;
         }

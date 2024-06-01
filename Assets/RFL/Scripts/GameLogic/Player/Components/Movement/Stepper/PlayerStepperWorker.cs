@@ -4,6 +4,8 @@
     using System.Linq;
     using RFL.Scripts.DI;
     using RFL.Scripts.Extensions;
+    using RFL.Scripts.Extensions.Math.Numbers;
+    using RFL.Scripts.Extensions.Math.Vectors;
     using RFL.Scripts.GameLogic.Tags;
     using RFL.Scripts.GlobalServices.Input.Services;
     using RFL.Scripts.Helpers;

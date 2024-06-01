@@ -1,6 +1,6 @@
 ﻿namespace RFL.Scripts.GameLogic.Player.Components.Movement.Stepper
 {
-    using RFL.Scripts.Extensions;
+    using RFL.Scripts.Extensions.Math.Vectors;
     using UnityEngine;
 
     public readonly struct StepperRaycastInfo

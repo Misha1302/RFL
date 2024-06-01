@@ -2,7 +2,7 @@
 {
     using System;
     using RFL.Scripts.DI;
-    using RFL.Scripts.Extensions;
+    using RFL.Scripts.Extensions.Math.Numbers;
     using RFL.Scripts.GlobalServices.Time;
 
     public class Axis

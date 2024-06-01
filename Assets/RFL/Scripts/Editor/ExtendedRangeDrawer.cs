@@ -1,7 +1,7 @@
 ﻿namespace RFL.Scripts.Editor
 {
     using RFL.Scripts.Attributes;
-    using RFL.Scripts.Extensions;
+    using RFL.Scripts.Extensions.Math.Numbers;
     using UnityEditor;
     using UnityEngine;
 

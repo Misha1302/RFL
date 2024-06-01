@@ -2,6 +2,7 @@
 {
     using RFL.Scripts.DI;
     using RFL.Scripts.Extensions;
+    using RFL.Scripts.Extensions.Math.Vectors;
     using RFL.Scripts.GlobalServices.GameManager.MonoBeh;
     using RFL.Scripts.GlobalServices.Repository;
     using RFL.Scripts.GlobalServices.Repository.DataContainers.Primitives;

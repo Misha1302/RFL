@@ -1,7 +1,7 @@
 ﻿namespace RFL.Scripts.GlobalServices.Fps
 {
     using System;
-    using RFL.Scripts.Extensions;
+    using RFL.Scripts.Extensions.Math.Numbers;
     using RFL.Scripts.GlobalServices.GameManager.MonoBeh;
 
     public class FpsCounterService : MonoBeh, IService

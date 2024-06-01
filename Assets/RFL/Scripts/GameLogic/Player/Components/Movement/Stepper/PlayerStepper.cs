@@ -1,7 +1,7 @@
 namespace RFL.Scripts.GameLogic.Player.Components.Movement.Stepper
 {
     using RFL.Scripts.DI;
-    using RFL.Scripts.Extensions;
+    using RFL.Scripts.Extensions.Math.Numbers;
     using RFL.Scripts.GlobalServices.GameManager.MonoBeh;
     using UnityEngine;
 
