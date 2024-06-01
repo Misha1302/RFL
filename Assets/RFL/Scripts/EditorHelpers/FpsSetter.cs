@@ -12,6 +12,8 @@ namespace RFL.Scripts.EditorHelpers
 
         private void OnValidate()
         {
+            if (Application.isPlaying) return;
+
             var repository = new RepositoryService();
             repository.GameData.targetFps.Value = targetFps;
             repository.GameData.needToShowFps.Value = needToShowFps;

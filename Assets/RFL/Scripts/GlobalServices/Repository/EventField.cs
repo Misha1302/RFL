@@ -4,9 +4,9 @@
     using UnityEngine;
 
     [Serializable]
-    public class EventField<T>
+    public class EventField<T> where T : new()
     {
-        [SerializeField] private T value;
+        [SerializeField] private T value = new();
 
         public Action OnChanged = null!;
 

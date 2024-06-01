@@ -2,12 +2,16 @@
 {
     using System;
     using RFL.Scripts.DI;
+    using RFL.Scripts.Extensions;
     using RFL.Scripts.GlobalServices.ApplicationEvents;
+    using RFL.Scripts.GlobalServices.GameManager.MonoBeh;
     using UnityEngine;
+    using Object = UnityEngine.Object;
 
     public class RepositoryService : IService
     {
         private const string Key = "GameDataKey";
+        private bool _isSaving;
 
         private readonly Lazy<GameData> _gameData;
 
@@ -21,10 +25,10 @@
         private GameData LoadGameData()
         {
             var gameData = SaveSystem.Get(Key, out var value) ? JsonUtility.FromJson<GameData>(value) : null;
-            gameData ??= new GameData();
+            gameData ??= GameDataFabric.MakeExampleGameData();
 
-            if (!Application.isEditor)
-                Di.Get<ApplicationEventsService>().SubscribeOnAppQuit(SaveGameData, -100);
+            if (Application.isPlaying)
+                Di.Get<ApplicationEventsService>().SubscribeOnAppQuit(SaveGameData, 100);
             else
                 gameData.OnChanged += _ => SaveGameData();
 
@@ -33,7 +37,21 @@
 
         private void SaveGameData()
         {
-            SaveSystem.Set(Key, JsonUtility.ToJson(GameData));
+            if (_isSaving) return;
+
+            _isSaving = true;
+            SaveMonoBehs();
+            SaveSystem.Set(Key, JsonUtility.ToJson(GameData, true));
+            _isSaving = false;
+        }
+
+        private static void SaveMonoBehs()
+        {
+            if (!Application.isPlaying)
+                return;
+
+            var objects = Object.FindObjectsByType<MonoBeh>(FindObjectsInactive.Include, FindObjectsSortMode.None);
+            objects.ForAll(x => (x as ISavable)?.Save());
         }
     }
 }

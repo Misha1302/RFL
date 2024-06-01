@@ -18,6 +18,7 @@ namespace RFL.Scripts.Bootstrap
         {
             Di.Instance.AddGlobalSingleton(new PauseService());
             Di.Instance.AddGlobalSingleton(Creator.Create<GameService>());
+            Di.Instance.AddGlobalSingleton(Creator.Create<ApplicationEventsService>());
 
             Di.Instance.AddGlobalSingleton(new SceneService());
             Di.Instance.AddGlobalSingleton(new RepositoryService());
@@ -25,7 +26,6 @@ namespace RFL.Scripts.Bootstrap
             Di.Instance.AddGlobalSingleton(Creator.Create<TimeService>());
             Di.Instance.AddGlobalSingleton(Creator.Create<CoroutinesService>());
             Di.Instance.AddGlobalSingleton(Creator.Create<FpsCounterService>());
-            Di.Instance.AddGlobalSingleton(Creator.Create<ApplicationEventsService>());
 
             InitializersManager.InitEvery();
         }

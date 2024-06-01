@@ -4,6 +4,7 @@
     using System.Linq;
     using RFL.Scripts.Extensions;
     using RFL.Scripts.GlobalServices.GameManager.MonoBeh;
+    using RFL.Scripts.GlobalServices.Repository;
     using UnityEngine;
     using Object = UnityEngine.Object;
 
@@ -24,9 +25,11 @@
         private static string MakeName(params Type[] types) =>
             $"{Prefix}({string.Join("; ", types.Select(x => x.Name))})";
 
-        public static void Destroy(Transform transform)
+        public static void Destroy(Transform transform, bool saveData = true)
         {
             var monoBehs = transform.GetComponentsInChildren<MonoBeh>(true);
+            if (saveData)
+                monoBehs.ForAll(x => (x as ISavable)?.Save());
             monoBehs.ForAll(x => x.SelfDestroy());
             Object.Destroy(transform.gameObject);
         }

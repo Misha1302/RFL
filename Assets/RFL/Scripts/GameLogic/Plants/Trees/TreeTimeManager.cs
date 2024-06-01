@@ -1,31 +1,28 @@
 ﻿namespace RFL.Scripts.GameLogic.Plants.Trees
 {
     using System;
-    using RFL.Scripts.Extensions;
     using RFL.Scripts.GlobalServices.GameManager.MonoBeh;
+    using RFL.Scripts.Helpers;
 
     public class TreeTimeManager : MonoBeh
     {
         private double _startTotalTime;
 
-        public Action OnTimeToPhase1 = null!;
-        public Action OnTimeToPhase2 = null!;
-        public Action OnTimeToPhase3 = null!;
+        public Action<TreePhaseType> OnTimeToPhase;
 
-        private double TimeToPhase1 => _startTotalTime + FixedDeltaTime;
-        private double TimeToPhase2 => _startTotalTime + 5d;
-        private double TimeToPhase3 => _startTotalTime + 10d;
-
-        protected override void FixedTick()
-        {
-            if (TotalTime.ApproxEq(TimeToPhase1)) OnTimeToPhase1?.Invoke();
-            if (TotalTime.ApproxEq(TimeToPhase2)) OnTimeToPhase2?.Invoke();
-            if (TotalTime.ApproxEq(TimeToPhase3)) OnTimeToPhase3?.Invoke();
-        }
 
         public void Init(double startTotalTime)
         {
             _startTotalTime = startTotalTime;
+
+            Creator.Create<TimeEvent>().Init(_startTotalTime).OnTimeCome +=
+                () => OnTimeToPhase(TreePhaseType.Phase1);
+
+            Creator.Create<TimeEvent>().Init(_startTotalTime + 5d).OnTimeCome +=
+                () => OnTimeToPhase(TreePhaseType.Phase2);
+
+            Creator.Create<TimeEvent>().Init(_startTotalTime + 10d).OnTimeCome +=
+                () => OnTimeToPhase(TreePhaseType.Phase3);
         }
     }
 }

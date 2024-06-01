@@ -2,21 +2,20 @@
 {
     using RFL.Scripts.DI;
     using RFL.Scripts.Extensions;
-    using RFL.Scripts.GlobalServices.ApplicationEvents;
     using RFL.Scripts.GlobalServices.GameManager.MonoBeh;
     using RFL.Scripts.GlobalServices.Repository;
 
-    public class PlayerDataSaver : MonoBeh
+    public class PlayerDataSaver : MonoBeh, ISavable
     {
+        public void Save()
+        {
+            Di.Get<RepositoryService>().GameData.playerPos.Value = Di.Get<Player>().PlayerTransform.Pos.Round(0.5f);
+        }
+
         protected override void OnStart()
         {
-            Di.Get<ApplicationEventsService>().SubscribeOnAppQuit(() =>
-            {
-                Di.Get<RepositoryService>().GameData.playerPos.Value =
-                    Di.Get<Player>().PlayerTransform.Pos.Round(0.5f);
-            });
-
-            Di.Get<Player>().PlayerTransform.Pos = Di.Get<RepositoryService>().GameData.playerPos.Value;
+            var playerTransformPos = Di.Get<RepositoryService>().GameData.playerPos.Value;
+            Di.Get<Player>().PlayerTransform.Pos = playerTransformPos;
         }
     }
 }

@@ -14,16 +14,16 @@
         public void Init()
         {
             var startScene = SceneManager.GetActiveScene().name;
-            DestroyAll();
+            DestroyAll(false);
             LoadSceneAdditive(startScene);
         }
 
-        private void DestroyAll()
+        private void DestroyAll(bool saveData)
         {
             Objects.Select(x => x.root).Distinct().ForAll(x =>
             {
                 if (!x.HasComponent<IInterScene>())
-                    Creator.Destroy(x);
+                    Creator.Destroy(x, saveData);
             });
         }
 

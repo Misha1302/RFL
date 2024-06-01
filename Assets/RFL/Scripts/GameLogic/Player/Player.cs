@@ -14,8 +14,10 @@
     [RequireComponent(typeof(PlayerImageFlipper))]
     [RequireComponent(typeof(PlayerPhysicMaterial))]
     [RequireComponent(typeof(PlayerPauseHandler))]
+    [RequireComponent(typeof(PlayerDataSaver))]
     public class Player : MonoBeh
     {
+        private readonly Lazy<PlayerDataSaver> _playerDataSaver;
         private readonly Lazy<PlayerHorizontalMovement> _playerHorizontalMovement;
         private readonly Lazy<PlayerImageFlipper> _playerImageFlipper;
         private readonly Lazy<PlayerJumper> _playerJumper;
@@ -34,6 +36,7 @@
             _playerStepper = new Lazy<PlayerStepper>(GetComponent<PlayerStepper>);
             _playerHorizontalMovement = new Lazy<PlayerHorizontalMovement>(GetComponent<PlayerHorizontalMovement>);
             _playerTransform = new Lazy<PlayerTransform>(GetComponent<PlayerTransform>);
+            _playerDataSaver = new Lazy<PlayerDataSaver>(GetComponent<PlayerDataSaver>);
         }
 
         public PlayerHorizontalMovement PlayerHorizontalMovement => _playerHorizontalMovement.Value;
@@ -43,5 +46,6 @@
         public PlayerPhysicMaterial PlayerPhysicMaterial => _playerPhysicMaterial.Value;
         public PlayerStepper PlayerStepper => _playerStepper.Value;
         public PlayerTransform PlayerTransform => _playerTransform.Value;
+        public PlayerDataSaver PlayerDataSaver => _playerDataSaver.Value;
     }
 }

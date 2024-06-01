@@ -1,34 +1,46 @@
 ﻿namespace RFL.Scripts.GameLogic.Plants.Trees
 {
-    using System.Linq;
+    using RFL.Scripts.DI;
     using RFL.Scripts.Extensions;
     using RFL.Scripts.GlobalServices.GameManager.MonoBeh;
+    using RFL.Scripts.GlobalServices.Repository;
+    using RFL.Scripts.GlobalServices.Time;
     using RFL.Scripts.Helpers;
     using UnityEngine;
 
-    public class TreeGrower : MonoBeh
+    public class TreeGrower : MonoBeh, ISavable, IEntity
     {
+        private TreeData _treeData;
         private TreeTimeManager _treeTimeManager;
 
-        protected override void OnStart()
+        public SerializableGuid Id { get; private set; }
+
+        public void Save()
         {
-            _treeTimeManager = Creator.Create<TreeTimeManager>();
-            _treeTimeManager.Init(TotalTime);
-            _treeTimeManager.OnTimeToPhase1 += () => ChangePhase(1);
-            _treeTimeManager.OnTimeToPhase2 += () => ChangePhase(2);
-            _treeTimeManager.OnTimeToPhase3 += () => ChangePhase(3);
+            Di.Get<RepositoryService>().GameData.coreScene.Value.treesData[Id] =
+                new TreeData(_treeData.ticksCountWhenTreeWasGrown, transform.position, Id);
         }
 
-        private void ChangePhase(int phase)
+        public void Init(TreeData treeData)
         {
-            transform.ForAll<Transform>(Creator.Destroy);
+            _treeData = treeData;
+            _treeTimeManager = Creator.Create<TreeTimeManager>();
+            _treeTimeManager.Init(Di.Get<TimeService>().CalcTime(treeData.ticksCountWhenTreeWasGrown));
+            _treeTimeManager.OnTimeToPhase += ChangePhase;
 
-            var resource = Resources.Load<GameObject>($"Trees/Tree ({phase} phase)");
+            transform.position = treeData.position;
+
+            Id = treeData.id;
+        }
+
+        private void ChangePhase(TreePhaseType treePhaseType)
+        {
+            transform.ForAll<Transform>(x => Creator.Destroy(x));
+
+            var resource = Resources.Load<GameObject>($"Trees/Tree ({(int)treePhaseType} phase)");
             var instance = Creator.Instantiate(resource);
             instance.transform.SetParent(transform);
-            instance.transform.localPosition =
-                Vector3.zero.WithY(instance.GetComponentsInChildren<SpriteRenderer>()
-                    .Max(r => r.size.y * r.transform.localScale.y) / 2);
+            instance.transform.localPosition = Vector3.zero.WithY(instance.CalcHalfOfVisibleYSize());
         }
     }
 }

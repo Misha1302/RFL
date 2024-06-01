@@ -1,6 +1,7 @@
 ﻿namespace RFL.Scripts.UI
 {
     using RFL.Scripts.Attributes;
+    using RFL.Scripts.GlobalServices.Fps;
     using RFL.Scripts.Helpers;
     using UnityEngine;
     using UnityEngine.EventSystems;
