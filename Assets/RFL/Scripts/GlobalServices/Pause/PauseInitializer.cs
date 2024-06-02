@@ -22,8 +22,8 @@
                 }
                 else
                 {
-                    Creator.Destroy(
-                        Object.FindAnyObjectByType<SettingsCanvasTag>(FindObjectsInactive.Include).transform);
+                    var canvas = Object.FindAnyObjectByType<SettingsCanvasTag>(FindObjectsInactive.Include);
+                    Creator.Destroy(canvas.transform);
                 }
             };
         }

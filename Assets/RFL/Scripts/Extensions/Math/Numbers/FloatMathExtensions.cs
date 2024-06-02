@@ -13,13 +13,6 @@
         public static float PingPong(this float value, float repeatValue) => Mathf.PingPong(value, repeatValue);
         public static float Max(this float value, float value2) => Mathf.Max(value, value2);
 
-        public static float Round(this float value, float step)
-        {
-            var mod = value % step;
-            if (mod < step / 2) return value - mod;
-            return value + (step - mod);
-        }
-
         public static float MoveTowards(this float current, float target, float maxDelta) =>
             Mathf.MoveTowards(current, target, maxDelta);
 

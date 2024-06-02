@@ -1,7 +1,6 @@
 ﻿namespace RFL.Scripts.GameLogic.Player.Components
 {
     using RFL.Scripts.DI;
-    using RFL.Scripts.Extensions.Math.Vectors;
     using RFL.Scripts.GlobalServices.GameManager.MonoBeh;
     using RFL.Scripts.GlobalServices.Repository;
 
@@ -10,7 +9,7 @@
         public void Save()
         {
             Di.Get<RepositoryService>().GameData.playerPos.Value =
-                Di.Get<Player>().Get<PlayerTransform>().Pos.Round(0.5f);
+                Di.Get<Player>().Get<PlayerTransform>().Pos;
         }
 
         protected override void OnStart()

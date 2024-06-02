@@ -1,6 +1,5 @@
 ﻿namespace RFL.Scripts.GameLogic.Player.Components
 {
-    using System;
     using RFL.Scripts.DI;
     using RFL.Scripts.GlobalServices.GameManager.MonoBeh;
     using UnityEngine;
@@ -8,11 +7,11 @@
     [RequireComponent(typeof(SpriteRenderer))]
     public class PlayerImageFlipper : MonoBeh
     {
-        private readonly Lazy<SpriteRenderer> _spriteRenderer;
+        private SpriteRenderer _spriteRenderer;
 
-        protected PlayerImageFlipper()
+        protected override void OnStart()
         {
-            _spriteRenderer = new Lazy<SpriteRenderer>(GetComponent<SpriteRenderer>);
+            _spriteRenderer = GetComponent<SpriteRenderer>();
         }
 
         protected override void LateTick()
@@ -22,8 +21,12 @@
 
         private void Flip()
         {
-            if (Di.Get<Player>().Get<PlayerTransform>().Vel.x != 0)
-                _spriteRenderer.Value.flipX = Di.Get<Player>().Get<PlayerTransform>().Vel.x < 0;
+            _spriteRenderer.flipX = Di.Get<Player>().Get<PlayerTransform>().Vel.x switch
+            {
+                < 0 => true,
+                > 0 => false,
+                _ => _spriteRenderer.flipX
+            };
         }
     }
 }
