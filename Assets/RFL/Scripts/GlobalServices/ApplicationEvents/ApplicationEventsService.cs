@@ -1,28 +1,30 @@
 ﻿namespace RFL.Scripts.GlobalServices.ApplicationEvents
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
     using RFL.Scripts.Extensions;
     using RFL.Scripts.GlobalServices.GameManager.MonoBeh;
     using UnityEngine;
 
     public class ApplicationEventsService : MonoBeh, IService
     {
-        private readonly Dictionary<int, Action> _onAppQuit = new();
+        public readonly ExtendedEvent OnAppQuitting = new();
+        public readonly ExtendedEvent OnAppUnFocused = new();
+
+        private void OnApplicationFocus(bool hasFocus)
+        {
+            if (hasFocus) return;
+            OnAppUnFocused?.Invoke();
+        }
 
         private void OnApplicationQuit()
         {
-            _onAppQuit.OrderBy(x => x.Key).ForAll(x => x.Value.Invoke());
-            FindObjectsByType<MonoBeh>(FindObjectsInactive.Include, FindObjectsSortMode.None)
-                .ForAll(x => x.isEnabled = false);
+            OnAppQuitting?.Invoke();
+            DisableAll();
         }
 
-        public void SubscribeOnAppQuit(Action action, int priority = 0)
+        private void DisableAll()
         {
-            _onAppQuit.TryAdd(priority, action);
-            _onAppQuit[priority] -= action;
-            _onAppQuit[priority] += action;
+            FindObjectsByType<MonoBeh>(FindObjectsInactive.Include, FindObjectsSortMode.None)
+                .ForAll(x => x.isEnabled = false);
         }
     }
 }

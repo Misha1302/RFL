@@ -24,6 +24,13 @@
 
         private GameData LoadGameData()
         {
+            var gameData = LoadRawGameData();
+            SubscribeOnDataSave(gameData);
+            return gameData;
+        }
+
+        private static GameData LoadRawGameData()
+        {
             GameData gameData;
             if (SaveSystem.Get(Key, out var value))
             {
@@ -35,11 +42,20 @@
                 gameData = GameDataFabric.MakeExampleGameData();
             }
 
-            if (Application.isPlaying)
-                Di.Get<ApplicationEventsService>().SubscribeOnAppQuit(SaveGameData, 100);
-            else gameData.OnChanged += _ => SaveGameData();
-
             return gameData;
+        }
+
+        private void SubscribeOnDataSave(GameData gameData)
+        {
+            if (Application.isPlaying)
+            {
+                Di.Get<ApplicationEventsService>().OnAppUnFocused.Add(SaveGameData);
+                Di.Get<ApplicationEventsService>().OnAppQuitting.Add(SaveGameData);
+            }
+            else
+            {
+                gameData.OnChanged += _ => SaveGameData();
+            }
         }
 
         private void SaveGameData()
