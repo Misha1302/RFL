@@ -13,14 +13,18 @@
         private const string Key = "GameDataKey";
         private bool _isSaving;
 
-        private readonly Lazy<GameData> _gameData;
+        private Lazy<GameData> _gameData;
 
         public RepositoryService()
         {
             _gameData = new Lazy<GameData>(LoadGameData);
         }
 
-        public GameData GameData => _gameData.Value;
+        public GameData GameData
+        {
+            get => _gameData.Value;
+            private set => _gameData = new Lazy<GameData>(value);
+        }
 
         private GameData LoadGameData()
         {
@@ -43,6 +47,11 @@
             }
 
             return gameData;
+        }
+
+        public void Reset()
+        {
+            GameData = GameDataFabric.MakeExampleGameData();
         }
 
         private void SubscribeOnDataSave(GameData gameData)

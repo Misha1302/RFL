@@ -297,6 +297,7 @@ GameObject:
   - component: {fileID: 6784446392976924978}
   - component: {fileID: 6165382207625782430}
   - component: {fileID: 2403964531442775145}
+  - component: {fileID: 2333396303589218521}
   m_Layer: 5
   m_Name: ResetButton
   m_TagString: Untagged
@@ -406,6 +407,19 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &2333396303589218521
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6625316327046343513}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f7f99f2d4044fa9af0b9ae16fdf4f4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isEnabled: 1
 --- !u!1 &7073564718692904619
 GameObject:
   m_ObjectHideFlags: 0

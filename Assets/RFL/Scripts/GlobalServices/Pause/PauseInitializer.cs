@@ -17,8 +17,8 @@
             {
                 if (isPaused)
                 {
-                    var pauseCanvas = Resources.Load<SettingsCanvasTag>("UI/SettingsCanvas");
-                    Creator.Instantiate(pauseCanvas);
+                    var settingsCanvas = Resources.Load<SettingsCanvasTag>("UI/SettingsCanvas");
+                    Creator.Instantiate(settingsCanvas);
                 }
                 else
                 {

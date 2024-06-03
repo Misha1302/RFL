@@ -10,17 +10,8 @@
     {
         public static GameData MakeExampleGameData()
         {
-            var gd = new GameData
-            {
-                targetFps = { Value = 60 },
-                inputSpeed = { Value = 1f / 0.4f },
-                needToShowFps = { Value = true },
-                playerPos = { Value = new Vector2(9.75f, 0.93f) }
-            };
+            var gd = MakeStandardGameData();
             gd.coreScene.Value.data = ExampleTrees();
-
-            SubscribeOnChanged(gd);
-
             return gd;
         }
 
@@ -50,7 +41,7 @@
         {
             var gd = new GameData
             {
-                targetFps = { Value = 60 },
+                targetFps = { Value = -1 },
                 inputSpeed = { Value = 1f / 0.4f },
                 needToShowFps = { Value = true }
             };
