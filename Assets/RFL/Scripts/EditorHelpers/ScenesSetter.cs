@@ -1,6 +1,4 @@
-﻿#if UNITY_EDITOR
-
-namespace RFL.Scripts.EditorHelpers
+﻿namespace RFL.Scripts.EditorHelpers
 {
     using System.Linq;
     using RFL.Scripts.GlobalServices.Repository;
@@ -12,6 +10,7 @@ namespace RFL.Scripts.EditorHelpers
         [SerializeField] private SceneAsset[] scenes;
         [SerializeField] private bool saveChanged;
 
+#if UNITY_EDITOR
         private void OnValidate()
         {
             if (Application.isPlaying) return;
@@ -36,7 +35,6 @@ namespace RFL.Scripts.EditorHelpers
                 .Select(x => new EditorBuildSettingsScene(AssetDatabase.GetAssetPath(x), true))
                 .ToArray();
         }
+#endif
     }
 }
-
-#endif

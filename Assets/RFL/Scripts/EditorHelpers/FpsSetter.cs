@@ -1,6 +1,4 @@
-﻿#if UNITY_EDITOR
-
-namespace RFL.Scripts.EditorHelpers
+﻿namespace RFL.Scripts.EditorHelpers
 {
     using RFL.Scripts.GlobalServices.Repository;
     using UnityEngine;
@@ -10,7 +8,8 @@ namespace RFL.Scripts.EditorHelpers
         [Range(-1, 60)] [SerializeField] private int targetFps = -1;
         [SerializeField] private bool needToShowFps = true;
         [SerializeField] private bool saveChanges;
-
+        
+#if UNITY_EDITOR
         private void OnValidate()
         {
             if (!saveChanges) return;
@@ -21,7 +20,6 @@ namespace RFL.Scripts.EditorHelpers
 
             saveChanges = false;
         }
+#endif
     }
 }
-
-#endif

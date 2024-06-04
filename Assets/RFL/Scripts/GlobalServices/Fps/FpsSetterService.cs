@@ -1,7 +1,6 @@
 ﻿namespace RFL.Scripts.GlobalServices.Fps
 {
     using RFL.Scripts.DI;
-    using RFL.Scripts.Extensions.Math.Numbers;
     using RFL.Scripts.GlobalServices.Repository;
     using UnityEngine;
 
@@ -15,11 +14,8 @@
 
         private void SetTargetFps()
         {
-            const int maxFramesCount = 10_000;
-
             QualitySettings.vSyncCount = 0;
-            Application.targetFrameRate =
-                Di.Get<RepositoryService>().GameData.targetFps.Value.ThisOrIf(x => x < 0, maxFramesCount);
+            Application.targetFrameRate = Di.Get<RepositoryService>().GameData.targetFps.Value;
         }
     }
 }

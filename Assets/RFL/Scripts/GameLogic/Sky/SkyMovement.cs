@@ -37,7 +37,7 @@ namespace RFL.Scripts.GameLogic.Sky
 
         private void Move()
         {
-            transform.Translate(Vector3.right * (speed * FixedDeltaTime));
+            transform.Translate(Vector3.right * (speed * DeltaTime));
         }
 
         private void SpawnBackgrounds()

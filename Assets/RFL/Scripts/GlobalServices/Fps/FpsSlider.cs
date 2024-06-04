@@ -1,6 +1,8 @@
 ﻿namespace RFL.Scripts.GlobalServices.Fps
 {
     using RFL.Scripts.DI;
+    using RFL.Scripts.Extensions;
+    using RFL.Scripts.Extensions.Math.Numbers;
     using RFL.Scripts.GlobalServices.GameManager.MonoBeh;
     using RFL.Scripts.GlobalServices.Repository;
     using UnityEngine;
@@ -17,12 +19,14 @@
             _slider.wholeNumbers = true;
             _slider.onValueChanged.AddListener(SetFps);
 
-            _slider.value = Di.Get<RepositoryService>().GameData.targetFps.Value;
+            _slider.value = Di.Get<RepositoryService>().GameData.targetFps.Value
+                .ThisOrIf(x => x < 0, (int)_slider.maxValue);
         }
 
         private void SetFps(float sliderValue)
         {
-            Di.Get<RepositoryService>().GameData.targetFps.Value = (int)_slider.value;
+            Di.Get<RepositoryService>().GameData.targetFps.Value =
+                (int)sliderValue != (int)_slider.maxValue ? (int)sliderValue : -1;
         }
     }
 }

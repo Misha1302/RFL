@@ -1,6 +1,4 @@
-﻿#if UNITY_EDITOR
-
-namespace RFL.Scripts.EditorHelpers
+﻿namespace RFL.Scripts.EditorHelpers
 {
     using RFL.Scripts.DI;
     using RFL.Scripts.GlobalServices.Pause;
@@ -11,6 +9,7 @@ namespace RFL.Scripts.EditorHelpers
         [SerializeField] private bool changeToPause;
         [SerializeField] private bool changeToUnPause;
 
+#if UNITY_EDITOR
         private void OnValidate()
         {
             if (Application.isPlaying)
@@ -21,7 +20,6 @@ namespace RFL.Scripts.EditorHelpers
 
             changeToPause = changeToUnPause = false;
         }
+#endif
     }
 }
-
-#endif

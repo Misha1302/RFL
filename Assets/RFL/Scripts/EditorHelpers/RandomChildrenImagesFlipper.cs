@@ -1,5 +1,3 @@
-#if UNITY_EDITOR
-
 namespace RFL.Scripts.EditorHelpers
 {
     using System;
@@ -13,6 +11,7 @@ namespace RFL.Scripts.EditorHelpers
         [SerializeField] private bool changeToFlip;
         [SerializeField] private bool changeToReset;
 
+#if UNITY_EDITOR
         private void OnValidate()
         {
             if (changeToFlip) FlipSprites();
@@ -38,7 +37,6 @@ namespace RFL.Scripts.EditorHelpers
         {
             parentOfSprites.GetComponentsInChildren<SpriteRenderer>().ForAll(act);
         }
+#endif
     }
 }
-
-#endif
