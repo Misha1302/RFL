@@ -17,6 +17,7 @@ namespace RFL.Scripts.Bootstrap
         public static void Bootstrap()
         {
             Di.Instance.AddSingle(new PauseService());
+            Di.Instance.AddSingle(new NextMomentExecutorService());
             Di.Instance.AddSingle(Creator.Create<GameService>());
             Di.Instance.AddSingle(Creator.Create<ApplicationEventsService>());
 
@@ -26,6 +27,7 @@ namespace RFL.Scripts.Bootstrap
             Di.Instance.AddSingle(Creator.Create<TimeService>());
             Di.Instance.AddSingle(Creator.Create<CoroutinesService>());
             Di.Instance.AddSingle(Creator.Create<FpsCounterService>());
+            Di.Instance.AddSingle(new FpsSetterService());
 
             InitializersManager.InitEvery();
         }
