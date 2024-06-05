@@ -1,6 +1,5 @@
 ﻿namespace RFL.Scripts.Extensions.Math.Numbers
 {
-    using System;
     using UnityEngine;
 
     public static class IntMathExtensions

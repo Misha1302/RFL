@@ -6,10 +6,10 @@
 
     public class PauseSetter : MonoBehaviour
     {
+#if UNITY_EDITOR
         [SerializeField] private bool changeToPause;
         [SerializeField] private bool changeToUnPause;
 
-#if UNITY_EDITOR
         private void OnValidate()
         {
             if (Application.isPlaying)

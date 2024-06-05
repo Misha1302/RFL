@@ -25,6 +25,28 @@
                 act(item);
         }
 
+        public static T MaxBy<T, TComparable>(this IEnumerable<T> enumerable, Func<T, TComparable> act)
+            where TComparable : IComparable<TComparable> =>
+            enumerable.GetBy((x, y) => act(x).CompareTo(act(y)) > 0);
+
+        private static T GetBy<T>(this IEnumerable<T> enumerable, Func<T, T, bool> predicate)
+        {
+            using var enumerator = enumerable.GetEnumerator();
+
+            if (!enumerator.MoveNext()) return default;
+
+            var result = enumerator.Current;
+
+            while (enumerator.MoveNext())
+            {
+                var current = enumerator.Current;
+                if (predicate(current, result))
+                    result = current;
+            }
+
+            return result;
+        }
+
         public static ArraySegment<T> Slice<T>(this T[] arr, int start, int count) => new(arr, start, count);
     }
 }

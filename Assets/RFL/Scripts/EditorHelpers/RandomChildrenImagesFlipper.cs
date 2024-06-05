@@ -7,11 +7,11 @@ namespace RFL.Scripts.EditorHelpers
 
     public class RandomChildrenImagesFlipper : MonoBehaviour
     {
+#if UNITY_EDITOR
         [SerializeField] private Transform parentOfSprites;
         [SerializeField] private bool changeToFlip;
         [SerializeField] private bool changeToReset;
 
-#if UNITY_EDITOR
         private void OnValidate()
         {
             if (changeToFlip) FlipSprites();

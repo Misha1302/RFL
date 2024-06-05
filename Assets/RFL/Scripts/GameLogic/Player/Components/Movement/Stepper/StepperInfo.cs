@@ -1,5 +1,6 @@
 ﻿namespace RFL.Scripts.GameLogic.Player.Components.Movement.Stepper
 {
+    using RFL.Scripts.Helpers;
     using UnityEngine;
 
     public readonly struct StepperInfo
@@ -11,6 +12,8 @@
             XOffset = xOffset;
             MaxStep = maxStep;
             MinStep = minStep;
+
+            HitsBuffer = new RaycastHit2D[CollectionsLength.MaxHitsCount];
         }
 
         public readonly Transform LeftRayPoint;
@@ -18,5 +21,7 @@
         public readonly float XOffset;
         public readonly float MaxStep;
         public readonly float MinStep;
+
+        public readonly RaycastHit2D[] HitsBuffer;
     }
 }

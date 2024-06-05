@@ -7,10 +7,10 @@
 
     public class ScenesSetter : MonoBehaviour
     {
+#if UNITY_EDITOR
         [SerializeField] private SceneAsset[] scenes;
         [SerializeField] private bool saveChanged;
 
-#if UNITY_EDITOR
         private void OnValidate()
         {
             if (Application.isPlaying) return;

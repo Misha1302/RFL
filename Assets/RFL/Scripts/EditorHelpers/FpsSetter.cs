@@ -5,11 +5,11 @@
 
     public class FpsSetter : MonoBehaviour
     {
+#if UNITY_EDITOR
         [Range(-1, 60)] [SerializeField] private int targetFps = -1;
         [SerializeField] private bool needToShowFps = true;
         [SerializeField] private bool saveChanges;
-        
-#if UNITY_EDITOR
+
         private void OnValidate()
         {
             if (!saveChanges) return;
