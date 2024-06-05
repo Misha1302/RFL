@@ -67,7 +67,7 @@
                     _stepperInfo.MaxStep);
 
             var hits = _playerStepperHelper.GetValidRayHits(count);
-            var hit = hits.MaxBy(x => x.point.y);
+            var hit = hits.GetBy((x, y) => x.point.y.CompareTo(y.point.y) > 0);
             var hitPoint = _playerStepperHelper.GetHitPoint(point, hit);
 
             DrawRay(point, hitPoint);

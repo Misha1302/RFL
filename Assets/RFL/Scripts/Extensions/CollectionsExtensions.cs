@@ -29,7 +29,7 @@
             where TComparable : IComparable<TComparable> =>
             enumerable.GetBy((x, y) => act(x).CompareTo(act(y)) > 0);
 
-        private static T GetBy<T>(this IEnumerable<T> enumerable, Func<T, T, bool> predicate)
+        public static T GetBy<T>(this IEnumerable<T> enumerable, Func<T, T, bool> predicate)
         {
             using var enumerator = enumerable.GetEnumerator();
 
