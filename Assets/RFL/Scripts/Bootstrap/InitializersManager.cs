@@ -7,7 +7,7 @@
 
     public static class InitializersManager
     {
-        public static void InitEvery()
+        public static void InitEveryIntializer()
         {
             var initializers = Assembly.GetExecutingAssembly()
                 .GetTypes()
