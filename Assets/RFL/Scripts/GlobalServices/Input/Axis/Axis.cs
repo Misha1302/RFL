@@ -28,7 +28,7 @@
                 _ => Value
             };
 
-            Value = Value.MoveTowards(target, speed * Di.Get<TimeService>().DeltaTime);
+            Value = Value.MoveTowards(target, speed * Dc.Get<TimeService>().DeltaTime);
         }
 
         public static implicit operator float(Axis axis) => axis.Value;

@@ -18,7 +18,7 @@
 
         protected override void FixedTick()
         {
-            cameraFollowPoint.localPosition = _stdPosition + Di.Get<IInputService>().Input;
+            cameraFollowPoint.localPosition = _stdPosition + Dc.Get<IInputService>().Input;
         }
     }
 }

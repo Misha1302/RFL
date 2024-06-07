@@ -21,7 +21,7 @@
 
         private void Flip()
         {
-            _spriteRenderer.flipX = Di.Get<Player>().Get<PlayerTransform>().Vel.x switch
+            _spriteRenderer.flipX = Dc.Get<Player>().Get<PlayerTransform>().Vel.x switch
             {
                 < 0 => true,
                 > 0 => false,

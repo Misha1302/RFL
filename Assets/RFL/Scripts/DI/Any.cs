@@ -16,5 +16,7 @@
         public T Get<T>() => (T)obj;
 
         public bool Is<T>() => obj is T;
+
+        public object Get() => obj;
     }
 }

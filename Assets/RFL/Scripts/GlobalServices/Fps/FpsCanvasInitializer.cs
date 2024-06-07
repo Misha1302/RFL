@@ -11,13 +11,13 @@
         [InitializerMethod]
         public static void Initialize()
         {
-            if (Di.Get<RepositoryService>().GameData.needToShowFps.Value)
+            if (Dc.Get<RepositoryService>().GameData.needToShowFps.Value)
                 CreateFpsCanvas();
         }
 
         private static void CreateFpsCanvas()
         {
-            Creator.Instantiate(Resources.Load("UI/FpsCanvas"));
+            Dc.Get<CreatorService>().Instantiate(Resources.Load("UI/FpsCanvas"));
         }
     }
 }

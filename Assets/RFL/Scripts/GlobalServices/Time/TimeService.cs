@@ -13,7 +13,7 @@
         private long _startTotalTicks;
 
         public long TotalTicks => _startTotalTicks + _elapsedTicks;
-        public new double TotalTime => CalcTime(_startTotalTicks + _elapsedTicks);
+        public new double TotalTime => CalcTime(TotalTicks);
         public float ElapsedTime => (float)CalcTime(_elapsedTicks);
         public new float DeltaTime => Time.deltaTime;
         public new float FixedDeltaTime => Time.fixedDeltaTime;
@@ -28,17 +28,23 @@
 
         protected override void OnStart()
         {
-            _startTotalTicks = Di.Get<RepositoryService>().GameData.totalTicks.Value;
+            SetTicks();
+            Dc.Get<RepositoryService>().GameData.totalTicks.OnChanged += SetTicks;
+        }
+
+        private void SetTicks()
+        {
+            _startTotalTicks = Dc.Get<RepositoryService>().GameData.totalTicks.Value;
         }
 
         private void SaveTime()
         {
-            Di.Get<RepositoryService>().GameData.totalTicks.Value = _startTotalTicks + _elapsedTicks;
+            Dc.Get<RepositoryService>().GameData.totalTicks.Value = TotalTicks;
         }
 
         protected override void FixedTick()
         {
-            if (!Di.Get<PauseService>().IsPaused)
+            if (!Dc.Get<PauseService>().IsPaused)
                 _elapsedTicks++;
         }
     }

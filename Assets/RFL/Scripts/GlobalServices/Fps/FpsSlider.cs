@@ -18,13 +18,13 @@
             _slider.wholeNumbers = true;
             _slider.onValueChanged.AddListener(SetFps);
 
-            _slider.value = Di.Get<RepositoryService>().GameData.targetFps.Value
+            _slider.value = Dc.Get<RepositoryService>().GameData.targetFps.Value
                 .ThisOrIf(x => x < 0, (int)_slider.maxValue);
         }
 
         private void SetFps(float sliderValue)
         {
-            Di.Get<RepositoryService>().GameData.targetFps.Value =
+            Dc.Get<RepositoryService>().GameData.targetFps.Value =
                 (int)sliderValue != (int)_slider.maxValue ? (int)sliderValue : -1;
         }
     }

@@ -11,9 +11,10 @@
         protected void Awake()
         {
             if (isEnabled)
-                Di.Get<GameService>().AddMonoBeh(this);
+                Dc.Get<GameService>().AddMonoBeh(this);
             if (!transform.TryGetComponent(out CollisionDetector))
                 CollisionDetector = gameObject.AddComponent<CollisionDetector>();
+            DependencyInjector.Instance.Inject(this);
             OnCreated();
         }
 
@@ -57,7 +58,7 @@
         public virtual void SelfDestroy()
         {
             isEnabled = false;
-            Di.Get<GameService>().RemoveMonoBeh(this);
+            Dc.Get<GameService>().RemoveMonoBeh(this);
         }
     }
 }

@@ -11,19 +11,19 @@
         [InitializerMethod]
         public static void Initialize()
         {
-            Di.Get<IInputService>().OnPause += Di.Get<PauseService>().PauseOrUnPause;
+            Dc.Get<IInputService>().OnPause += Dc.Get<PauseService>().PauseOrUnPause;
 
-            Di.Get<PauseService>().OnPausedChanged += isPaused =>
+            Dc.Get<PauseService>().OnPausedChanged += isPaused =>
             {
                 if (isPaused)
                 {
                     var settingsCanvas = Resources.Load<SettingsCanvasTag>("UI/SettingsCanvas");
-                    Creator.Instantiate(settingsCanvas);
+                    Dc.Get<CreatorService>().Instantiate(settingsCanvas);
                 }
                 else
                 {
                     var canvas = Object.FindAnyObjectByType<SettingsCanvasTag>(FindObjectsInactive.Include);
-                    Creator.Destroy(canvas.transform);
+                    Dc.Get<DestroyerService>().Destroy(canvas.transform);
                 }
             };
         }

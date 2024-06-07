@@ -1,5 +1,6 @@
 ﻿namespace RFL.Scripts.GlobalServices.Input.Services
 {
+    using RFL.Scripts.DI;
     using RFL.Scripts.GlobalServices.Input.UI;
     using RFL.Scripts.Helpers;
     using UnityEngine;
@@ -24,7 +25,7 @@
         {
             base.OnStart();
             var mobileInputCanvas = Resources.Load<MobileInputCanvas>("UI/CanvasMobileController");
-            _inputCanvas = Creator.Instantiate(mobileInputCanvas);
+            _inputCanvas = Dc.Get<CreatorService>().Instantiate(mobileInputCanvas);
         }
     }
 }

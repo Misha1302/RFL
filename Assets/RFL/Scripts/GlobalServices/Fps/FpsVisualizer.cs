@@ -13,7 +13,7 @@ namespace RFL.Scripts.GlobalServices.Fps
         {
             _text = GetComponentInChildren<FpsTextTag>().GetComponent<TMP_Text>();
 
-            Di.Get<FpsCounterService>().OnFpsChanged += ShowFps;
+            Dc.Get<FpsCounterService>().OnFpsChanged += ShowFps;
         }
 
         private void ShowFps(float value)

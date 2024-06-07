@@ -13,7 +13,7 @@
 
         protected override void Tick()
         {
-            Di.Get<Player>().Get<PlayerTransform>().SetVelocityX(Di.Get<IInputService>().Input.X * speed);
+            Dc.Get<Player>().Get<PlayerTransform>().SetVelocityX(Dc.Get<IInputService>().Input.X * speed);
         }
     }
 }

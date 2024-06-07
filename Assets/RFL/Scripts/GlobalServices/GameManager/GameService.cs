@@ -13,18 +13,18 @@
         private bool _isEnabled;
 
 
-        private void Awake() => Di.Get<PauseService>().OnPausedChanged += OnPausedChanged;
+        private void Awake() => Dc.Get<PauseService>().OnPausedChanged += OnPausedChanged;
 
         private void Update()
         {
-            Di.Get<NextMomentExecutorService>().CustomTick();
+            Dc.Get<NextMomentExecutorService>().CustomTick();
             if (!_isEnabled) return;
             _monoBehs.ForAll(x => x.PubTick());
         }
 
         private void FixedUpdate()
         {
-            Di.Get<NextMomentExecutorService>().CustomTick();
+            Dc.Get<NextMomentExecutorService>().CustomTick();
             if (!_isEnabled) return;
             _monoBehs.ForAll(x => x.PubFixedTick());
         }
@@ -42,7 +42,7 @@
         public void AddMonoBeh(MonoBeh.MonoBeh monoBeh)
         {
             _monoBehs.Add(monoBeh);
-            Di.Get<NextMomentExecutorService>().ExecuteInNextMoment(monoBeh.PubOnStart);
+            Dc.Get<NextMomentExecutorService>().ExecuteInNextMoment(monoBeh.PubOnStart);
         }
 
         public void RemoveMonoBeh(MonoBeh.MonoBeh monoBeh)

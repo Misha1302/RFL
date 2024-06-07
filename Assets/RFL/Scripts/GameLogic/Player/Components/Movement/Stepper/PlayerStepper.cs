@@ -31,7 +31,7 @@ namespace RFL.Scripts.GameLogic.Player.Components.Movement.Stepper
         }
 
         public float Player2FootsDelta =>
-            playerFoot.localPosition.y.Abs() * Di.Get<Player>().transform.lossyScale.y;
+            playerFoot.localPosition.y.Abs() * Dc.Get<Player>().transform.lossyScale.y;
 
 
         protected override void OnStart()

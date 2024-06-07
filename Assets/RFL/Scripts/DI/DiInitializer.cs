@@ -17,18 +17,22 @@
         [InitializerMethod(-1000)]
         public static void Initialize()
         {
-            Di.Instance.AddSingle(new PauseService());
-            Di.Instance.AddSingle(new NextMomentExecutorService());
-            Di.Instance.AddSingle(Creator.Create<GameService>());
-            Di.Instance.AddSingle(Creator.Create<ApplicationEventsService>());
+            DependencyInjector.CreateSingleton(Dc.Instance);
 
-            Di.Instance.AddSingle(new SceneService());
-            Di.Instance.AddSingle(new RepositoryService());
-            Di.Instance.AddSingle(InputMaker.MakeInputService());
-            Di.Instance.AddSingle(Creator.Create<TimeService>());
-            Di.Instance.AddSingle(Creator.Create<CoroutinesService>());
-            Di.Instance.AddSingle(Creator.Create<FpsCounterService>());
-            Di.Instance.AddSingle(new FpsSetterService());
+            Dc.Instance.AddSingle(new CreatorService());
+            Dc.Instance.AddSingle(new DestroyerService());
+            Dc.Instance.AddSingle(new PauseService());
+            Dc.Instance.AddSingle(new NextMomentExecutorService());
+            Dc.Instance.AddSingle(Dc.Get<CreatorService>().Create<GameService>());
+            Dc.Instance.AddSingle(Dc.Get<CreatorService>().Create<ApplicationEventsService>());
+
+            Dc.Instance.AddSingle(new SceneService());
+            Dc.Instance.AddSingle(new RepositoryService());
+            Dc.Instance.AddSingle(InputMaker.MakeInputService());
+            Dc.Instance.AddSingle(Dc.Get<CreatorService>().Create<TimeService>());
+            Dc.Instance.AddSingle(Dc.Get<CreatorService>().Create<CoroutinesService>());
+            Dc.Instance.AddSingle(Dc.Get<CreatorService>().Create<FpsCounterService>());
+            Dc.Instance.AddSingle(new FpsSetterService());
         }
     }
 }

@@ -17,7 +17,7 @@
             _stepperInfo = stepperInfo;
         }
 
-        public float CalcY(float y) => y + Di.Get<Player>().Get<PlayerStepper>().Player2FootsDelta;
+        public float CalcY(float y) => y + Dc.Get<Player>().Get<PlayerStepper>().Player2FootsDelta;
 
         public IEnumerable<RaycastHit2D> GetValidRayHits(int count) =>
             _stepperInfo.HitsBuffer.Slice(0, count).Where(x => !x.transform.HasComponent<PlayerTag>());

@@ -17,7 +17,7 @@
 
 
         private bool IsJumping =>
-            jumpTime >= PassedTime && Di.Get<IInputService>().Jump && !GroundChecker.IsGroundedWithOutCoyote;
+            jumpTime >= PassedTime && Dc.Get<IInputService>().Jump && !GroundChecker.IsGroundedWithOutCoyote;
 
 
         private float PassedTime => TimeSinceStart - _startJumpTime;
@@ -39,7 +39,7 @@
 
         private void HandleJumpIfNeed()
         {
-            if (jumpTime >= PassedTime || !Di.Get<IInputService>().Jump || !GroundChecker.IsGroundedWithCoyote) return;
+            if (jumpTime >= PassedTime || !Dc.Get<IInputService>().Jump || !GroundChecker.IsGroundedWithCoyote) return;
             HandleJump();
         }
 
@@ -57,7 +57,7 @@
 
         private void HandleJumping()
         {
-            Di.Get<Player>().Get<PlayerTransform>().AddForce(Vector2.up * (GetYForce() * DeltaTime));
+            Dc.Get<Player>().Get<PlayerTransform>().AddForce(Vector2.up * (GetYForce() * DeltaTime));
         }
 
         private void HandleJump()
@@ -65,7 +65,7 @@
             _startJumpTime = TimeSinceStart;
             _jumped = true;
 
-            Di.Get<Player>().Get<PlayerTransform>().SetVelocityY(GetYForce());
+            Dc.Get<Player>().Get<PlayerTransform>().SetVelocityY(GetYForce());
         }
 
         private void HandleEndOfJumping()
@@ -78,14 +78,14 @@
 
         private static void SlowDownIfNeed()
         {
-            if (Di.Get<Player>().Get<PlayerTransform>().Vel.y <= 0) return;
+            if (Dc.Get<Player>().Get<PlayerTransform>().Vel.y <= 0) return;
             SlowDown();
         }
 
         private static void SlowDown()
         {
-            Di.Get<Player>().Get<PlayerTransform>()
-                .SetVelocityY(Di.Get<Player>().Get<PlayerTransform>().Vel.y / 2f);
+            Dc.Get<Player>().Get<PlayerTransform>()
+                .SetVelocityY(Dc.Get<Player>().Get<PlayerTransform>().Vel.y / 2f);
         }
 
         private float GetYForce() => jumpVelocityCurve.Evaluate(PassedTime / jumpTime) * jumpHeight;

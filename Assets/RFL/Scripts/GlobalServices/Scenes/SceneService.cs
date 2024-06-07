@@ -1,6 +1,7 @@
 ﻿namespace RFL.Scripts.GlobalServices.Scenes
 {
     using System.Linq;
+    using RFL.Scripts.DI;
     using RFL.Scripts.Extensions;
     using RFL.Scripts.Helpers;
     using UnityEngine;
@@ -23,7 +24,7 @@
             Objects.Select(x => x.root).Distinct().ForAll(x =>
             {
                 if (!x.HasComponent<IInterScene>())
-                    Creator.Destroy(x, saveData);
+                    Dc.Get<DestroyerService>().Destroy(x, saveData);
             });
         }
 

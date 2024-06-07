@@ -8,6 +8,12 @@
 
     public static class GameDataFabric
     {
+        public const int DefaultTargetFps = -1;
+        public const float DefaultInputSpeed = 1f / 0.4f;
+        public const bool DefaultNeedToShowFps = true;
+        public const long DefaultTotalTicks = 0;
+        public static readonly Vector3 DefaultPlayerPos = Vector3.zero;
+
         public static GameData MakeExampleGameData()
         {
             var gd = MakeStandardGameData();
@@ -17,11 +23,11 @@
 
         public static void SubscribeOnChanged(GameData gd)
         {
+            gd.targetFps.OnChanged += () => gd.OnChanged?.Invoke(gd);
             gd.inputSpeed.OnChanged += () => gd.OnChanged?.Invoke(gd);
             gd.needToShowFps.OnChanged += () => gd.OnChanged?.Invoke(gd);
             gd.scenesList.OnChanged += () => gd.OnChanged?.Invoke(gd);
             gd.totalTicks.OnChanged += () => gd.OnChanged?.Invoke(gd);
-            gd.targetFps.OnChanged += () => gd.OnChanged?.Invoke(gd);
             gd.playerPos.OnChanged += () => gd.OnChanged?.Invoke(gd);
             gd.coreScene.OnChanged += () => gd.OnChanged?.Invoke(gd);
 

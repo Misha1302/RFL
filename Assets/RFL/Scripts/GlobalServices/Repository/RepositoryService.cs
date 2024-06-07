@@ -51,15 +51,19 @@
 
         public void Reset()
         {
-            GameData = GameDataFabric.MakeExampleGameData();
+            GameData.targetFps.Value = GameDataFabric.DefaultTargetFps;
+            GameData.inputSpeed.Value = GameDataFabric.DefaultInputSpeed;
+            GameData.needToShowFps.Value = GameDataFabric.DefaultNeedToShowFps;
+            GameData.totalTicks.Value = GameDataFabric.DefaultTotalTicks;
+            GameData.playerPos.Value = GameDataFabric.DefaultPlayerPos;
         }
 
         private void SubscribeOnDataSave(GameData gameData)
         {
             if (Application.isPlaying)
             {
-                Di.Get<ApplicationEventsService>().OnAppUnFocused.Add(SaveGameData);
-                Di.Get<ApplicationEventsService>().OnAppQuitting.Add(SaveGameData);
+                Dc.Get<ApplicationEventsService>().OnAppUnFocused.Add(SaveGameData);
+                Dc.Get<ApplicationEventsService>().OnAppQuitting.Add(SaveGameData);
             }
             else
             {

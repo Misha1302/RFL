@@ -8,14 +8,14 @@
     {
         public void Save()
         {
-            Di.Get<RepositoryService>().GameData.playerPos.Value =
-                Di.Get<Player>().Get<PlayerTransform>().Pos;
+            Dc.Get<RepositoryService>().GameData.playerPos.Value =
+                Dc.Get<Player>().Get<PlayerTransform>().Pos;
         }
 
         protected override void OnStart()
         {
-            var playerTransformPos = Di.Get<RepositoryService>().GameData.playerPos.Value;
-            Di.Get<Player>().Get<PlayerTransform>().Pos = playerTransformPos;
+            var playerTransformPos = Dc.Get<RepositoryService>().GameData.playerPos.Value;
+            Dc.Get<Player>().Get<PlayerTransform>().Pos = playerTransformPos;
         }
     }
 }

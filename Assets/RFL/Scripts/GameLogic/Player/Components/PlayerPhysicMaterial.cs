@@ -8,7 +8,7 @@
     {
         protected override void OnStart()
         {
-            Di.Get<Player>().Get<PlayerTransform>().SetPhysicsMaterial(new PhysicsMaterial2D { friction = 0f });
+            Dc.Get<Player>().Get<PlayerTransform>().SetPhysicsMaterial(new PhysicsMaterial2D { friction = 0f });
         }
     }
 }

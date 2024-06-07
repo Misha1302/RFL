@@ -20,7 +20,7 @@
 
         protected override void OnCreated()
         {
-            Input = new Axis2D(Di.Get<RepositoryService>().GameData.inputSpeed.Value);
+            Input = new Axis2D(Dc.Get<RepositoryService>().GameData.inputSpeed.Value);
         }
 
         protected override void OnStart()
@@ -39,7 +39,7 @@
         private void SubscribeOnButtonPause()
         {
             var pauseCanvas = Resources.Load("UI/PauseCanvas");
-            var pauseCanvasInstance = Creator.Instantiate(pauseCanvas);
+            var pauseCanvasInstance = Dc.Get<CreatorService>().Instantiate(pauseCanvas);
             var button = pauseCanvasInstance.GetComponentInChildren<PauseButtonTag>().GetComponent<Button>();
             button.onClick.AddListener(OnPause.Invoke);
         }

@@ -14,8 +14,8 @@
         {
             if (Application.isPlaying)
             {
-                if (changeToPause) Di.Get<PauseService>().IsPaused = true;
-                if (changeToUnPause) Di.Get<PauseService>().IsPaused = false;
+                if (changeToPause) Dc.Get<PauseService>().IsPaused = true;
+                if (changeToUnPause) Dc.Get<PauseService>().IsPaused = false;
             }
 
             changeToPause = changeToUnPause = false;

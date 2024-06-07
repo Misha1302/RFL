@@ -19,15 +19,15 @@
 
         public void Save()
         {
-            Di.Get<RepositoryService>().GameData.coreScene.Value.data[Id] =
+            Dc.Get<RepositoryService>().GameData.coreScene.Value.data[Id] =
                 new Any(new TreeData(_treeData?.ticksCountWhenTreeWasGrown ?? 0, transform.position, Id));
         }
 
         public void Init(TreeData treeData)
         {
             _treeData = treeData;
-            _treeTimeManager = Creator.Create<TreeTimeManager>();
-            _treeTimeManager.Init(Di.Get<TimeService>().CalcTime(treeData.ticksCountWhenTreeWasGrown));
+            _treeTimeManager = Dc.Get<CreatorService>().Create<TreeTimeManager>();
+            _treeTimeManager.Init(Dc.Get<TimeService>().CalcTime(treeData.ticksCountWhenTreeWasGrown));
             _treeTimeManager.OnTimeToPhase += ChangePhase;
 
             transform.position = treeData.position;
@@ -37,10 +37,10 @@
 
         private void ChangePhase(TreePhaseType treePhaseType)
         {
-            transform.ForAll<Transform>(x => Creator.Destroy(x));
+            transform.ForAll<Transform>(x => Dc.Get<DestroyerService>().Destroy(x));
 
             var resource = Resources.Load<GameObject>($"Trees/Tree ({(int)treePhaseType} phase)");
-            var instance = Creator.Instantiate(resource);
+            var instance = Dc.Get<CreatorService>().Instantiate(resource);
             instance.transform.SetParent(transform);
             instance.transform.localPosition = Vector3.zero.WithY(instance.CalcHalfOfVisibleYSize());
         }

@@ -17,22 +17,22 @@
     [RequireComponent(typeof(PlayerDataSaver))]
     public class Player : MonoBeh
     {
-        private readonly Di _di = new();
+        private readonly Dc _dc = new();
 
         public Player()
         {
-            Di.Instance.AddSingle(this);
+            Dc.Instance.AddSingle(this);
 
-            _di.AddLazySingle(GetComponent<PlayerImageFlipper>);
-            _di.AddLazySingle(GetComponent<PlayerJumper>);
-            _di.AddLazySingle(GetComponent<PlayerPauseHandler>);
-            _di.AddLazySingle(GetComponent<PlayerPhysicMaterial>);
-            _di.AddLazySingle(GetComponent<PlayerStepper>);
-            _di.AddLazySingle(GetComponent<PlayerHorizontalMovement>);
-            _di.AddLazySingle(GetComponent<PlayerTransform>);
-            _di.AddLazySingle(GetComponent<PlayerDataSaver>);
+            _dc.AddLazySingle(GetComponent<PlayerImageFlipper>);
+            _dc.AddLazySingle(GetComponent<PlayerJumper>);
+            _dc.AddLazySingle(GetComponent<PlayerPauseHandler>);
+            _dc.AddLazySingle(GetComponent<PlayerPhysicMaterial>);
+            _dc.AddLazySingle(GetComponent<PlayerStepper>);
+            _dc.AddLazySingle(GetComponent<PlayerHorizontalMovement>);
+            _dc.AddLazySingle(GetComponent<PlayerTransform>);
+            _dc.AddLazySingle(GetComponent<PlayerDataSaver>);
         }
 
-        public T Get<T>() => _di.GetSingle<T>();
+        public T Get<T>() => _dc.GetSingle<T>();
     }
 }

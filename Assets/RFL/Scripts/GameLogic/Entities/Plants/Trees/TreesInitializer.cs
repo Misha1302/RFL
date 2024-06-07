@@ -11,11 +11,11 @@
         [InitializerMethod]
         public static void Initialize()
         {
-            var data = Di.Get<RepositoryService>().GameData.coreScene.Value.data;
+            var data = Dc.Get<RepositoryService>().GameData.coreScene.Value.data;
             data.ForAll(x =>
             {
                 if (x.value.Is<TreeData>())
-                    Creator.Create<TreeGrower>().Init(x.value.Get<TreeData>());
+                    Dc.Get<CreatorService>().Create<TreeGrower>().Init(x.value.Get<TreeData>());
             });
             data.Clear();
         }

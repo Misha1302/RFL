@@ -12,20 +12,20 @@
 
         protected override void OnStart()
         {
-            Di.Get<PauseService>().OnPausedChanged += OnPauseChanged;
+            Dc.Get<PauseService>().OnPausedChanged += OnPauseChanged;
         }
 
         private void OnPauseChanged(bool isPaused)
         {
             if (isPaused)
             {
-                _savedDirection = Di.Get<Player>().Get<PlayerTransform>().Vel;
-                Di.Get<Player>().Get<PlayerTransform>().Freeze();
+                _savedDirection = Dc.Get<Player>().Get<PlayerTransform>().Vel;
+                Dc.Get<Player>().Get<PlayerTransform>().Freeze();
             }
             else
             {
-                Di.Get<Player>().Get<PlayerTransform>().UnFreeze();
-                Di.Get<Player>().Get<PlayerTransform>().Vel = _savedDirection;
+                Dc.Get<Player>().Get<PlayerTransform>().UnFreeze();
+                Dc.Get<Player>().Get<PlayerTransform>().Vel = _savedDirection;
             }
         }
     }

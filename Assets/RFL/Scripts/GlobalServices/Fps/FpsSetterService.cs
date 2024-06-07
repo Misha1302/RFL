@@ -9,13 +9,13 @@
         public FpsSetterService()
         {
             SetTargetFps();
-            Di.Get<RepositoryService>().GameData.targetFps.OnChanged += SetTargetFps;
+            Dc.Get<RepositoryService>().GameData.targetFps.OnChanged += SetTargetFps;
         }
 
         private void SetTargetFps()
         {
             QualitySettings.vSyncCount = 0;
-            Application.targetFrameRate = Di.Get<RepositoryService>().GameData.targetFps.Value;
+            Application.targetFrameRate = Dc.Get<RepositoryService>().GameData.targetFps.Value;
         }
     }
 }

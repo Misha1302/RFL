@@ -18,17 +18,17 @@
 
         protected override void OnStart()
         {
-            Di.Get<RepositoryService>().GameData.targetFps.OnChanged += SetText;
+            Dc.Get<RepositoryService>().GameData.targetFps.OnChanged += SetText;
         }
 
         public override void SelfDestroy()
         {
-            Di.Get<RepositoryService>().GameData.targetFps.OnChanged -= SetText;
+            Dc.Get<RepositoryService>().GameData.targetFps.OnChanged -= SetText;
         }
 
         private void SetText()
         {
-            var targetFps = Di.Get<RepositoryService>().GameData.targetFps.Value;
+            var targetFps = Dc.Get<RepositoryService>().GameData.targetFps.Value;
             GetComponent<TMP_Text>().text = string.Format(format, targetFps);
         }
     }

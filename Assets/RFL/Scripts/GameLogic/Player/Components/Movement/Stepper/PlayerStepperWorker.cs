@@ -30,7 +30,7 @@
             MovePlayer(y);
         }
 
-        private static bool CanStep() => Di.Get<Player>().Get<PlayerJumper>().GroundChecker.IsGroundedWithOutCoyote;
+        private static bool CanStep() => Dc.Get<Player>().Get<PlayerJumper>().GroundChecker.IsGroundedWithOutCoyote;
 
         private void Raycasts(out StepperRaycastInfo castLeft, out StepperRaycastInfo castRight)
         {
@@ -40,11 +40,11 @@
 
         private void MovePlayer(float y)
         {
-            var finishX = Di.Get<Player>().Get<PlayerTransform>().Pos.x +
-                          Di.Get<IInputService>().Input.X.Sign() * _stepperInfo.XOffset;
+            var finishX = Dc.Get<Player>().Get<PlayerTransform>().Pos.x +
+                          Dc.Get<IInputService>().Input.X.Sign() * _stepperInfo.XOffset;
             var finishY = _playerStepperHelper.CalcY(y);
 
-            Di.Get<Player>().Get<PlayerTransform>().Pos = new Vector3(finishX, finishY);
+            Dc.Get<Player>().Get<PlayerTransform>().Pos = new Vector3(finishX, finishY);
         }
 
         private static bool TryGetY(StepperRaycastInfo castLeft, StepperRaycastInfo castRight, out float y)

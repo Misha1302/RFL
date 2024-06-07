@@ -11,7 +11,7 @@
         public WaitSeconds(float seconds)
         {
             _seconds = seconds;
-            _startTime = Di.Get<TimeService>().ElapsedTime;
+            _startTime = Dc.Get<TimeService>().ElapsedTime;
         }
 
         public float EndTime => _startTime + _seconds;

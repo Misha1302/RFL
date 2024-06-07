@@ -45,7 +45,7 @@
             if (_enumerator.Current is WaitNextFrame) Next();
 
             if (_enumerator.Current is WaitSeconds s)
-                if (Di.Get<TimeService>().ElapsedTime >= s.EndTime)
+                if (Dc.Get<TimeService>().ElapsedTime >= s.EndTime)
                     Next();
         }
 
