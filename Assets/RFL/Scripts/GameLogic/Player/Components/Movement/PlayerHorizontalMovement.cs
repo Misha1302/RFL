@@ -1,5 +1,6 @@
 ﻿namespace RFL.Scripts.GameLogic.Player.Components.Movement
 {
+    using RFL.Scripts.Attributes;
     using RFL.Scripts.DI;
     using RFL.Scripts.GlobalServices.GameManager.MonoBeh;
     using RFL.Scripts.GlobalServices.Input.Services;
@@ -10,6 +11,11 @@
     {
         [SerializeField] private float speed = 5f;
 
+        [InjectMethod]
+        public void Init(IInputService inputService)
+        {
+            
+        }
 
         protected override void Tick()
         {

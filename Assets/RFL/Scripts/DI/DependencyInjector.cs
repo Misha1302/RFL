@@ -34,7 +34,7 @@
                 return;
 
             var parameters = new List<object>();
-            initMethod.GetParameters().ForAll(x => parameters.Add(_container.GetSingle(x.ParameterType)));
+            initMethod.GetParameters().ForAll(x => parameters.Add(_container.GetSingle(new Types(x.ParameterType))));
 
             initMethod.Invoke(component, parameters.ToArray());
         }

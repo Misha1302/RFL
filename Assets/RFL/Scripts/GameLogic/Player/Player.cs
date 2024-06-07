@@ -17,22 +17,17 @@
     [RequireComponent(typeof(PlayerDataSaver))]
     public class Player : MonoBeh
     {
-        private readonly Dc _dc = new();
-
         public Player()
         {
-            Dc.Instance.AddSingle(this);
-
-            _dc.AddLazySingle(GetComponent<PlayerImageFlipper>);
-            _dc.AddLazySingle(GetComponent<PlayerJumper>);
-            _dc.AddLazySingle(GetComponent<PlayerPauseHandler>);
-            _dc.AddLazySingle(GetComponent<PlayerPhysicMaterial>);
-            _dc.AddLazySingle(GetComponent<PlayerStepper>);
-            _dc.AddLazySingle(GetComponent<PlayerHorizontalMovement>);
-            _dc.AddLazySingle(GetComponent<PlayerTransform>);
-            _dc.AddLazySingle(GetComponent<PlayerDataSaver>);
+            Dc.Instance.AddLazySingleScoped<PlayerScope, PlayerImageFlipper>(GetComponent<PlayerImageFlipper>);
+            Dc.Instance.AddLazySingleScoped<PlayerScope, PlayerJumper>(GetComponent<PlayerJumper>);
+            Dc.Instance.AddLazySingleScoped<PlayerScope, PlayerPauseHandler>(GetComponent<PlayerPauseHandler>);
+            Dc.Instance.AddLazySingleScoped<PlayerScope, PlayerPhysicMaterial>(GetComponent<PlayerPhysicMaterial>);
+            Dc.Instance.AddLazySingleScoped<PlayerScope, PlayerStepper>(GetComponent<PlayerStepper>);
+            Dc.Instance.AddLazySingleScoped<PlayerScope, PlayerHorizontalMovement>(
+                GetComponent<PlayerHorizontalMovement>);
+            Dc.Instance.AddLazySingleScoped<PlayerScope, PlayerTransform>(GetComponent<PlayerTransform>);
+            Dc.Instance.AddLazySingleScoped<PlayerScope, PlayerDataSaver>(GetComponent<PlayerDataSaver>);
         }
-
-        public T Get<T>() => _dc.GetSingle<T>();
     }
 }

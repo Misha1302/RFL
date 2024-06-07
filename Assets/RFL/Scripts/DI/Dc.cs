@@ -6,31 +6,39 @@ namespace RFL.Scripts.DI
     using RFL.Scripts.Helpers;
     using RFL.Scripts.Singletons;
 
-    public class Dc : SingletonBase<Dc>
+    public class RawDc
     {
-        private readonly Dictionary<Type, Lazy<Any>> _singletons = new();
+        private readonly Dictionary<Types, Lazy<Any>> _singletons = new();
 
-        public void AddSingle<TSingleton>(TSingleton singleton) =>
-            AddLazySingle(() => singleton);
+        public void AddLazySingleScoped<TScope, TSingleton>(Func<TSingleton> func) =>
+            _singletons.Add(new Types(typeof(TScope)), new Lazy<Any>(() => new Any(func())));
 
-        public void AddLazySingle<TSingleton>(Func<TSingleton> lazyFunc) =>
-            _singletons[typeof(TSingleton)] = new Lazy<Any>(() => new Any(lazyFunc()));
-
-
-        [Pure] public TSingleton GetSingle<TSingleton>() =>
-            (TSingleton)GetSingle(typeof(TSingleton));
-
-        [Pure] public object GetSingle(Type type)
+        [Pure] public object GetSingle(Types types)
         {
-            if (!_singletons.TryGetValue(type, out var lazy))
-                Thrower.InvalidOpEx($"Could not found {type.Name}");
+            if (!_singletons.TryGetValue(types, out var lazy))
+                Thrower.InvalidOpEx($"Could not found {types}");
 
             var value = lazy.Value.Get();
             if (value == null)
-                Thrower.InvalidOpEx($"Value of {type.Name} was null");
+                Thrower.InvalidOpEx($"Value of {types} was null");
             return value;
         }
+    }
 
-        [Pure] public static TSingleton Get<TSingleton>() => Instance.GetSingle<TSingleton>();
+    public class Dc : SingletonBase<Dc>
+    {
+        private readonly RawDc _rawDc = new();
+
+        public void AddLazySingle<TSingleton>(Func<TSingleton> func) =>
+            _rawDc.AddLazySingleScoped<GlobalScope, TSingleton>(func);
+
+        public void AddLazySingleScoped<TScope, TSingleton>(Func<TSingleton> func) =>
+            _rawDc.AddLazySingleScoped<TScope, TSingleton>(func);
+
+        [Pure] public TSingleton GetSingle<TSingleton>() =>
+            (TSingleton)_rawDc.GetSingle(new Types(typeof(GlobalScope), typeof(TSingleton)));
+
+        [Pure] public object GetSingle(Types types) =>
+            _rawDc.GetSingle(types);
     }
 }

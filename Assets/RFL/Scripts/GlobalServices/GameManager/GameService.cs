@@ -10,7 +10,7 @@
     {
         private readonly List<MonoBeh.MonoBeh> _monoBehs = new();
 
-        private bool _isEnabled;
+        private bool _isEnabled = true;
 
 
         private void Awake() => Dc.Get<PauseService>().OnPausedChanged += OnPausedChanged;
