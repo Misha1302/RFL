@@ -8,10 +8,15 @@ namespace RFL.Scripts.DependenciesManagement.Container
             AddSingleScoped<IAnyScope, TSingleton>(value);
 
         public void AddSingleScoped<TScope, TSingleton>(TSingleton value) =>
-            AddLazySingleScoped<TScope, TSingleton>(() => value);
+            AddSingleScoped<TScope, TSingleton>(() => value);
 
+        public void AddLazySingleScoped<TScope, TSingleton>(Func<TSingleton> value) =>
+            AddSingleScoped<TScope, Lazy<TSingleton>>(() => new Lazy<TSingleton>(value));
 
-        public void AddLazySingle<TSingleton>(Func<TSingleton> func) =>
-            AddLazySingleScoped<IAnyScope, TSingleton>(func);
+        public void AddLazySingle<TSingleton>(Func<TSingleton> value) =>
+            AddSingleScoped<IAnyScope, Lazy<TSingleton>>(() => new Lazy<TSingleton>(value));
+
+        public void AddSingle<TSingleton>(Func<TSingleton> func) =>
+            AddSingleScoped<IAnyScope, TSingleton>(func);
     }
 }

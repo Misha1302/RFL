@@ -1,5 +1,6 @@
 ﻿namespace RFL.Scripts.GlobalServices.Scenes
 {
+    using System;
     using System.Linq;
     using RFL.Scripts.Attributes;
     using RFL.Scripts.DependenciesManagement.Injector;
@@ -11,7 +12,7 @@
 
     public class SceneService : InjectableBase, IService
     {
-        [Inject] private DestroyerService _destroyerService;
+        [Inject] private Lazy<DestroyerService> _destroyerService;
 
         private Transform[] Objects => Object.FindObjectsOfType<Transform>(true);
 
@@ -27,7 +28,7 @@
             Objects.Select(x => x.root).Distinct().ForAll(x =>
             {
                 if (!x.HasComponent<IInterScene>())
-                    _destroyerService.Destroy(x, saveData);
+                    _destroyerService.Value.Destroy(x, saveData);
             });
         }
 

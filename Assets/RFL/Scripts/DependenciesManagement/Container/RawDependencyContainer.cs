@@ -3,15 +3,12 @@
     using System;
     using System.Collections.Generic;
     using System.Diagnostics.Contracts;
-    using System.Linq;
-    using UnityEngine;
 
     public class RawDependencyContainer
     {
         private readonly Dictionary<ScopeType, Dictionary<Type, Lazy<Any>>> _scopes = new();
 
-
-        public void AddLazySingleScoped<TScope, TSingleton>(Func<TSingleton> func)
+        public void AddSingleScoped<TScope, TSingleton>(Func<TSingleton> func)
         {
             var typesInScope = GetScope(new ScopeType(typeof(TScope)));
             typesInScope[typeof(TSingleton)] = new Lazy<Any>(() => new Any(func()));

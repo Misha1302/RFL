@@ -1,5 +1,6 @@
 ﻿namespace RFL.Scripts.GlobalServices.Time
 {
+    using System;
     using RFL.Scripts.Attributes;
     using RFL.Scripts.GlobalServices.GameManager.MonoBeh;
     using RFL.Scripts.GlobalServices.Repository;
@@ -7,21 +8,21 @@
     // ReSharper disable MemberCanBeMadeStatic.Global
     public class TimeManagerService : MonoBeh, IService, ISavable
     {
-        [Inject] private TimeService _timeService;
+        [Inject] private Lazy<TimeService> _timeService;
 
         public void Save()
         {
-            _timeService.Save();
+            _timeService.Value.Save();
         }
 
         protected override void OnStart()
         {
-            _timeService.OnStart();
+            _timeService.Value.OnStart();
         }
 
         protected override void FixedTick()
         {
-            _timeService.FixedTick();
+            _timeService.Value.FixedTick();
         }
     }
 }

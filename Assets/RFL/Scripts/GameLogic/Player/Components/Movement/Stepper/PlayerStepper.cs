@@ -1,5 +1,6 @@
 namespace RFL.Scripts.GameLogic.Player.Components.Movement.Stepper
 {
+    using System;
     using RFL.Scripts.Attributes;
     using RFL.Scripts.Extensions.Math.Numbers;
     using RFL.Scripts.GlobalServices.GameManager.MonoBeh;
@@ -22,7 +23,7 @@ namespace RFL.Scripts.GameLogic.Player.Components.Movement.Stepper
         [SerializeField] private Transform rightUpRayPoint;
 
 
-        [Inject] private Player _player;
+        [Inject] private Lazy<Player> _player;
 
 
         private PlayerStepperWorker _stepperDown;
@@ -35,7 +36,7 @@ namespace RFL.Scripts.GameLogic.Player.Components.Movement.Stepper
         }
 
         public float Player2FootsDelta =>
-            playerFoot.localPosition.y.Abs() * _player.transform.lossyScale.y;
+            playerFoot.localPosition.y.Abs() * _player.Value.transform.lossyScale.y;
 
 
         protected override void OnStart()

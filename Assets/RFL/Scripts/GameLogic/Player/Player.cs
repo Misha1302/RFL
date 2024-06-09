@@ -20,7 +20,7 @@
         public Player()
         {
             var container = GameSingletons.DependencyInjector.DependencyContainer;
-            container.AddSingle(this);
+            container.AddLazySingle(() => this);
             container.AddLazySingleScoped<IPlayerScope, PlayerTransform>(GetComponent<PlayerTransform>);
             container.AddLazySingleScoped<IPlayerScope, PlayerImageFlipper>(GetComponent<PlayerImageFlipper>);
             container.AddLazySingleScoped<IPlayerScope, PlayerJumper>(GetComponent<PlayerJumper>);

@@ -1,12 +1,13 @@
 ﻿namespace RFL.Scripts.GlobalServices.GameManager.MonoBeh
 {
+    using System;
     using RFL.Scripts.Attributes;
     using RFL.Scripts.Singletons;
 
     public abstract class MonoBeh : ComponentsKeeper
     {
         public bool isEnabled = true;
-        [Inject] private GameService _gameService;
+        [Inject] private Lazy<GameService> _gameService;
         protected CollisionDetector CollisionDetector;
 
 
@@ -15,7 +16,7 @@
             GameSingletons.DependencyInjector.Inject(this);
 
             if (isEnabled)
-                _gameService.AddMonoBeh(this);
+                _gameService.Value.AddMonoBeh(this);
             if (!transform.TryGetComponent(out CollisionDetector))
                 CollisionDetector = gameObject.AddComponent<CollisionDetector>();
 
@@ -62,7 +63,7 @@
         public virtual void SelfDestroy()
         {
             isEnabled = false;
-            _gameService?.RemoveMonoBeh(this);
+            _gameService?.Value.RemoveMonoBeh(this);
         }
     }
 }

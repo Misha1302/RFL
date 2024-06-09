@@ -1,5 +1,6 @@
 ﻿namespace RFL.Scripts.GameLogic.Player.Components.Movement
 {
+    using System;
     using RFL.Scripts.Attributes;
     using RFL.Scripts.GlobalServices.GameManager.MonoBeh;
     using RFL.Scripts.GlobalServices.Input.Services;
@@ -12,14 +13,14 @@
         [SerializeField] private float jumpTime = 0.75f;
         [SerializeField] private float jumpHeight = 10f;
 
-        [Inject] private IInputService _inputService;
+        [Inject] private Lazy<IInputService> _inputService;
         private bool _jumped;
-        [Inject] private PlayerTransform _playerTransform;
+        [Inject] private Lazy<PlayerTransform> _playerTransform;
         private float _startJumpTime = float.MinValue;
 
 
         private bool IsJumping =>
-            jumpTime >= PassedTime && _inputService.Jump && !GroundChecker.IsGroundedWithOutCoyote;
+            jumpTime >= PassedTime && _inputService.Value.Jump && !GroundChecker.IsGroundedWithOutCoyote;
 
 
         private float PassedTime => TimeSinceStart - _startJumpTime;
@@ -41,7 +42,7 @@
 
         private void HandleJumpIfNeed()
         {
-            if (jumpTime >= PassedTime || !_inputService.Jump || !GroundChecker.IsGroundedWithCoyote) return;
+            if (jumpTime >= PassedTime || !_inputService.Value.Jump || !GroundChecker.IsGroundedWithCoyote) return;
             HandleJump();
         }
 
@@ -59,7 +60,7 @@
 
         private void HandleJumping()
         {
-            _playerTransform.AddForce(Vector2.up * (GetYForce() * DeltaTime));
+            _playerTransform.Value.AddForce(Vector2.up * (GetYForce() * DeltaTime));
         }
 
         private void HandleJump()
@@ -67,7 +68,7 @@
             _startJumpTime = TimeSinceStart;
             _jumped = true;
 
-            _playerTransform.SetVelocityY(GetYForce());
+            _playerTransform.Value.SetVelocityY(GetYForce());
         }
 
         private void HandleEndOfJumping()
@@ -80,13 +81,13 @@
 
         private void SlowDownIfNeed()
         {
-            if (_playerTransform.Vel.y <= 0) return;
+            if (_playerTransform.Value.Vel.y <= 0) return;
             SlowDown();
         }
 
         private void SlowDown()
         {
-            _playerTransform.SetVelocityY(_playerTransform.Vel.y / 2f);
+            _playerTransform.Value.SetVelocityY(_playerTransform.Value.Vel.y / 2f);
         }
 
         private float GetYForce() => jumpVelocityCurve.Evaluate(PassedTime / jumpTime) * jumpHeight;

@@ -81,7 +81,7 @@
         private object GetFromContainer(ScopeType[] scopeTypes, Type type)
         {
             if (!DependencyContainer.TryGetSingleOfScopes(scopeTypes, type, out var single))
-                Thrower.InvalidOpEx($"Cannot find {type.Name} in container");
+                Thrower.InvalidOpEx($"Cannot find {type.GetFriendlyTypeName()} in container");
             return single;
         }
     }

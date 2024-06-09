@@ -1,16 +1,17 @@
 ﻿namespace RFL.Scripts.GameLogic.Player.Components
 {
+    using System;
     using RFL.Scripts.Attributes;
     using RFL.Scripts.GlobalServices.GameManager.MonoBeh;
     using UnityEngine;
 
     public class PlayerPhysicMaterial : MonoBeh, Player.IPlayerScope
     {
-        [Inject] private PlayerTransform _playerTransform;
+        [Inject] private Lazy<PlayerTransform> _playerTransform;
 
         protected override void OnStart()
         {
-            _playerTransform.SetPhysicsMaterial(new PhysicsMaterial2D { friction = 0f });
+            _playerTransform.Value.SetPhysicsMaterial(new PhysicsMaterial2D { friction = 0f });
         }
     }
 }

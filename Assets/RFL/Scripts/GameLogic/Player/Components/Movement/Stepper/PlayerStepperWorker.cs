@@ -1,5 +1,6 @@
 ﻿namespace RFL.Scripts.GameLogic.Player.Components.Movement.Stepper
 {
+    using System;
     using RFL.Scripts.Attributes;
     using RFL.Scripts.DependenciesManagement.Injector;
     using RFL.Scripts.Extensions;
@@ -10,9 +11,9 @@
 
     public class PlayerStepperWorker : InjectableBase, Player.IPlayerScope
     {
-        [Inject] private PlayerJumper _playerJumper;
-        [Inject] private PlayerTransform _playerTransform;
-        [Inject] private IInputService _inputService;
+        [Inject] private Lazy<PlayerJumper> _playerJumper;
+        [Inject] private Lazy<PlayerTransform> _playerTransform;
+        [Inject] private Lazy<IInputService> _inputService;
 
         private readonly PlayerStepperHelper _playerStepperHelper;
         private readonly StepperInfo _stepperInfo;
@@ -35,7 +36,7 @@
             MovePlayer(y);
         }
 
-        private bool CanStep() => _playerJumper.GroundChecker.IsGroundedWithOutCoyote;
+        private bool CanStep() => _playerJumper.Value.GroundChecker.IsGroundedWithOutCoyote;
 
         private void Raycasts(out StepperRaycastInfo castLeft, out StepperRaycastInfo castRight)
         {
@@ -45,10 +46,10 @@
 
         private void MovePlayer(float y)
         {
-            var finishX = _playerTransform.Pos.x + _inputService.Input.X.Sign() * _stepperInfo.XOffset;
+            var finishX = _playerTransform.Value.Pos.x + _inputService.Value.Input.X.Sign() * _stepperInfo.XOffset;
             var finishY = _playerStepperHelper.CalcY(y);
 
-            _playerTransform.Pos = new Vector3(finishX, finishY);
+            _playerTransform.Value.Pos = new Vector3(finishX, finishY);
         }
 
         private static bool TryGetY(StepperRaycastInfo castLeft, StepperRaycastInfo castRight, out float y)

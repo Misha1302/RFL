@@ -16,7 +16,7 @@
 
         private readonly Lazy<GameData> _gameData;
 
-        [Inject] private ApplicationEventsService _applicationEventsService;
+        [Inject] private Lazy<ApplicationEventsService> _applicationEventsService;
 
         public RepositoryService()
         {
@@ -61,8 +61,8 @@
         {
             if (Application.isPlaying)
             {
-                _applicationEventsService.OnAppUnFocused.Add(SaveGameData);
-                _applicationEventsService.OnAppQuitting.Add(SaveGameData);
+                _applicationEventsService.Value.OnAppUnFocused.Add(SaveGameData);
+                _applicationEventsService.Value.OnAppQuitting.Add(SaveGameData);
             }
             else
             {

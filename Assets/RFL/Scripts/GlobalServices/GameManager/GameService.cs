@@ -1,5 +1,6 @@
 ﻿namespace RFL.Scripts.GlobalServices.GameManager
 {
+    using System;
     using System.Collections.Generic;
     using RFL.Scripts.Attributes;
     using RFL.Scripts.Extensions;
@@ -13,26 +14,26 @@
 
         private bool _isEnabled = true;
 
-        [Inject] private NextMomentExecutorService _nextMomentExecutorService;
-        [Inject] private PauseService _pauseService;
+        [Inject] private Lazy<NextMomentExecutorService> _nextMomentExecutorService;
+        [Inject] private Lazy<PauseService> _pauseService;
 
 
         private void Awake()
         {
             GameSingletons.DependencyInjector.Inject(this);
-            _pauseService.OnPausedChanged += OnPausedChanged;
+            _pauseService.Value.OnPausedChanged += OnPausedChanged;
         }
 
         private void Update()
         {
-            _nextMomentExecutorService.CustomTick();
+            _nextMomentExecutorService.Value.CustomTick();
             if (!_isEnabled) return;
             _monoBehs.ForAll(x => x.PubTick());
         }
 
         private void FixedUpdate()
         {
-            _nextMomentExecutorService.CustomTick();
+            _nextMomentExecutorService.Value.CustomTick();
             if (!_isEnabled) return;
             _monoBehs.ForAll(x => x.PubFixedTick());
         }
@@ -50,7 +51,7 @@
         public void AddMonoBeh(MonoBeh.MonoBeh monoBeh)
         {
             _monoBehs.Add(monoBeh);
-            _nextMomentExecutorService.ExecuteInNextMoment(monoBeh.PubOnStart);
+            _nextMomentExecutorService.Value.ExecuteInNextMoment(monoBeh.PubOnStart);
         }
 
         public void RemoveMonoBeh(MonoBeh.MonoBeh monoBeh)
