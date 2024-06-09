@@ -19,6 +19,7 @@
     {
         public Player()
         {
+            Dc.Instance.AddLazySingleScoped<PlayerScope, Player>(GetComponent<Player>);
             Dc.Instance.AddLazySingleScoped<PlayerScope, PlayerImageFlipper>(GetComponent<PlayerImageFlipper>);
             Dc.Instance.AddLazySingleScoped<PlayerScope, PlayerJumper>(GetComponent<PlayerJumper>);
             Dc.Instance.AddLazySingleScoped<PlayerScope, PlayerPauseHandler>(GetComponent<PlayerPauseHandler>);

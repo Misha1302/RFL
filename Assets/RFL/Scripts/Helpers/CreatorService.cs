@@ -7,7 +7,6 @@
     using Component = UnityEngine.Component;
     using Object = UnityEngine.Object;
 
-    // TODO: разделить на два класса
     public class CreatorService
     {
         private const string Prefix = "__";

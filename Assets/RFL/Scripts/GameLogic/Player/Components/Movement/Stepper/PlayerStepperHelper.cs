@@ -2,14 +2,17 @@
 {
     using System.Collections.Generic;
     using System.Linq;
-    using RFL.Scripts.DI;
+    using RFL.Scripts.Attributes;
     using RFL.Scripts.Extensions;
     using RFL.Scripts.Extensions.Math.Vectors;
+    using RFL.Scripts.GameLogic.Entities.Plants.Trees;
     using RFL.Scripts.GameLogic.Tags;
     using UnityEngine;
 
-    public class PlayerStepperHelper
+    public class PlayerStepperHelper : InjectableBase
     {
+        [Inject] private PlayerStepper _playerStepper;
+
         private readonly StepperInfo _stepperInfo;
 
         public PlayerStepperHelper(StepperInfo stepperInfo)
@@ -17,7 +20,7 @@
             _stepperInfo = stepperInfo;
         }
 
-        public float CalcY(float y) => y + Dc.Get<Player>().Get<PlayerStepper>().Player2FootsDelta;
+        public float CalcY(float y) => y + _playerStepper.Player2FootsDelta;
 
         public IEnumerable<RaycastHit2D> GetValidRayHits(int count) =>
             _stepperInfo.HitsBuffer.Slice(0, count).Where(x => !x.transform.HasComponent<PlayerTag>());

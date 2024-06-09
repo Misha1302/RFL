@@ -1,22 +1,22 @@
 ﻿namespace RFL.Scripts.GlobalServices.Time
 {
-    using RFL.Scripts.DI;
-    using RFL.Scripts.GlobalServices.GameManager.MonoBeh;
+    using RFL.Scripts.Attributes;using RFL.Scripts.GameLogic.Entities.Plants.Trees;
     using RFL.Scripts.GlobalServices.Pause;
     using RFL.Scripts.GlobalServices.Repository;
     using UnityEngine;
 
-    // ReSharper disable MemberCanBeMadeStatic.Global
-    public class TimeService : MonoBeh, IService, ISavable
+    public class TimeService : InjectableBase, ISavable
     {
         private long _elapsedTicks;
+        [Inject] private PauseService _pauseService;
+        [Inject] private RepositoryService _repositoryService;
         private long _startTotalTicks;
 
         public long TotalTicks => _startTotalTicks + _elapsedTicks;
-        public new double TotalTime => CalcTime(TotalTicks);
+        public double TotalTime => CalcTime(TotalTicks);
         public float ElapsedTime => (float)CalcTime(_elapsedTicks);
-        public new float DeltaTime => Time.deltaTime;
-        public new float FixedDeltaTime => Time.fixedDeltaTime;
+        public float DeltaTime => Time.deltaTime;
+        public float FixedDeltaTime => Time.fixedDeltaTime;
 
         public void Save()
         {
@@ -26,25 +26,25 @@
         public double CalcTime(long ticks) => ticks * FixedDeltaTime;
 
 
-        protected override void OnStart()
+        public void OnStart()
         {
             SetTicks();
-            Dc.Get<RepositoryService>().GameData.totalTicks.OnChanged += SetTicks;
+            _repositoryService.GameData.totalTicks.OnChanged += SetTicks;
         }
 
         private void SetTicks()
         {
-            _startTotalTicks = Dc.Get<RepositoryService>().GameData.totalTicks.Value;
+            _startTotalTicks = _repositoryService.GameData.totalTicks.Value;
         }
 
         private void SaveTime()
         {
-            Dc.Get<RepositoryService>().GameData.totalTicks.Value = TotalTicks;
+            _repositoryService.GameData.totalTicks.Value = TotalTicks;
         }
 
-        protected override void FixedTick()
+        public void FixedTick()
         {
-            if (!Dc.Get<PauseService>().IsPaused)
+            if (!_pauseService.IsPaused)
                 _elapsedTicks++;
         }
     }

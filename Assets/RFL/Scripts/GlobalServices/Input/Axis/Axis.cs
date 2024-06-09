@@ -1,12 +1,16 @@
 ﻿namespace RFL.Scripts.GlobalServices.Input.Axis
 {
     using System;
+    using RFL.Scripts.Attributes;
     using RFL.Scripts.DI;
     using RFL.Scripts.Extensions.Math.Numbers;
+    using RFL.Scripts.GameLogic.Entities.Plants.Trees;
     using RFL.Scripts.GlobalServices.Time;
 
-    public class Axis
+    public class Axis : InjectableBase
     {
+        [Inject] private TimeService _timeService;
+        
         private readonly float _speed;
 
         public Axis(float speed)
@@ -28,7 +32,7 @@
                 _ => Value
             };
 
-            Value = Value.MoveTowards(target, speed * Dc.Get<TimeService>().DeltaTime);
+            Value = Value.MoveTowards(target, speed * _timeService.DeltaTime);
         }
 
         public static implicit operator float(Axis axis) => axis.Value;

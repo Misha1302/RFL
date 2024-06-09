@@ -1,5 +1,6 @@
 ﻿namespace RFL.Scripts.Bootstrap
 {
+    using System;
     using System.Linq;
     using System.Reflection;
     using RFL.Scripts.Attributes;
@@ -11,13 +12,15 @@
         {
             var initializers = Assembly.GetExecutingAssembly()
                 .GetTypes()
-                .SelectMany(type =>
-                    type.GetMethods(BindingFlags.Static | BindingFlags.Public)
-                        .Where(m => m.GetCustomAttributes<InitializerMethodAttribute>().Any())
+                .SelectMany(type => type.GetMethods(BindingFlags.Instance | BindingFlags.Public)
+                    .Where(m => m.GetCustomAttributes<InitializerMethodAttribute>().Any())
                 ).OrderBy(x => x.GetCustomAttribute<InitializerMethodAttribute>().Priority);
 
-
-            initializers.ForAll(x => x.Invoke(null, null));
+            initializers.ForAll(x =>
+            {
+                var instance = Activator.CreateInstance(x.DeclaringType!);
+                x.Invoke(instance, null);
+            });
         }
     }
 }

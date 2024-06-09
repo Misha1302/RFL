@@ -14,7 +14,7 @@
             _types = types;
         }
 
-        public IEnumerator<Type> GetEnumerator() => (IEnumerator<Type>)_types.GetEnumerator();
+        public IEnumerator<Type> GetEnumerator() => _types.Cast<Type>().GetEnumerator();
 
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 

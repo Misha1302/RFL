@@ -1,29 +1,34 @@
 ﻿namespace RFL.Scripts.GlobalServices.Pause
 {
     using RFL.Scripts.Attributes;
-    using RFL.Scripts.DI;
+    using RFL.Scripts.GameLogic.Entities.Plants.Trees;
     using RFL.Scripts.GlobalServices.Input.Services;
     using RFL.Scripts.Helpers;
     using UnityEngine;
 
-    public static class PauseInitializer
+    public class PauseInitializer : InjectableBase
     {
-        [InitializerMethod]
-        public static void Initialize()
-        {
-            Dc.Get<IInputService>().OnPause += Dc.Get<PauseService>().PauseOrUnPause;
+        [Inject] private PauseService _pauseService;
+        [Inject] private IInputService _inputService;
+        [Inject] private CreatorService _creatorService;
+        [Inject] private DestroyerService _destroyerService;
 
-            Dc.Get<PauseService>().OnPausedChanged += isPaused =>
+        [InitializerMethod]
+        public void Initialize()
+        {
+            _inputService.OnPause += _pauseService.PauseOrUnPause;
+
+            _pauseService.OnPausedChanged += isPaused =>
             {
                 if (isPaused)
                 {
                     var settingsCanvas = Resources.Load<SettingsCanvasTag>("UI/SettingsCanvas");
-                    Dc.Get<CreatorService>().Instantiate(settingsCanvas);
+                    _creatorService.Instantiate(settingsCanvas);
                 }
                 else
                 {
                     var canvas = Object.FindAnyObjectByType<SettingsCanvasTag>(FindObjectsInactive.Include);
-                    Dc.Get<DestroyerService>().Destroy(canvas.transform);
+                    _destroyerService.Destroy(canvas.transform);
                 }
             };
         }

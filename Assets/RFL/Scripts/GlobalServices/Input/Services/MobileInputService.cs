@@ -25,7 +25,7 @@
         {
             base.OnStart();
             var mobileInputCanvas = Resources.Load<MobileInputCanvas>("UI/CanvasMobileController");
-            _inputCanvas = Dc.Get<CreatorService>().Instantiate(mobileInputCanvas);
+            _inputCanvas = CreatorService.Instantiate(mobileInputCanvas);
         }
     }
 }

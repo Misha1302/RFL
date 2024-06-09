@@ -9,9 +9,12 @@
     [RequireComponent(typeof(Rigidbody2D))]
     public class PlayerHorizontalMovement : MonoBeh
     {
+        [Inject] private PlayerTransform _playerTransform;
+        [Inject] private IInputService _inputService;
+        
         [SerializeField] private float speed = 5f;
 
-        [InjectMethod]
+        [Inject]
         public void Init(IInputService inputService)
         {
             
@@ -19,7 +22,7 @@
 
         protected override void Tick()
         {
-            Dc.Get<Player>().Get<PlayerTransform>().SetVelocityX(Dc.Get<IInputService>().Input.X * speed);
+            _playerTransform.SetVelocityX(_inputService.Input.X * speed);
         }
     }
 }

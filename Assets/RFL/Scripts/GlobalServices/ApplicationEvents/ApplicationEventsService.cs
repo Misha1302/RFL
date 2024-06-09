@@ -4,7 +4,7 @@
     using RFL.Scripts.GlobalServices.GameManager.MonoBeh;
     using UnityEngine;
 
-    public class ApplicationEventsService : MonoBeh, IService
+    public class ApplicationEventsService : MonoBehaviour, IService
     {
         public readonly ExtendedEvent OnAppQuitting = new();
         public readonly ExtendedEvent OnAppUnFocused = new();

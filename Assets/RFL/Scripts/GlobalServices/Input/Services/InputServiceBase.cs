@@ -1,7 +1,7 @@
 ﻿namespace RFL.Scripts.GlobalServices.Input.Services
 {
     using System;
-    using RFL.Scripts.DI;
+    using RFL.Scripts.Attributes;
     using RFL.Scripts.GlobalServices.GameManager.MonoBeh;
     using RFL.Scripts.GlobalServices.Input.Axis;
     using RFL.Scripts.GlobalServices.Pause;
@@ -13,6 +13,9 @@
 
     public abstract class InputServiceBase : MonoBeh, IInputService
     {
+        [Inject] protected CreatorService CreatorService;
+        [Inject] protected RepositoryService RepositoryService;
+
         public Axis2D Input { get; private set; }
         public bool Jump { get; protected set; }
         public Action OnPause { get; set; }
@@ -20,7 +23,7 @@
 
         protected override void OnCreated()
         {
-            Input = new Axis2D(Dc.Get<RepositoryService>().GameData.inputSpeed.Value);
+            Input = new Axis2D(RepositoryService.GameData.inputSpeed.Value);
         }
 
         protected override void OnStart()
@@ -39,7 +42,7 @@
         private void SubscribeOnButtonPause()
         {
             var pauseCanvas = Resources.Load("UI/PauseCanvas");
-            var pauseCanvasInstance = Dc.Get<CreatorService>().Instantiate(pauseCanvas);
+            var pauseCanvasInstance = CreatorService.Instantiate(pauseCanvas);
             var button = pauseCanvasInstance.GetComponentInChildren<PauseButtonTag>().GetComponent<Button>();
             button.onClick.AddListener(OnPause.Invoke);
         }

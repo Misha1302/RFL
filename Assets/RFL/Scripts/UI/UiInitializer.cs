@@ -1,18 +1,20 @@
 ﻿namespace RFL.Scripts.UI
 {
     using RFL.Scripts.Attributes;
-    using RFL.Scripts.DI;
+    using RFL.Scripts.GameLogic.Entities.Plants.Trees;
     using RFL.Scripts.GlobalServices.Fps;
     using RFL.Scripts.Helpers;
     using UnityEngine;
     using UnityEngine.EventSystems;
 
-    public static class UiInitializer
+    public class UiInitializer : InjectableBase
     {
+        [Inject] private CreatorService _creatorService;
+
         [InitializerMethod]
-        public static void Initialize()
+        public void Initialize()
         {
-            Dc.Get<CreatorService>().Instantiate(Resources.Load<EventSystem>("UI/EventSystem")).gameObject
+            _creatorService.Instantiate(Resources.Load<EventSystem>("UI/EventSystem")).gameObject
                 .AddComponent<InterSceneTag>();
         }
     }

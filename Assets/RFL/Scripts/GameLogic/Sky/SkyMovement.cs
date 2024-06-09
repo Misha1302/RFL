@@ -1,7 +1,6 @@
 namespace RFL.Scripts.GameLogic.Sky
 {
     using RFL.Scripts.Attributes;
-    using RFL.Scripts.DI;
     using RFL.Scripts.Extensions.Math.Vectors;
     using RFL.Scripts.GlobalServices.GameManager.MonoBeh;
     using RFL.Scripts.Helpers;
@@ -13,6 +12,8 @@ namespace RFL.Scripts.GameLogic.Sky
         private int skiesCount;
 
         [SerializeField] private float speed = -1;
+
+        [Inject] private CreatorService _creatorService;
 
         private Transform _sky;
         private float _width;
@@ -53,7 +54,7 @@ namespace RFL.Scripts.GameLogic.Sky
 
         private void InstantiateSky(Transform obj, float xPos)
         {
-            var instance = Dc.Get<CreatorService>().Instantiate(obj);
+            var instance = _creatorService.Instantiate(obj);
             instance.SetParent(transform);
             instance.localPosition = new Vector3(xPos, 0, 10);
         }

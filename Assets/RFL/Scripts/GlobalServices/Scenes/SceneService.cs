@@ -1,15 +1,18 @@
 ﻿namespace RFL.Scripts.GlobalServices.Scenes
 {
     using System.Linq;
-    using RFL.Scripts.DI;
+    using RFL.Scripts.Attributes;
     using RFL.Scripts.Extensions;
+    using RFL.Scripts.GameLogic.Entities.Plants.Trees;
     using RFL.Scripts.Helpers;
     using UnityEngine;
     using UnityEngine.SceneManagement;
     using Object = UnityEngine.Object;
 
-    public class SceneService : IService
+    public class SceneService : InjectableBase, IService
     {
+        [Inject] private DestroyerService _destroyerService;
+
         private Transform[] Objects => Object.FindObjectsOfType<Transform>(true);
 
         public void Init()
@@ -24,7 +27,7 @@
             Objects.Select(x => x.root).Distinct().ForAll(x =>
             {
                 if (!x.HasComponent<IInterScene>())
-                    Dc.Get<DestroyerService>().Destroy(x, saveData);
+                    _destroyerService.Destroy(x, saveData);
             });
         }
 

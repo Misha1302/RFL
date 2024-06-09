@@ -1,6 +1,6 @@
 ﻿namespace RFL.Scripts.GlobalServices.Fps
 {
-    using RFL.Scripts.DI;
+    using RFL.Scripts.Attributes;
     using RFL.Scripts.GlobalServices.GameManager.MonoBeh;
     using RFL.Scripts.GlobalServices.Repository;
     using TMPro;
@@ -10,6 +10,7 @@
     public class FpsText : MonoBeh
     {
         [SerializeField] private string format = "{0}";
+        [Inject] private RepositoryService _repositoryService;
 
         private void OnValidate()
         {
@@ -18,17 +19,17 @@
 
         protected override void OnStart()
         {
-            Dc.Get<RepositoryService>().GameData.targetFps.OnChanged += SetText;
+            _repositoryService.GameData.targetFps.OnChanged += SetText;
         }
 
         public override void SelfDestroy()
         {
-            Dc.Get<RepositoryService>().GameData.targetFps.OnChanged -= SetText;
+            _repositoryService.GameData.targetFps.OnChanged -= SetText;
         }
 
         private void SetText()
         {
-            var targetFps = Dc.Get<RepositoryService>().GameData.targetFps.Value;
+            var targetFps = _repositoryService.GameData.targetFps.Value;
             GetComponent<TMP_Text>().text = string.Format(format, targetFps);
         }
     }

@@ -11,7 +11,7 @@
     {
         private RepositoryService _repositoryService;
 
-        [InjectMethod]
+        [Inject]
         public void Init(RepositoryService repositoryService)
         {
             _repositoryService = repositoryService;

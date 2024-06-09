@@ -12,26 +12,26 @@
     using RFL.Scripts.GlobalServices.Time;
     using RFL.Scripts.Helpers;
 
-    public static class DiInitializer
+    public class DiInitializer
     {
         [InitializerMethod(-1000)]
-        public static void Initialize()
+        public void Initialize()
         {
-            DependencyInjector.CreateSingleton(Dc.Instance);
-
-            Dc.Instance.AddSingle(new CreatorService());
+            var creator = new CreatorService();
+            Dc.Instance.AddSingle(creator);
             Dc.Instance.AddSingle(new DestroyerService());
+            Dc.Instance.AddSingle(creator.Create<ApplicationEventsService>());
             Dc.Instance.AddSingle(new PauseService());
             Dc.Instance.AddSingle(new NextMomentExecutorService());
-            Dc.Instance.AddSingle(Dc.Get<CreatorService>().Create<GameService>());
-            Dc.Instance.AddSingle(Dc.Get<CreatorService>().Create<ApplicationEventsService>());
+            Dc.Instance.AddSingle(new RepositoryService());
+            Dc.Instance.AddSingle(new TimeService());
+            Dc.Instance.AddSingle(creator.Create<GameService>());
+            Dc.Instance.AddSingle(creator.Create<TimeManagerService>());
 
             Dc.Instance.AddSingle(new SceneService());
-            Dc.Instance.AddSingle(new RepositoryService());
-            Dc.Instance.AddSingle(InputMaker.MakeInputService());
-            Dc.Instance.AddSingle(Dc.Get<CreatorService>().Create<TimeService>());
-            Dc.Instance.AddSingle(Dc.Get<CreatorService>().Create<CoroutinesService>());
-            Dc.Instance.AddSingle(Dc.Get<CreatorService>().Create<FpsCounterService>());
+            Dc.Instance.AddSingle(InputMaker.MakeInputService(creator));
+            Dc.Instance.AddSingle(creator.Create<CoroutinesService>());
+            Dc.Instance.AddSingle(creator.Create<FpsCounterService>());
             Dc.Instance.AddSingle(new FpsSetterService());
         }
     }

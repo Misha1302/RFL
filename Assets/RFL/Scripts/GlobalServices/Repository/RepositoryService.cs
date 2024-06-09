@@ -1,19 +1,22 @@
 ﻿namespace RFL.Scripts.GlobalServices.Repository
 {
     using System;
-    using RFL.Scripts.DI;
+    using RFL.Scripts.Attributes;
     using RFL.Scripts.Extensions;
+    using RFL.Scripts.GameLogic.Entities.Plants.Trees;
     using RFL.Scripts.GlobalServices.ApplicationEvents;
     using RFL.Scripts.GlobalServices.GameManager.MonoBeh;
     using UnityEngine;
     using Object = UnityEngine.Object;
 
-    public class RepositoryService : IService
+    public class RepositoryService : InjectableBase, IService
     {
         private const string Key = "GameDataKey";
         private bool _isSaving;
 
         private Lazy<GameData> _gameData;
+
+        [Inject] private ApplicationEventsService _applicationEventsService;
 
         public RepositoryService()
         {
@@ -62,8 +65,8 @@
         {
             if (Application.isPlaying)
             {
-                Dc.Get<ApplicationEventsService>().OnAppUnFocused.Add(SaveGameData);
-                Dc.Get<ApplicationEventsService>().OnAppQuitting.Add(SaveGameData);
+                _applicationEventsService.OnAppUnFocused.Add(SaveGameData);
+                _applicationEventsService.OnAppQuitting.Add(SaveGameData);
             }
             else
             {

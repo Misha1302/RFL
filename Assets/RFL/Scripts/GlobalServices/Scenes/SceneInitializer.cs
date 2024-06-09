@@ -1,14 +1,16 @@
 ﻿namespace RFL.Scripts.GlobalServices.Scenes
 {
     using RFL.Scripts.Attributes;
-    using RFL.Scripts.DI;
+    using RFL.Scripts.GameLogic.Entities.Plants.Trees;
 
-    public static class SceneInitializer
+    public class SceneInitializer : InjectableBase
     {
+        [Inject] private SceneService _sceneService;
+
         [InitializerMethod(-100)]
-        public static void Initialize()
+        public void Initialize()
         {
-            Dc.Get<SceneService>().Init();
+            _sceneService.Init();
         }
     }
 }

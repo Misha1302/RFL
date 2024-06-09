@@ -1,21 +1,24 @@
 ﻿namespace RFL.Scripts.GlobalServices.Fps
 {
-    using RFL.Scripts.DI;
+    using RFL.Scripts.Attributes;
+    using RFL.Scripts.GameLogic.Entities.Plants.Trees;
     using RFL.Scripts.GlobalServices.Repository;
     using UnityEngine;
 
-    public class FpsSetterService : IService
+    public class FpsSetterService : InjectableBase, IService
     {
+        [Inject] private RepositoryService _repositoryService;
+
         public FpsSetterService()
         {
             SetTargetFps();
-            Dc.Get<RepositoryService>().GameData.targetFps.OnChanged += SetTargetFps;
+            _repositoryService.GameData.targetFps.OnChanged += SetTargetFps;
         }
 
         private void SetTargetFps()
         {
             QualitySettings.vSyncCount = 0;
-            Application.targetFrameRate = Dc.Get<RepositoryService>().GameData.targetFps.Value;
+            Application.targetFrameRate = _repositoryService.GameData.targetFps.Value;
         }
     }
 }

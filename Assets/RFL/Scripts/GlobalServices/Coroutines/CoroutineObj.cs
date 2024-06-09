@@ -3,12 +3,15 @@
     using System;
     using System.Collections.Generic;
     using JetBrains.Annotations;
-    using RFL.Scripts.DI;
+    using RFL.Scripts.Attributes;
+    using RFL.Scripts.GameLogic.Entities.Plants.Trees;
     using RFL.Scripts.GlobalServices.Coroutines.Waitings;
     using RFL.Scripts.GlobalServices.Time;
 
-    public class CoroutineObj
+    public class CoroutineObj : InjectableBase
     {
+        [Inject] private TimeService _timeService;
+
         private readonly IEnumerator<ICoroutineWaiting> _enumerator;
         [CanBeNull] private readonly Action _whenCoroutineEnd;
 
@@ -45,7 +48,7 @@
             if (_enumerator.Current is WaitNextFrame) Next();
 
             if (_enumerator.Current is WaitSeconds s)
-                if (Dc.Get<TimeService>().ElapsedTime >= s.EndTime)
+                if (_timeService.ElapsedTime >= s.EndTime)
                     Next();
         }
 

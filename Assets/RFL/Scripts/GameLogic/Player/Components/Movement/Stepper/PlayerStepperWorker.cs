@@ -1,14 +1,19 @@
 ﻿namespace RFL.Scripts.GameLogic.Player.Components.Movement.Stepper
 {
-    using RFL.Scripts.DI;
+    using RFL.Scripts.Attributes;
     using RFL.Scripts.Extensions;
     using RFL.Scripts.Extensions.Math.Numbers;
     using RFL.Scripts.Extensions.Math.Vectors;
+    using RFL.Scripts.GameLogic.Entities.Plants.Trees;
     using RFL.Scripts.GlobalServices.Input.Services;
     using UnityEngine;
 
-    public class PlayerStepperWorker
+    public class PlayerStepperWorker : InjectableBase
     {
+        [Inject] private PlayerJumper _playerJumper;
+        [Inject] private PlayerTransform _playerTransform;
+        [Inject] private IInputService _inputService;
+
         private readonly PlayerStepperHelper _playerStepperHelper;
         private readonly StepperInfo _stepperInfo;
 
@@ -30,7 +35,7 @@
             MovePlayer(y);
         }
 
-        private static bool CanStep() => Dc.Get<Player>().Get<PlayerJumper>().GroundChecker.IsGroundedWithOutCoyote;
+        private bool CanStep() => _playerJumper.GroundChecker.IsGroundedWithOutCoyote;
 
         private void Raycasts(out StepperRaycastInfo castLeft, out StepperRaycastInfo castRight)
         {
@@ -40,11 +45,10 @@
 
         private void MovePlayer(float y)
         {
-            var finishX = Dc.Get<Player>().Get<PlayerTransform>().Pos.x +
-                          Dc.Get<IInputService>().Input.X.Sign() * _stepperInfo.XOffset;
+            var finishX = _playerTransform.Pos.x + _inputService.Input.X.Sign() * _stepperInfo.XOffset;
             var finishY = _playerStepperHelper.CalcY(y);
 
-            Dc.Get<Player>().Get<PlayerTransform>().Pos = new Vector3(finishX, finishY);
+            _playerTransform.Pos = new Vector3(finishX, finishY);
         }
 
         private static bool TryGetY(StepperRaycastInfo castLeft, StepperRaycastInfo castRight, out float y)

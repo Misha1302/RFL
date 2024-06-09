@@ -1,20 +1,26 @@
 ﻿namespace RFL.Scripts.GlobalServices.GameManager.MonoBeh
 {
+    using RFL.Scripts.Attributes;
     using RFL.Scripts.DI;
+    using RFL.Scripts.GlobalServices.Time;
+    using UnityEngine;
 
     public abstract class MonoBeh : ComponentsKeeper
     {
         public bool isEnabled = true;
+        [Inject] private GameService _gameService;
         protected CollisionDetector CollisionDetector;
 
 
         protected void Awake()
         {
+            DependencyInjector.Instance.Inject(this);
+
             if (isEnabled)
-                Dc.Get<GameService>().AddMonoBeh(this);
+                _gameService.AddMonoBeh(this);
             if (!transform.TryGetComponent(out CollisionDetector))
                 CollisionDetector = gameObject.AddComponent<CollisionDetector>();
-            DependencyInjector.Instance.Inject(this);
+
             OnCreated();
         }
 
@@ -58,7 +64,7 @@
         public virtual void SelfDestroy()
         {
             isEnabled = false;
-            Dc.Get<GameService>().RemoveMonoBeh(this);
+            _gameService?.RemoveMonoBeh(this);
         }
     }
 }

@@ -1,23 +1,27 @@
 ﻿namespace RFL.Scripts.GlobalServices.Fps
 {
     using RFL.Scripts.Attributes;
-    using RFL.Scripts.DI;
+    using RFL.Scripts.GameLogic.Entities.Plants.Trees;
     using RFL.Scripts.GlobalServices.Repository;
     using RFL.Scripts.Helpers;
     using UnityEngine;
 
-    public static class FpsCanvasInitializer
+    public class FpsCanvasInitializer : InjectableBase
     {
+        [Inject] private RepositoryService _repositoryService;
+        [Inject] private CreatorService _creatorService;
+
+
         [InitializerMethod]
-        public static void Initialize()
+        public void Initialize()
         {
-            if (Dc.Get<RepositoryService>().GameData.needToShowFps.Value)
+            if (_repositoryService.GameData.needToShowFps.Value)
                 CreateFpsCanvas();
         }
 
-        private static void CreateFpsCanvas()
+        private void CreateFpsCanvas()
         {
-            Dc.Get<CreatorService>().Instantiate(Resources.Load("UI/FpsCanvas"));
+            _creatorService.Instantiate(Resources.Load("UI/FpsCanvas"));
         }
     }
 }
