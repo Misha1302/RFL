@@ -6,7 +6,7 @@
     using UnityEngine;
 
     [RequireComponent(typeof(Rigidbody2D))]
-    public class PlayerJumper : MonoBeh
+    public class PlayerJumper : MonoBeh, Player.IPlayerScope
     {
         [SerializeField] private AnimationCurve jumpVelocityCurve;
         [SerializeField] private float jumpTime = 0.75f;

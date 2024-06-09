@@ -5,7 +5,7 @@
     using UnityEngine;
 
     [RequireComponent(typeof(SpriteRenderer))]
-    public class PlayerImageFlipper : MonoBeh
+    public class PlayerImageFlipper : MonoBeh, Player.IPlayerScope
     {
         [Inject] private PlayerTransform _playerTransform;
 

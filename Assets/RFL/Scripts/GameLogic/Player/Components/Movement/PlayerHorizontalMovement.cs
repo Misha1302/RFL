@@ -6,7 +6,7 @@
     using UnityEngine;
 
     [RequireComponent(typeof(Rigidbody2D))]
-    public class PlayerHorizontalMovement : MonoBeh
+    public class PlayerHorizontalMovement : MonoBeh, Player.IPlayerScope
     {
         [SerializeField] private float speed = 5f;
         [Inject] private IInputService _inputService;

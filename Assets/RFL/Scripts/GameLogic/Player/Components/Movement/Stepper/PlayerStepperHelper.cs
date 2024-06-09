@@ -9,7 +9,7 @@
     using RFL.Scripts.GameLogic.Tags;
     using UnityEngine;
 
-    public class PlayerStepperHelper : InjectableBase
+    public class PlayerStepperHelper : InjectableBase, Player.IPlayerScope
     {
         [Inject] private PlayerStepper _playerStepper;
 

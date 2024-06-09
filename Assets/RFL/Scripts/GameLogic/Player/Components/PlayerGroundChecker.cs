@@ -8,7 +8,7 @@
     using RFL.Scripts.Helpers;
     using UnityEngine;
 
-    public class PlayerGroundChecker : MonoBeh
+    public class PlayerGroundChecker : MonoBeh, Player.IPlayerScope
     {
         [SerializeField] private float coyoteTime = 0.2f;
 

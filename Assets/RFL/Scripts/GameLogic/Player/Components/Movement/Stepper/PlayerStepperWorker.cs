@@ -8,7 +8,7 @@
     using RFL.Scripts.GlobalServices.Input.Services;
     using UnityEngine;
 
-    public class PlayerStepperWorker : InjectableBase
+    public class PlayerStepperWorker : InjectableBase, Player.IPlayerScope
     {
         [Inject] private PlayerJumper _playerJumper;
         [Inject] private PlayerTransform _playerTransform;

@@ -20,15 +20,18 @@
         public Player()
         {
             var container = GameSingletons.DependencyInjector.DependencyContainer;
-            container.AddLazySingle(GetComponent<Player>);
-            container.AddLazySingle(GetComponent<PlayerImageFlipper>);
-            container.AddLazySingle(GetComponent<PlayerJumper>);
-            container.AddLazySingle(GetComponent<PlayerPauseHandler>);
-            container.AddLazySingle(GetComponent<PlayerPhysicMaterial>);
-            container.AddLazySingle(GetComponent<PlayerStepper>);
-            container.AddLazySingle(GetComponent<PlayerHorizontalMovement>);
-            container.AddLazySingle(GetComponent<PlayerTransform>);
-            container.AddLazySingle(GetComponent<PlayerDataSaver>);
+            container.AddSingle(this);
+            container.AddLazySingleScoped<IPlayerScope, PlayerTransform>(GetComponent<PlayerTransform>);
+            container.AddLazySingleScoped<IPlayerScope, PlayerImageFlipper>(GetComponent<PlayerImageFlipper>);
+            container.AddLazySingleScoped<IPlayerScope, PlayerJumper>(GetComponent<PlayerJumper>);
+            container.AddLazySingleScoped<IPlayerScope, PlayerPauseHandler>(GetComponent<PlayerPauseHandler>);
+            container.AddLazySingleScoped<IPlayerScope, PlayerPhysicMaterial>(GetComponent<PlayerPhysicMaterial>);
+            container.AddLazySingleScoped<IPlayerScope, PlayerStepper>(GetComponent<PlayerStepper>);
+            container.AddLazySingleScoped<IPlayerScope, PlayerHorizontalMovement>(
+                GetComponent<PlayerHorizontalMovement>);
+            container.AddLazySingleScoped<IPlayerScope, PlayerDataSaver>(GetComponent<PlayerDataSaver>);
         }
+
+        public interface IPlayerScope { }
     }
 }

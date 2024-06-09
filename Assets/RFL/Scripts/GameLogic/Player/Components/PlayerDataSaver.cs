@@ -4,7 +4,7 @@
     using RFL.Scripts.GlobalServices.GameManager.MonoBeh;
     using RFL.Scripts.GlobalServices.Repository;
 
-    public class PlayerDataSaver : MonoBeh, ISavable
+    public class PlayerDataSaver : MonoBeh, ISavable, Player.IPlayerScope
     {
         [Inject] private PlayerTransform _playerTransform;
         [Inject] private RepositoryService _repositoryService;

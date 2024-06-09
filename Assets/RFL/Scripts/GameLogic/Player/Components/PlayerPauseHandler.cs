@@ -7,7 +7,7 @@
     using UnityEngine;
 
     [RequireComponent(typeof(Rigidbody2D))]
-    public class PlayerPauseHandler : MonoBeh
+    public class PlayerPauseHandler : MonoBeh, Player.IPlayerScope
     {
         [Inject] private PauseService _pauseService;
         [Inject] private PlayerTransform _playerTransform;

@@ -5,7 +5,7 @@
     using UnityEngine;
 
     [RequireComponent(typeof(Rigidbody2D))]
-    public class PlayerTransform : MonoBeh
+    public class PlayerTransform : MonoBeh, Player.IPlayerScope
     {
         private Rigidbody2D _rb2D;
 

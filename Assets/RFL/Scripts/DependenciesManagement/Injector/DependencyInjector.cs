@@ -7,6 +7,7 @@
     using RFL.Scripts.Attributes;
     using RFL.Scripts.DependenciesManagement.Container;
     using RFL.Scripts.Extensions;
+    using RFL.Scripts.Helpers;
 
     public class DependencyInjector
     {
@@ -34,8 +35,9 @@
             if (!fieldInfos.Any())
                 return;
 
+            var scopeTypes = GetScopeTypes(component);
             fieldInfos.ForAll(x =>
-                x.SetValue(component, DependencyContainer.GetSingle(x.FieldType))
+                x.SetValue(component, GetFromContainer(scopeTypes, x.FieldType))
             );
         }
 
@@ -63,10 +65,24 @@
             if (initMethod == null)
                 return;
 
-            var parameters = new List<object>();
-            initMethod.GetParameters().ForAll(x => parameters.Add(DependencyContainer.GetSingle(x.ParameterType)));
+            var scopeTypes = GetScopeTypes(component);
+            var parameters = initMethod.GetParameters()
+                .Select(x => GetFromContainer(scopeTypes, x.ParameterType))
+                .ToList();
 
             initMethod.Invoke(component, parameters.ToArray());
+        }
+
+        private ScopeType[] GetScopeTypes(object component)
+        {
+            return component.GetType().GetInterfaces().Select(t => new ScopeType(t)).ToArray();
+        }
+
+        private object GetFromContainer(ScopeType[] scopeTypes, Type type)
+        {
+            if (!DependencyContainer.TryGetSingleOfScopes(scopeTypes, type, out var single))
+                Thrower.InvalidOpEx($"Cannot find {type.Name} in container");
+            return single;
         }
     }
 }

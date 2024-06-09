@@ -3,26 +3,50 @@
     using System;
     using System.Collections.Generic;
     using System.Diagnostics.Contracts;
-    using RFL.Scripts.Helpers;
+    using System.Linq;
+    using UnityEngine;
 
     public class RawDependencyContainer
     {
-        private readonly Dictionary<Type, Lazy<Any>> _singletons = new();
+        private readonly Dictionary<ScopeType, Dictionary<Type, Lazy<Any>>> _scopes = new();
 
-        public void AddLazySingle<TSingleton>(Func<TSingleton> func)
+
+        public void AddLazySingleScoped<TScope, TSingleton>(Func<TSingleton> func)
         {
-            _singletons[typeof(TSingleton)] = new Lazy<Any>(() => new Any(func()));
+            var typesInScope = GetScope(new ScopeType(typeof(TScope)));
+            typesInScope[typeof(TSingleton)] = new Lazy<Any>(() => new Any(func()));
         }
 
-        [Pure] public object GetSingle(Type type)
+        [Pure] public bool TryGetSingleOfScopes(ScopeType[] scopeTypes, Type type, out object single)
         {
-            if (!_singletons.TryGetValue(type, out var lazy))
-                Thrower.InvalidOpEx($"Could not found {type}");
+            single = null;
 
-            var value = lazy.Value.Get();
-            if (value == null)
-                Thrower.InvalidOpEx($"Value of {type} was null");
-            return value;
+            if (TryGetSingleOfScope(typeof(IAnyScope), type, out single))
+                return true;
+
+            foreach (var scopeType in scopeTypes)
+                if (TryGetSingleOfScope(scopeType, type, out single))
+                    return true;
+
+            return false;
+        }
+
+        private bool TryGetSingleOfScope(ScopeType scopeType, Type type, out object single)
+        {
+            single = null;
+
+            var scope = GetScope(scopeType);
+            if (!scope.TryGetValue(type, out var lazy))
+                return false;
+
+            single = lazy.Value.Get();
+            return single != null;
+        }
+
+        [Pure] private Dictionary<Type, Lazy<Any>> GetScope(ScopeType scopeType)
+        {
+            _scopes.TryAdd(scopeType, null);
+            return _scopes[scopeType] ??= new Dictionary<Type, Lazy<Any>>();
         }
     }
 }
