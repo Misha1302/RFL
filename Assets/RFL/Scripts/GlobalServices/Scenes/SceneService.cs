@@ -2,8 +2,8 @@
 {
     using System.Linq;
     using RFL.Scripts.Attributes;
+    using RFL.Scripts.DependenciesManagement.Injector;
     using RFL.Scripts.Extensions;
-    using RFL.Scripts.GameLogic.Entities.Plants.Trees;
     using RFL.Scripts.Helpers;
     using UnityEngine;
     using UnityEngine.SceneManagement;

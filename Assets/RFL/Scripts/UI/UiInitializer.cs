@@ -1,7 +1,7 @@
 ﻿namespace RFL.Scripts.UI
 {
     using RFL.Scripts.Attributes;
-    using RFL.Scripts.GameLogic.Entities.Plants.Trees;
+    using RFL.Scripts.DependenciesManagement.Injector;
     using RFL.Scripts.GlobalServices.Fps;
     using RFL.Scripts.Helpers;
     using UnityEngine;

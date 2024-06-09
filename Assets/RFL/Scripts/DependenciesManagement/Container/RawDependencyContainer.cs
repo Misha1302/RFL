@@ -1,15 +1,15 @@
-﻿namespace RFL.Scripts.DI
+﻿namespace RFL.Scripts.DependenciesManagement.Container
 {
     using System;
     using System.Collections.Generic;
     using System.Diagnostics.Contracts;
     using RFL.Scripts.Helpers;
 
-    public class RawDc
+    public class RawDependencyContainer
     {
         private readonly Dictionary<Type, Lazy<Any>> _singletons = new();
 
-        public void AddLazySingleScoped<TSingleton>(Func<TSingleton> func)
+        public void AddLazySingle<TSingleton>(Func<TSingleton> func)
         {
             _singletons[typeof(TSingleton)] = new Lazy<Any>(() => new Any(func()));
         }

@@ -1,7 +1,7 @@
 ﻿namespace RFL.Scripts.GameLogic.Entities.Plants.Trees
 {
     using RFL.Scripts.Attributes;
-    using RFL.Scripts.DI;
+    using RFL.Scripts.DependenciesManagement.Container;
     using RFL.Scripts.Extensions;
     using RFL.Scripts.Extensions.Math.Vectors;
     using RFL.Scripts.GlobalServices.GameManager.MonoBeh;
@@ -21,12 +21,14 @@
         private TreeData _treeData;
         private TreeTimeManager _treeTimeManager;
 
+        private long TicksCountWhenTreeWasGrown => _treeData?.ticksCountWhenTreeWasGrown ?? 0;
+
         public SerializableGuid Id { get; private set; }
 
         public void Save()
         {
             _repositoryService.GameData.coreScene.Value.data[Id] =
-                new Any(new TreeData(_treeData?.ticksCountWhenTreeWasGrown ?? 0, transform.position, Id));
+                new Any(new TreeData(TicksCountWhenTreeWasGrown, transform.position, Id));
         }
 
         public void Init(TreeData treeData)

@@ -2,9 +2,9 @@
 {
     using System.Collections.Generic;
     using RFL.Scripts.Attributes;
-    using RFL.Scripts.DI;
     using RFL.Scripts.Extensions;
     using RFL.Scripts.GlobalServices.Pause;
+    using RFL.Scripts.Singletons;
     using UnityEngine;
 
     public class GameService : MonoBehaviour, IService
@@ -19,7 +19,7 @@
 
         private void Awake()
         {
-            DependencyInjector.Instance.Inject(this);
+            GameSingletons.DependencyInjector.Inject(this);
             _pauseService.OnPausedChanged += OnPausedChanged;
         }
 

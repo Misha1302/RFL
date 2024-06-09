@@ -9,13 +9,7 @@
     [RequireComponent(typeof(Button))]
     public class DropDataButton : MonoBeh
     {
-        private RepositoryService _repositoryService;
-
-        [Inject]
-        public void Init(RepositoryService repositoryService)
-        {
-            _repositoryService = repositoryService;
-        }
+        [Inject] private RepositoryService _repositoryService;
 
         protected override void OnStart()
         {

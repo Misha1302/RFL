@@ -1,9 +1,7 @@
 ﻿namespace RFL.Scripts.GlobalServices.GameManager.MonoBeh
 {
     using RFL.Scripts.Attributes;
-    using RFL.Scripts.DI;
-    using RFL.Scripts.GlobalServices.Time;
-    using UnityEngine;
+    using RFL.Scripts.Singletons;
 
     public abstract class MonoBeh : ComponentsKeeper
     {
@@ -14,7 +12,7 @@
 
         protected void Awake()
         {
-            DependencyInjector.Instance.Inject(this);
+            GameSingletons.DependencyInjector.Inject(this);
 
             if (isEnabled)
                 _gameService.AddMonoBeh(this);

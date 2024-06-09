@@ -1,4 +1,4 @@
-﻿namespace RFL.Scripts.DI
+﻿namespace RFL.Scripts.DependenciesManagement.Container
 {
     using System;
     using UnityEngine;

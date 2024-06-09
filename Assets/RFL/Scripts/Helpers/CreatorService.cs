@@ -2,7 +2,7 @@
 {
     using System;
     using System.Linq;
-    using RFL.Scripts.DI;
+    using RFL.Scripts.DependenciesManagement.Container;
     using UnityEngine;
     using Component = UnityEngine.Component;
     using Object = UnityEngine.Object;
@@ -11,7 +11,7 @@
     {
         private const string Prefix = "__";
 
-        private readonly Dc _container;
+        private readonly DependencyContainer _container;
 
         public T Instantiate<T>(T prefab) where T : Object => Object.Instantiate(prefab);
 

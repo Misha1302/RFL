@@ -1,10 +1,10 @@
 ﻿namespace RFL.Scripts.GameLogic.Player.Components.Movement.Stepper
 {
     using RFL.Scripts.Attributes;
+    using RFL.Scripts.DependenciesManagement.Injector;
     using RFL.Scripts.Extensions;
     using RFL.Scripts.Extensions.Math.Numbers;
     using RFL.Scripts.Extensions.Math.Vectors;
-    using RFL.Scripts.GameLogic.Entities.Plants.Trees;
     using RFL.Scripts.GlobalServices.Input.Services;
     using UnityEngine;
 

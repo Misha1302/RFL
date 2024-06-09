@@ -1,7 +1,7 @@
 ﻿namespace RFL.Scripts.GlobalServices.Coroutines.Waitings
 {
     using RFL.Scripts.Attributes;
-    using RFL.Scripts.GameLogic.Entities.Plants.Trees;
+    using RFL.Scripts.DependenciesManagement.Injector;
     using RFL.Scripts.GlobalServices.Time;
 
     public class WaitSeconds : InjectableBase, ICoroutineWaiting

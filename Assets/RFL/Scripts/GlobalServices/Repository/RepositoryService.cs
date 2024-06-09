@@ -2,8 +2,8 @@
 {
     using System;
     using RFL.Scripts.Attributes;
+    using RFL.Scripts.DependenciesManagement.Injector;
     using RFL.Scripts.Extensions;
-    using RFL.Scripts.GameLogic.Entities.Plants.Trees;
     using RFL.Scripts.GlobalServices.ApplicationEvents;
     using RFL.Scripts.GlobalServices.GameManager.MonoBeh;
     using UnityEngine;
@@ -14,7 +14,7 @@
         private const string Key = "GameDataKey";
         private bool _isSaving;
 
-        private Lazy<GameData> _gameData;
+        private readonly Lazy<GameData> _gameData;
 
         [Inject] private ApplicationEventsService _applicationEventsService;
 
@@ -23,11 +23,7 @@
             _gameData = new Lazy<GameData>(LoadGameData);
         }
 
-        public GameData GameData
-        {
-            get => _gameData.Value;
-            private set => _gameData = new Lazy<GameData>(value);
-        }
+        public GameData GameData => _gameData.Value;
 
         private GameData LoadGameData()
         {

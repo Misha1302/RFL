@@ -11,7 +11,7 @@
         [SerializeField] private bool changeToPause;
         [SerializeField] private bool changeToUnPause;
 
-        [InjectAttribute] private PauseService _pauseService;
+        [Inject] private PauseService _pauseService;
 
         private void OnValidate()
         {

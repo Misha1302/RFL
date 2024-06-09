@@ -2,7 +2,7 @@
 {
     using System;
     using System.Diagnostics.CodeAnalysis;
-    using RFL.Scripts.DI;
+    using RFL.Scripts.DependenciesManagement.Container;
 
     public static class Thrower
     {

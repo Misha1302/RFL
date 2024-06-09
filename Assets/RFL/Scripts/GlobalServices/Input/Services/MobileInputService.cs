@@ -1,8 +1,6 @@
 ﻿namespace RFL.Scripts.GlobalServices.Input.Services
 {
-    using RFL.Scripts.DI;
     using RFL.Scripts.GlobalServices.Input.UI;
-    using RFL.Scripts.Helpers;
     using UnityEngine;
 
     public class MobileInputService : InputServiceBase

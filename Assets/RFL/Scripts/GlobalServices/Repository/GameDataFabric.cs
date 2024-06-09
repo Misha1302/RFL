@@ -1,7 +1,7 @@
 ﻿namespace RFL.Scripts.GlobalServices.Repository
 {
     using System;
-    using RFL.Scripts.DI;
+    using RFL.Scripts.DependenciesManagement.Container;
     using RFL.Scripts.GameLogic.Entities.Plants.Trees;
     using RFL.Scripts.GlobalServices.Repository.DataContainers.Primitives;
     using UnityEngine;

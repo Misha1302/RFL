@@ -4,7 +4,7 @@
     using System.Collections.Generic;
     using JetBrains.Annotations;
     using RFL.Scripts.Attributes;
-    using RFL.Scripts.GameLogic.Entities.Plants.Trees;
+    using RFL.Scripts.DependenciesManagement.Injector;
     using RFL.Scripts.GlobalServices.Coroutines.Waitings;
     using RFL.Scripts.GlobalServices.Time;
 

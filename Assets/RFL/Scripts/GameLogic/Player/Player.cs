@@ -1,10 +1,10 @@
 ﻿namespace RFL.Scripts.GameLogic.Player
 {
-    using RFL.Scripts.DI;
     using RFL.Scripts.GameLogic.Player.Components;
     using RFL.Scripts.GameLogic.Player.Components.Movement;
     using RFL.Scripts.GameLogic.Player.Components.Movement.Stepper;
     using RFL.Scripts.GlobalServices.GameManager.MonoBeh;
+    using RFL.Scripts.Singletons;
     using UnityEngine;
 
     [RequireComponent(typeof(PlayerTransform))]
@@ -19,16 +19,16 @@
     {
         public Player()
         {
-            Dc.Instance.AddLazySingleScoped<PlayerScope, Player>(GetComponent<Player>);
-            Dc.Instance.AddLazySingleScoped<PlayerScope, PlayerImageFlipper>(GetComponent<PlayerImageFlipper>);
-            Dc.Instance.AddLazySingleScoped<PlayerScope, PlayerJumper>(GetComponent<PlayerJumper>);
-            Dc.Instance.AddLazySingleScoped<PlayerScope, PlayerPauseHandler>(GetComponent<PlayerPauseHandler>);
-            Dc.Instance.AddLazySingleScoped<PlayerScope, PlayerPhysicMaterial>(GetComponent<PlayerPhysicMaterial>);
-            Dc.Instance.AddLazySingleScoped<PlayerScope, PlayerStepper>(GetComponent<PlayerStepper>);
-            Dc.Instance.AddLazySingleScoped<PlayerScope, PlayerHorizontalMovement>(
-                GetComponent<PlayerHorizontalMovement>);
-            Dc.Instance.AddLazySingleScoped<PlayerScope, PlayerTransform>(GetComponent<PlayerTransform>);
-            Dc.Instance.AddLazySingleScoped<PlayerScope, PlayerDataSaver>(GetComponent<PlayerDataSaver>);
+            var container = GameSingletons.DependencyInjector.DependencyContainer;
+            container.AddLazySingle(GetComponent<Player>);
+            container.AddLazySingle(GetComponent<PlayerImageFlipper>);
+            container.AddLazySingle(GetComponent<PlayerJumper>);
+            container.AddLazySingle(GetComponent<PlayerPauseHandler>);
+            container.AddLazySingle(GetComponent<PlayerPhysicMaterial>);
+            container.AddLazySingle(GetComponent<PlayerStepper>);
+            container.AddLazySingle(GetComponent<PlayerHorizontalMovement>);
+            container.AddLazySingle(GetComponent<PlayerTransform>);
+            container.AddLazySingle(GetComponent<PlayerDataSaver>);
         }
     }
 }

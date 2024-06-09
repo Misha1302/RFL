@@ -1,6 +1,7 @@
 ﻿namespace RFL.Scripts.GameLogic.Entities.Plants.Trees
 {
     using RFL.Scripts.Attributes;
+    using RFL.Scripts.DependenciesManagement.Injector;
     using RFL.Scripts.Extensions;
     using RFL.Scripts.GlobalServices.Repository;
     using RFL.Scripts.Helpers;

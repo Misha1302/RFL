@@ -2,15 +2,14 @@
 {
     using System;
     using RFL.Scripts.Attributes;
-    using RFL.Scripts.DI;
+    using RFL.Scripts.DependenciesManagement.Injector;
     using RFL.Scripts.Extensions.Math.Numbers;
-    using RFL.Scripts.GameLogic.Entities.Plants.Trees;
     using RFL.Scripts.GlobalServices.Time;
 
     public class Axis : InjectableBase
     {
         [Inject] private TimeService _timeService;
-        
+
         private readonly float _speed;
 
         public Axis(float speed)

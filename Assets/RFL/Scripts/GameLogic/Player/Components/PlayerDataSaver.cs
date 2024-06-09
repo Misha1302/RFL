@@ -11,8 +11,7 @@
 
         public void Save()
         {
-            _repositoryService.GameData.playerPos.Value =
-                _playerTransform.Pos;
+            _repositoryService.GameData.playerPos.Value = _playerTransform.Pos;
         }
 
         protected override void OnStart()
