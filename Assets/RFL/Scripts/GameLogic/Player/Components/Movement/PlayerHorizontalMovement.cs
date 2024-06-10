@@ -5,7 +5,6 @@
     using RFL.Scripts.GlobalServices.Input.Services;
     using UnityEngine;
 
-    [RequireComponent(typeof(Rigidbody2D))]
     public class PlayerHorizontalMovement : MonoBeh, Player.IPlayerScope
     {
         [SerializeField] private float speed = 5f;

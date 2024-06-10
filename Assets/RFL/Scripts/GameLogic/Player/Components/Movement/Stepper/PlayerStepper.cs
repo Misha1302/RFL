@@ -5,7 +5,6 @@ namespace RFL.Scripts.GameLogic.Player.Components.Movement.Stepper
     using RFL.Scripts.GlobalServices.GameManager.MonoBeh;
     using UnityEngine;
 
-    [RequireComponent(typeof(Rigidbody2D))]
     public class PlayerStepper : MonoBeh, Player.IPlayerScope
     {
         public static readonly ContactFilter2D ContactFilter2D;

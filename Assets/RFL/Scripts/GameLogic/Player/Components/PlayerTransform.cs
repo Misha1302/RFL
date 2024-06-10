@@ -27,9 +27,6 @@
         }
 
 
-        public void MoveToX(float x) => Pos = Pos.WithX(x);
-        public void MoveToY(float y) => Pos = Pos.WithY(y);
-
         public void SetVelocityX(float x) => _rb2D.velocity = _rb2D.velocity.WithX(x);
         public void SetVelocityY(float y) => _rb2D.velocity = _rb2D.velocity.WithY(y);
 
