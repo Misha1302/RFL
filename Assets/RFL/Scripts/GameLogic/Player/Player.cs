@@ -1,5 +1,6 @@
 ﻿namespace RFL.Scripts.GameLogic.Player
 {
+    using RFL.Scripts.DependenciesManagement.Container;
     using RFL.Scripts.GameLogic.Player.Components;
     using RFL.Scripts.GameLogic.Player.Components.Movement;
     using RFL.Scripts.GameLogic.Player.Components.Movement.Stepper;
@@ -19,16 +20,22 @@
     {
         public Player()
         {
-            var container = GameSingletons.DependencyInjector.DependencyContainer;
-            container.AddSingle(this);
-            container.AddSingleScoped<IPlayerScope, PlayerTransform>(GetComponent<PlayerTransform>);
-            container.AddSingleScoped<IPlayerScope, PlayerImageFlipper>(GetComponent<PlayerImageFlipper>);
-            container.AddSingleScoped<IPlayerScope, PlayerJumper>(GetComponent<PlayerJumper>);
-            container.AddSingleScoped<IPlayerScope, PlayerPauseHandler>(GetComponent<PlayerPauseHandler>);
-            container.AddSingleScoped<IPlayerScope, PlayerPhysicMaterial>(GetComponent<PlayerPhysicMaterial>);
-            container.AddSingleScoped<IPlayerScope, PlayerStepper>(GetComponent<PlayerStepper>);
-            container.AddSingleScoped<IPlayerScope, PlayerHorizontalMovement>(GetComponent<PlayerHorizontalMovement>);
-            container.AddSingleScoped<IPlayerScope, PlayerDataSaver>(GetComponent<PlayerDataSaver>);
+            Container.AddSingle(this);
+            Container.AddSingleScoped<IPlayerScope, PlayerTransform>(GetComponent<PlayerTransform>);
+            Container.AddSingleScoped<IPlayerScope, PlayerImageFlipper>(GetComponent<PlayerImageFlipper>);
+            Container.AddSingleScoped<IPlayerScope, PlayerJumper>(GetComponent<PlayerJumper>);
+            Container.AddSingleScoped<IPlayerScope, PlayerPauseHandler>(GetComponent<PlayerPauseHandler>);
+            Container.AddSingleScoped<IPlayerScope, PlayerPhysicMaterial>(GetComponent<PlayerPhysicMaterial>);
+            Container.AddSingleScoped<IPlayerScope, PlayerStepper>(GetComponent<PlayerStepper>);
+            Container.AddSingleScoped<IPlayerScope, PlayerHorizontalMovement>(GetComponent<PlayerHorizontalMovement>);
+            Container.AddSingleScoped<IPlayerScope, PlayerDataSaver>(GetComponent<PlayerDataSaver>);
+        }
+
+        private static DependencyContainer Container => GameSingletons.DependencyInjector.DependencyContainer;
+
+        public override void SelfDestroy()
+        {
+            Container.RemoveScope<IPlayerScope>();
         }
 
         public interface IPlayerScope { }

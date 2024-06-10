@@ -45,5 +45,10 @@
             _scopes.TryAdd(scopeType, null);
             return _scopes[scopeType] ??= new Dictionary<Type, Lazy<Any>>();
         }
+
+        public void RemoveScope<T>()
+        {
+            GetScope(typeof(T)).Clear();
+        }
     }
 }
