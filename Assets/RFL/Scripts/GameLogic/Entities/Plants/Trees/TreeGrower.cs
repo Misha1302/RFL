@@ -1,6 +1,5 @@
 ﻿namespace RFL.Scripts.GameLogic.Entities.Plants.Trees
 {
-    using System;
     using RFL.Scripts.Attributes;
     using RFL.Scripts.DependenciesManagement.Container;
     using RFL.Scripts.Extensions;
@@ -14,10 +13,10 @@
 
     public class TreeGrower : MonoBeh, ISavable, IEntity
     {
-        [Inject] private Lazy<CreatorService> _creatorService;
-        [Inject] private Lazy<DestroyerService> _destroyerService;
-        [Inject] private Lazy<RepositoryService> _repositoryService;
-        [Inject] private Lazy<TimeService> _timeService;
+        [Inject] private CreatorService _creatorService;
+        [Inject] private DestroyerService _destroyerService;
+        [Inject] private RepositoryService _repositoryService;
+        [Inject] private TimeService _timeService;
 
         private TreeData _treeData;
         private TreeTimeManager _treeTimeManager;
@@ -28,15 +27,15 @@
 
         public void Save()
         {
-            _repositoryService.Value.GameData.coreScene.Value.data[Id] =
+            _repositoryService.GameData.coreScene.Value.data[Id] =
                 new Any(new TreeData(TicksCountWhenTreeWasGrown, transform.position, Id));
         }
 
         public void Init(TreeData treeData)
         {
             _treeData = treeData;
-            _treeTimeManager = _creatorService.Value.Create<TreeTimeManager>();
-            _treeTimeManager.Init(_timeService.Value.CalcTime(treeData.ticksCountWhenTreeWasGrown));
+            _treeTimeManager = _creatorService.Create<TreeTimeManager>();
+            _treeTimeManager.Init(_timeService.CalcTime(treeData.ticksCountWhenTreeWasGrown));
             _treeTimeManager.OnTimeToPhase += ChangePhase;
 
             transform.position = treeData.position;
@@ -46,10 +45,10 @@
 
         private void ChangePhase(TreePhaseType treePhaseType)
         {
-            transform.ForAll<Transform>(x => _destroyerService.Value.Destroy(x));
+            transform.ForAll<Transform>(x => _destroyerService.Destroy(x));
 
             var resource = Resources.Load<GameObject>($"Trees/Tree ({(int)treePhaseType} phase)");
-            var instance = _creatorService.Value.Instantiate(resource);
+            var instance = _creatorService.Instantiate(resource);
             instance.transform.SetParent(transform);
             instance.transform.localPosition = Vector3.zero.WithY(instance.CalcHalfOfVisibleYSize());
         }

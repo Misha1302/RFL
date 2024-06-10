@@ -1,6 +1,5 @@
 ﻿namespace RFL.Scripts.GlobalServices.Fps
 {
-    using System;
     using RFL.Scripts.Attributes;
     using RFL.Scripts.DependenciesManagement.Injector;
     using RFL.Scripts.GlobalServices.Repository;
@@ -9,20 +8,20 @@
 
     public class FpsCanvasInitializer : InjectableBase
     {
-        [Inject] private Lazy<RepositoryService> _repositoryService;
-        [Inject] private Lazy<CreatorService> _creatorService;
+        [Inject] private RepositoryService _repositoryService;
+        [Inject] private CreatorService _creatorService;
 
 
         [InitializerMethod]
         public void Initialize()
         {
-            if (_repositoryService.Value.GameData.needToShowFps.Value)
+            if (_repositoryService.GameData.needToShowFps.Value)
                 CreateFpsCanvas();
         }
 
         private void CreateFpsCanvas()
         {
-            _creatorService.Value.Instantiate(Resources.Load("UI/FpsCanvas"));
+            _creatorService.Instantiate(Resources.Load("UI/FpsCanvas"));
         }
     }
 }

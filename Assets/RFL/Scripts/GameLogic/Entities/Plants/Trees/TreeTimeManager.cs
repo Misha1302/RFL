@@ -10,7 +10,7 @@
     {
         private readonly double[] _phaseWaitTimes = { 0d, 5d, 10d };
 
-        [Inject] private Lazy<CreatorService> _creatorService;
+        [Inject] private CreatorService _creatorService;
         private double _startTotalTime;
 
         public Action<TreePhaseType> OnTimeToPhase;
@@ -19,13 +19,13 @@
         {
             _startTotalTime = startTotalTime;
 
-            _creatorService.Value.Create<TimeEvent>().Init(_startTotalTime + _phaseWaitTimes[0])
+            _creatorService.Create<TimeEvent>().Init(_startTotalTime + _phaseWaitTimes[0])
                 .OnTimeCome += () => OnTimeToPhase(TreePhaseType.Phase1);
 
-            _creatorService.Value.Create<TimeEvent>().Init(_startTotalTime + _phaseWaitTimes[1])
+            _creatorService.Create<TimeEvent>().Init(_startTotalTime + _phaseWaitTimes[1])
                 .OnTimeCome += () => OnTimeToPhase(TreePhaseType.Phase2);
 
-            _creatorService.Value.Create<TimeEvent>().Init(_startTotalTime + _phaseWaitTimes[2])
+            _creatorService.Create<TimeEvent>().Init(_startTotalTime + _phaseWaitTimes[2])
                 .OnTimeCome += () => OnTimeToPhase(TreePhaseType.Phase3);
         }
     }

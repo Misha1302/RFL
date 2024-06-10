@@ -1,6 +1,5 @@
 ﻿namespace RFL.Scripts.GlobalServices.Time
 {
-    using System;
     using RFL.Scripts.Attributes;
     using RFL.Scripts.DependenciesManagement.Injector;
     using RFL.Scripts.GlobalServices.Pause;
@@ -10,8 +9,8 @@
     public class TimeService : InjectableBase, ISavable
     {
         private long _elapsedTicks;
-        [Inject] private Lazy<PauseService> _pauseService;
-        [Inject] private Lazy<RepositoryService> _repositoryService;
+        [Inject] private PauseService _pauseService;
+        [Inject] private RepositoryService _repositoryService;
         private long _startTotalTicks;
 
         public long TotalTicks => _startTotalTicks + _elapsedTicks;
@@ -31,22 +30,22 @@
         public void OnStart()
         {
             SetTicks();
-            _repositoryService.Value.GameData.totalTicks.OnChanged += SetTicks;
+            _repositoryService.GameData.totalTicks.OnChanged += SetTicks;
         }
 
         private void SetTicks()
         {
-            _startTotalTicks = _repositoryService.Value.GameData.totalTicks.Value;
+            _startTotalTicks = _repositoryService.GameData.totalTicks.Value;
         }
 
         private void SaveTime()
         {
-            _repositoryService.Value.GameData.totalTicks.Value = TotalTicks;
+            _repositoryService.GameData.totalTicks.Value = TotalTicks;
         }
 
         public void FixedTick()
         {
-            if (!_pauseService.Value.IsPaused)
+            if (!_pauseService.IsPaused)
                 _elapsedTicks++;
         }
     }

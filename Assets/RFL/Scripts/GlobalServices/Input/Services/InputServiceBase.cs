@@ -14,8 +14,8 @@
     public abstract class InputServiceBase : MonoBeh, IInputService
     {
         // ReSharper disable UnassignedField.Global
-        [Inject] protected Lazy<CreatorService> CreatorService;
-        [Inject] protected Lazy<RepositoryService> RepositoryService;
+        [Inject] protected CreatorService CreatorService;
+        [Inject] protected RepositoryService RepositoryService;
 
         public Axis2D Input { get; private set; }
         public bool Jump { get; protected set; }
@@ -24,7 +24,7 @@
 
         protected override void OnCreated()
         {
-            Input = new Axis2D(RepositoryService.Value.GameData.inputSpeed.Value);
+            Input = new Axis2D(RepositoryService.GameData.inputSpeed.Value);
         }
 
         protected override void OnStart()
@@ -43,7 +43,7 @@
         private void SubscribeOnButtonPause()
         {
             var pauseCanvas = Resources.Load("UI/PauseCanvas");
-            var pauseCanvasInstance = CreatorService.Value.Instantiate(pauseCanvas);
+            var pauseCanvasInstance = CreatorService.Instantiate(pauseCanvas);
             var button = pauseCanvasInstance.GetComponentInChildren<PauseButtonTag>().GetComponent<Button>();
             button.onClick.AddListener(OnPause.Invoke);
         }

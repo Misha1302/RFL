@@ -1,6 +1,5 @@
 ﻿namespace RFL.Scripts.GameLogic.Player.Components.Movement.Stepper
 {
-    using System;
     using System.Collections.Generic;
     using System.Linq;
     using RFL.Scripts.Attributes;
@@ -12,7 +11,7 @@
 
     public class PlayerStepperHelper : InjectableBase, Player.IPlayerScope
     {
-        [Inject] private Lazy<PlayerStepper> _playerStepper;
+        [Inject] private PlayerStepper _playerStepper;
 
         private readonly StepperInfo _stepperInfo;
 
@@ -21,7 +20,7 @@
             _stepperInfo = stepperInfo;
         }
 
-        public float CalcY(float y) => y + _playerStepper.Value.Player2FootsDelta;
+        public float CalcY(float y) => y + _playerStepper.Player2FootsDelta;
 
         public IEnumerable<RaycastHit2D> GetValidRayHits(int count) =>
             _stepperInfo.HitsBuffer.Slice(0, count).Where(x => !x.transform.HasComponent<PlayerTag>());

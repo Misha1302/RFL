@@ -1,6 +1,5 @@
 ﻿namespace RFL.Scripts.GameLogic.SettingsCanvas
 {
-    using System;
     using RFL.Scripts.Attributes;
     using RFL.Scripts.GlobalServices.GameManager.MonoBeh;
     using RFL.Scripts.GlobalServices.Repository;
@@ -10,11 +9,11 @@
     [RequireComponent(typeof(Button))]
     public class DropDataButton : MonoBeh
     {
-        [Inject] private Lazy<RepositoryService> _repositoryService;
+        [Inject] private RepositoryService _repositoryService;
 
         protected override void OnStart()
         {
-            GetComponent<Button>().onClick.AddListener(_repositoryService.Value.Reset);
+            GetComponent<Button>().onClick.AddListener(_repositoryService.Reset);
         }
     }
 }

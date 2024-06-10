@@ -1,13 +1,11 @@
 ﻿namespace RFL.Scripts.DependenciesManagement
 {
-    using System;
     using RFL.Scripts.Attributes;
     using RFL.Scripts.GlobalServices.ApplicationEvents;
     using RFL.Scripts.GlobalServices.Coroutines;
     using RFL.Scripts.GlobalServices.Fps;
     using RFL.Scripts.GlobalServices.GameManager;
     using RFL.Scripts.GlobalServices.Input;
-    using RFL.Scripts.GlobalServices.Input.Services;
     using RFL.Scripts.GlobalServices.Pause;
     using RFL.Scripts.GlobalServices.Repository;
     using RFL.Scripts.GlobalServices.Scenes;
@@ -23,21 +21,21 @@
             var creator = new CreatorService();
             var container = GameSingletons.DependencyInjector.DependencyContainer;
 
-            container.AddSingle(new Lazy<CreatorService>(creator));
-            container.AddSingle(new Lazy<DestroyerService>(new DestroyerService()));
-            container.AddSingle(new Lazy<ApplicationEventsService>(creator.Create<ApplicationEventsService>()));
-            container.AddSingle(new Lazy<PauseService>(new PauseService()));
-            container.AddSingle(new Lazy<NextMomentExecutorService>(new NextMomentExecutorService()));
-            container.AddSingle(new Lazy<RepositoryService>(new RepositoryService()));
-            container.AddSingle(new Lazy<TimeService>(new TimeService()));
-            container.AddSingle(new Lazy<GameService>(creator.Create<GameService>()));
-            container.AddSingle(new Lazy<TimeManagerService>(creator.Create<TimeManagerService>()));
+            container.AddSingle(creator);
+            container.AddSingle(new DestroyerService());
+            container.AddSingle(creator.Create<ApplicationEventsService>());
+            container.AddSingle(new PauseService());
+            container.AddSingle(new NextMomentExecutorService());
+            container.AddSingle(new RepositoryService());
+            container.AddSingle(new TimeService());
+            container.AddSingle(creator.Create<GameService>());
+            container.AddSingle(creator.Create<TimeManagerService>());
 
-            container.AddSingle(new Lazy<SceneService>(new SceneService()));
-            container.AddSingle(new Lazy<IInputService>(InputMaker.MakeInputService(creator)));
-            container.AddSingle(new Lazy<CoroutinesService>(creator.Create<CoroutinesService>()));
-            container.AddSingle(new Lazy<FpsCounterService>(creator.Create<FpsCounterService>()));
-            container.AddSingle(new Lazy<FpsSetterService>(new FpsSetterService()));
+            container.AddSingle(new SceneService());
+            container.AddSingle(InputMaker.MakeInputService(creator));
+            container.AddSingle(creator.Create<CoroutinesService>());
+            container.AddSingle(creator.Create<FpsCounterService>());
+            container.AddSingle(new FpsSetterService());
         }
     }
 }

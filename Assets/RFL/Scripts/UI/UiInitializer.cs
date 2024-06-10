@@ -1,6 +1,5 @@
 ﻿namespace RFL.Scripts.UI
 {
-    using System;
     using RFL.Scripts.Attributes;
     using RFL.Scripts.DependenciesManagement.Injector;
     using RFL.Scripts.GlobalServices.Fps;
@@ -10,12 +9,12 @@
 
     public class UiInitializer : InjectableBase
     {
-        [Inject] private Lazy<CreatorService> _creatorService;
+        [Inject] private CreatorService _creatorService;
 
         [InitializerMethod]
         public void Initialize()
         {
-            _creatorService.Value.Instantiate(Resources.Load<EventSystem>("UI/EventSystem")).gameObject
+            _creatorService.Instantiate(Resources.Load<EventSystem>("UI/EventSystem")).gameObject
                 .AddComponent<InterSceneTag>();
         }
     }

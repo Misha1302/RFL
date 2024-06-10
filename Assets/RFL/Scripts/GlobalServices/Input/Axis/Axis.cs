@@ -8,7 +8,7 @@
 
     public class Axis : InjectableBase
     {
-        [Inject] private Lazy<TimeService> _timeService;
+        [Inject] private TimeService _timeService;
 
         private readonly float _speed;
 
@@ -31,7 +31,7 @@
                 _ => Value
             };
 
-            Value = Value.MoveTowards(target, speed * _timeService.Value.DeltaTime);
+            Value = Value.MoveTowards(target, speed * _timeService.DeltaTime);
         }
 
         public static implicit operator float(Axis axis) => axis.Value;

@@ -10,7 +10,7 @@
 
     public class CoroutineObj : InjectableBase
     {
-        [Inject] private Lazy<TimeService> _timeService;
+        [Inject] private TimeService _timeService;
 
         private readonly IEnumerator<ICoroutineWaiting> _enumerator;
         [CanBeNull] private readonly Action _whenCoroutineEnd;
@@ -48,7 +48,7 @@
             if (_enumerator.Current is WaitNextFrame) Next();
 
             if (_enumerator.Current is WaitSeconds s)
-                if (_timeService.Value.ElapsedTime >= s.EndTime)
+                if (_timeService.ElapsedTime >= s.EndTime)
                     Next();
         }
 

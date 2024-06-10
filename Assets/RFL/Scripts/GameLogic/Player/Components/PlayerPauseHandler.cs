@@ -1,6 +1,5 @@
 ﻿namespace RFL.Scripts.GameLogic.Player.Components
 {
-    using System;
     using RFL.Scripts.Attributes;
     using RFL.Scripts.GlobalServices.GameManager.MonoBeh;
     using RFL.Scripts.GlobalServices.Pause;
@@ -10,28 +9,28 @@
     [RequireComponent(typeof(Rigidbody2D))]
     public class PlayerPauseHandler : MonoBeh, Player.IPlayerScope
     {
-        [Inject] private Lazy<PauseService> _pauseService;
-        [Inject] private Lazy<PlayerTransform> _playerTransform;
-        [Inject] private Lazy<RepositoryService> _repositoryService;
+        [Inject] private PauseService _pauseService;
+        [Inject] private PlayerTransform _playerTransform;
+        [Inject] private RepositoryService _repositoryService;
 
         private Vector3 _savedDirection;
 
         protected override void OnStart()
         {
-            _pauseService.Value.OnPausedChanged += OnPauseChanged;
+            _pauseService.OnPausedChanged += OnPauseChanged;
         }
 
         private void OnPauseChanged(bool isPaused)
         {
             if (isPaused)
             {
-                _savedDirection = _playerTransform.Value.Vel;
-                _playerTransform.Value.Freeze();
+                _savedDirection = _playerTransform.Vel;
+                _playerTransform.Freeze();
             }
             else
             {
-                _playerTransform.Value.UnFreeze();
-                _playerTransform.Value.Vel = _savedDirection;
+                _playerTransform.UnFreeze();
+                _playerTransform.Vel = _savedDirection;
             }
         }
     }

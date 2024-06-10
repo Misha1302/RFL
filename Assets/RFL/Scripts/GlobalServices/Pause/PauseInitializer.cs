@@ -1,6 +1,5 @@
 ﻿namespace RFL.Scripts.GlobalServices.Pause
 {
-    using System;
     using RFL.Scripts.Attributes;
     using RFL.Scripts.DependenciesManagement.Injector;
     using RFL.Scripts.GlobalServices.Input.Services;
@@ -10,27 +9,27 @@
 
     public class PauseInitializer : InjectableBase
     {
-        [Inject] private Lazy<PauseService> _pauseService;
-        [Inject] private Lazy<IInputService> _inputService;
-        [Inject] private Lazy<CreatorService> _creatorService;
-        [Inject] private Lazy<DestroyerService> _destroyerService;
+        [Inject] private PauseService _pauseService;
+        [Inject] private IInputService _inputService;
+        [Inject] private CreatorService _creatorService;
+        [Inject] private DestroyerService _destroyerService;
 
         [InitializerMethod]
         public void Initialize()
         {
-            _inputService.Value.OnPause += _pauseService.Value.PauseOrUnPause;
+            _inputService.OnPause += _pauseService.PauseOrUnPause;
 
-            _pauseService.Value.OnPausedChanged += isPaused =>
+            _pauseService.OnPausedChanged += isPaused =>
             {
                 if (isPaused)
                 {
                     var settingsCanvas = Resources.Load<SettingsCanvasTag>("UI/SettingsCanvas");
-                    _creatorService.Value.Instantiate(settingsCanvas);
+                    _creatorService.Instantiate(settingsCanvas);
                 }
                 else
                 {
                     var canvas = Object.FindAnyObjectByType<SettingsCanvasTag>(FindObjectsInactive.Include);
-                    _destroyerService.Value.Destroy(canvas.transform);
+                    _destroyerService.Destroy(canvas.transform);
                 }
             };
         }
