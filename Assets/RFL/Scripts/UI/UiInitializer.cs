@@ -12,7 +12,7 @@
     {
         [Inject] private CreatorService _creatorService;
 
-        [SceneInitializer(typeof(AnyScene))]
+        [SceneInitializer(typeof(AnyScene), initializationType: InitializationType.Once)]
         public void Initialize()
         {
             _creatorService.Instantiate(Resources.Load<EventSystem>("UI/EventSystem")).gameObject

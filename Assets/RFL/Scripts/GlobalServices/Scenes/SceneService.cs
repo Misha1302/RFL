@@ -29,7 +29,7 @@
         {
             Objects.Select(x => x.root).Distinct().ForAll(x =>
             {
-                if (!x.HasComponent<IInterScene>())
+                if (!x.HasComponent<IInterScene>() && !x.IsDestroying())
                     _destroyerService.Destroy(x, saveData);
             });
         }
@@ -37,7 +37,7 @@
         public void ChangeScene(SceneName name)
         {
             CurrentScene = name;
-            // DestroyAll(true);
+            DestroyAll(true);
             SceneManager.LoadScene(CurrentScene, LoadSceneMode.Additive);
             InitializersManager.InitEveryIntializer(CurrentScene);
         }

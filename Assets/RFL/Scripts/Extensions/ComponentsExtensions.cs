@@ -1,11 +1,13 @@
 ﻿namespace RFL.Scripts.Extensions
 {
+    using JetBrains.Annotations;
+    using RFL.Scripts.GlobalServices.Scenes;
     using Unity.VisualScripting;
     using UnityEngine;
 
     public static class ComponentsExtensions
     {
-        public static bool HasComponent<T>(this Component component) =>
+        [Pure] public static bool HasComponent<T>(this Component component) =>
             component.TryGetComponent<T>(out _);
 
         public static T GetOrAddComponent<T>(this Component component) where T : Component
@@ -14,5 +16,11 @@
                 value = component.AddComponent<T>();
             return value;
         }
+
+        public static void AddComponentIfNotAdded<T>(this Component component) where T : Component =>
+            component.GetOrAddComponent<T>();
+
+        [Pure] public static bool IsDestroying(this Component component) =>
+            component.HasComponent<DestroyingTag>();
     }
 }
