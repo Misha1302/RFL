@@ -12,6 +12,7 @@
 
     public class EditorTreeCreator : MonoBeh
     {
+#if UNITY_EDITOR
         [SerializeField] private bool createTree;
         [Inject] private CreatorService _creatorService;
         [Inject] private TimeService _timeService;
@@ -28,6 +29,7 @@
                 _creatorService.Create<TreeEntity>()
                     .Init(new TreeData(_timeService.TotalTicks, Vector3.zero, Guid.NewGuid()));
             };
+#endif
         }
     }
 }
