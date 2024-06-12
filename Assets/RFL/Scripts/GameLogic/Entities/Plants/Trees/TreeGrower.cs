@@ -1,23 +1,30 @@
 ﻿namespace RFL.Scripts.GameLogic.Entities.Plants.Trees
 {
+    using System.Linq;
     using RFL.Scripts.Attributes;
     using RFL.Scripts.DependenciesManagement.Container;
     using RFL.Scripts.Extensions;
     using RFL.Scripts.Extensions.Math.Vectors;
     using RFL.Scripts.GlobalServices.GameManager.MonoBeh;
     using RFL.Scripts.GlobalServices.Repository;
+    using RFL.Scripts.GlobalServices.Repository.DataContainers;
     using RFL.Scripts.GlobalServices.Repository.DataContainers.Primitives;
+    using RFL.Scripts.GlobalServices.Scenes;
     using RFL.Scripts.GlobalServices.Time;
     using RFL.Scripts.Helpers;
     using UnityEngine;
 
+    // TODO: разделить на saver и grower
+    // TODO: создать инициализатор сцен
     public class TreeGrower : MonoBeh, ISavable, IEntity
     {
         [Inject] private CreatorService _creatorService;
         [Inject] private DestroyerService _destroyerService;
         [Inject] private RepositoryService _repositoryService;
+        private SceneName _sceneGrownName;
+        [Inject] private SceneService _sceneService;
         [Inject] private TimeService _timeService;
-
+        
         private TreeData _treeData;
         private TreeTimeManager _treeTimeManager;
 
@@ -27,7 +34,7 @@
 
         public void Save()
         {
-            _repositoryService.GameData.coreScene.Value.data[Id] =
+            _repositoryService.GameData.sceneDatas.First(x => x.name == _sceneGrownName).data[Id] =
                 new Any(new TreeData(TicksCountWhenTreeWasGrown, transform.position, Id));
         }
 
@@ -41,6 +48,7 @@
             transform.position = treeData.position;
 
             Id = treeData.id;
+            _sceneGrownName = _sceneService.CurrentScene;
         }
 
         private void ChangePhase(TreePhaseType treePhaseType)

@@ -1,6 +1,7 @@
 ﻿namespace RFL.Scripts.DependenciesManagement
 {
     using RFL.Scripts.Attributes;
+    using RFL.Scripts.GameLogic.Scenes;
     using RFL.Scripts.GlobalServices.ApplicationEvents;
     using RFL.Scripts.GlobalServices.Coroutines;
     using RFL.Scripts.GlobalServices.Fps;
@@ -15,7 +16,7 @@
 
     public class DiInitializer
     {
-        [InitializerMethod(-1000)]
+        [SceneInitializer(typeof(AnyScene), -1000, InitializationType.Once)]
         public void Initialize()
         {
             var creator = new CreatorService();

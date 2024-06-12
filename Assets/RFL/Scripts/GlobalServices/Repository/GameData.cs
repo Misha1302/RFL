@@ -14,7 +14,7 @@
         public EventField<EventList<string>> scenesList = new();
         public EventField<long> totalTicks = new();
         public EventField<Vector3> playerPos = new();
-        public EventField<SceneData> coreScene = new();
+        public EventList<SceneData> sceneDatas = new();
 
         [NonSerialized] public Action<GameData> OnChanged;
     }

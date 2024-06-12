@@ -14,15 +14,15 @@
             typesInScope[typeof(TSingleton)] = new Lazy<Any>(() => new Any(func()));
         }
 
-        [Pure] public bool TryGetSingleOfScopes(ScopeType[] scopeTypes, Type type, out object single)
+        [Pure] public bool TryGetSingleOfScopes(ScopeType[] scopeTypes, Type singleType, out object single)
         {
             single = null;
 
-            if (TryGetSingleOfScope(typeof(IAnyScope), type, out single))
+            if (TryGetSingleOfScope(typeof(IAnyScope), singleType, out single))
                 return true;
 
             foreach (var scopeType in scopeTypes)
-                if (TryGetSingleOfScope(scopeType, type, out single))
+                if (TryGetSingleOfScope(scopeType, singleType, out single))
                     return true;
 
             return false;

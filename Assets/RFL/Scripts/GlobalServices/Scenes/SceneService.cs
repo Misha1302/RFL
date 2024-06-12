@@ -2,8 +2,11 @@
 {
     using System.Linq;
     using RFL.Scripts.Attributes;
+    using RFL.Scripts.Bootstrap;
     using RFL.Scripts.DependenciesManagement.Injector;
     using RFL.Scripts.Extensions;
+    using RFL.Scripts.GameLogic.Scenes;
+    using RFL.Scripts.GlobalServices.Repository.DataContainers;
     using RFL.Scripts.Helpers;
     using UnityEngine;
     using UnityEngine.SceneManagement;
@@ -14,12 +17,12 @@
         [Inject] private DestroyerService _destroyerService;
 
         private Transform[] Objects => Object.FindObjectsOfType<Transform>(true);
+        public SceneName CurrentScene { get; private set; }
 
         public void Init()
         {
-            var startScene = SceneManager.GetActiveScene().name;
             DestroyAll(false);
-            LoadSceneAdditive(startScene);
+            ChangeScene(new CoreScene());
         }
 
         private void DestroyAll(bool saveData)
@@ -31,9 +34,12 @@
             });
         }
 
-        public void LoadSceneAdditive(string name)
+        public void ChangeScene(SceneName name)
         {
-            SceneManager.LoadScene(name, LoadSceneMode.Additive);
+            CurrentScene = name;
+            // DestroyAll(true);
+            SceneManager.LoadScene(CurrentScene, LoadSceneMode.Additive);
+            InitializersManager.InitEveryIntializer(CurrentScene);
         }
     }
 }

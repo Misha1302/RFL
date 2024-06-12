@@ -2,6 +2,7 @@
 {
     using RFL.Scripts.Attributes;
     using RFL.Scripts.DependenciesManagement.Injector;
+    using RFL.Scripts.GameLogic.Scenes;
     using RFL.Scripts.GlobalServices.Repository;
     using RFL.Scripts.Helpers;
     using UnityEngine;
@@ -12,7 +13,7 @@
         [Inject] private CreatorService _creatorService;
 
 
-        [InitializerMethod]
+        [SceneInitializer(typeof(CoreScene))]
         public void Initialize()
         {
             if (_repositoryService.GameData.needToShowFps.Value)

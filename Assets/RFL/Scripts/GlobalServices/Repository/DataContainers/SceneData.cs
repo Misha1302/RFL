@@ -8,5 +8,11 @@
     public class SceneData
     {
         public EventSerializableDictionary<SerializableGuid, Any> data = new();
+        public SceneName name;
+
+        public SceneData(SceneName name)
+        {
+            this.name = name;
+        }
     }
 }

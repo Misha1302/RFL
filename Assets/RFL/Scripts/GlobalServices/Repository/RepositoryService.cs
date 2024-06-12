@@ -35,7 +35,7 @@
         private static GameData LoadRawGameData()
         {
             GameData gameData;
-            if (SaveSystem.Get(Key, out var value))
+            if (SaveSystem.Get(Key, out var value) && !string.IsNullOrWhiteSpace(value))
             {
                 gameData = JsonUtility.FromJson<GameData>(value);
                 GameDataFabric.SubscribeOnChanged(gameData);

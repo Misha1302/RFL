@@ -1,9 +1,10 @@
 ﻿namespace RFL.Scripts.GlobalServices.Repository
 {
     using System;
-    using RFL.Scripts.DependenciesManagement.Container;
-    using RFL.Scripts.GameLogic.Entities.Plants.Trees;
-    using RFL.Scripts.GlobalServices.Repository.DataContainers.Primitives;
+    using System.Linq;
+    using System.Reflection;
+    using RFL.Scripts.Extensions;
+    using RFL.Scripts.GlobalServices.Repository.DataContainers;
     using UnityEngine;
 
     public static class GameDataFabric
@@ -17,8 +18,18 @@
         public static GameData MakeExampleGameData()
         {
             var gd = MakeStandardGameData();
-            gd.coreScene.Value.data = ExampleTrees();
+            AddScenes(gd);
+            SubscribeOnChanged(gd);
             return gd;
+        }
+
+        private static void AddScenes(GameData gd)
+        {
+            Assembly.GetExecutingAssembly().GetTypes().Where(x => x.BaseType == typeof(SceneName)).ForAll(x =>
+                gd.sceneDatas.Add(new SceneData((SceneName)Activator.CreateInstance(x)))
+            );
+            
+            Debug.Log(string.Join(", ", gd.sceneDatas.Select(x => x.GetType().Name)));
         }
 
         public static void SubscribeOnChanged(GameData gd)
@@ -29,18 +40,10 @@
             gd.scenesList.OnChanged += () => gd.OnChanged?.Invoke(gd);
             gd.totalTicks.OnChanged += () => gd.OnChanged?.Invoke(gd);
             gd.playerPos.OnChanged += () => gd.OnChanged?.Invoke(gd);
-            gd.coreScene.OnChanged += () => gd.OnChanged?.Invoke(gd);
+            gd.sceneDatas.OnChanged += _ => gd.OnChanged?.Invoke(gd);
 
-            gd.coreScene.Value.data.OnChanged += () => gd.OnChanged?.Invoke(gd);
+            gd.sceneDatas.ForAll(x => x.data.OnChanged += () => gd.OnChanged?.Invoke(gd));
             gd.scenesList.Value.OnChanged += _ => gd.OnChanged?.Invoke(gd);
-        }
-
-        private static EventSerializableDictionary<SerializableGuid, Any> ExampleTrees()
-        {
-            var d = new EventSerializableDictionary<SerializableGuid, Any>();
-            var guid = Guid.NewGuid();
-            d[guid] = new Any(new TreeData(0, Vector3.one, guid));
-            return d;
         }
 
         public static GameData MakeStandardGameData()
@@ -51,8 +54,6 @@
                 inputSpeed = { Value = 1f / 0.4f },
                 needToShowFps = { Value = true }
             };
-
-            SubscribeOnChanged(gd);
 
             return gd;
         }

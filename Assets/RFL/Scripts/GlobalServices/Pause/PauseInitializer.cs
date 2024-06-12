@@ -2,6 +2,7 @@
 {
     using RFL.Scripts.Attributes;
     using RFL.Scripts.DependenciesManagement.Injector;
+    using RFL.Scripts.GameLogic.Scenes;
     using RFL.Scripts.GlobalServices.Input.Services;
     using RFL.Scripts.Helpers;
     using UnityEngine;
@@ -14,7 +15,7 @@
         [Inject] private CreatorService _creatorService;
         [Inject] private DestroyerService _destroyerService;
 
-        [InitializerMethod]
+        [SceneInitializer(typeof(CoreScene))]
         public void Initialize()
         {
             _inputService.OnPause += _pauseService.PauseOrUnPause;
