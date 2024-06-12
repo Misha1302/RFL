@@ -29,7 +29,7 @@
                 _creatorService.Create<TreeEntity>()
                     .Init(new TreeData(_timeService.TotalTicks, Vector3.zero, Guid.NewGuid()));
             };
-#endif
         }
+#endif
     }
 }
