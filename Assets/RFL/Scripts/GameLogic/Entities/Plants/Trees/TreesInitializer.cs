@@ -4,9 +4,10 @@
     using RFL.Scripts.Attributes;
     using RFL.Scripts.DependenciesManagement.Injector;
     using RFL.Scripts.Extensions;
+    using RFL.Scripts.GameLogic.Entities.Plants.Trees.TreeComponent;
     using RFL.Scripts.GameLogic.Scenes;
+    using RFL.Scripts.GlobalServices.Creator;
     using RFL.Scripts.GlobalServices.Repository;
-    using RFL.Scripts.Helpers;
 
     public class TreesInitializer : InjectableBase
     {
@@ -16,11 +17,11 @@
         [SceneInitializer(typeof(CoreScene))]
         public void Initialize()
         {
-            var data = _repositoryService.GameData.sceneDatas.First(x => x.name == CoreScene.Name).data;
+            var data = _repositoryService.GameData.sceneDatas.First(x => x.name == ScenesFactory.CoreScene()).data;
             data.ForAll(x =>
             {
                 if (x.value.Is<TreeData>())
-                    _creatorService.Create<TreeGrower>().Init(x.value.Get<TreeData>());
+                    _creatorService.Create<TreeEntity>().Init(x.value.Get<TreeData>());
             });
             data.Clear();
         }

@@ -3,8 +3,10 @@
     using RFL.Scripts.Attributes;
     using RFL.Scripts.DependenciesManagement.Injector;
     using RFL.Scripts.GameLogic.Scenes;
+    using RFL.Scripts.GlobalServices.Creator;
+    using RFL.Scripts.GlobalServices.Destroyer;
     using RFL.Scripts.GlobalServices.Input.Services;
-    using RFL.Scripts.Helpers;
+    using RFL.Scripts.GlobalServices.Pause.Canvas;
     using UnityEngine;
     using Object = UnityEngine.Object;
 

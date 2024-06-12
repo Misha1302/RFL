@@ -1,6 +1,7 @@
 ﻿namespace RFL.Scripts.GlobalServices.Scenes
 {
     using RFL.Scripts.Attributes;
+    using RFL.Scripts.Bootstrap.Initialization;
     using RFL.Scripts.DependenciesManagement.Injector;
     using RFL.Scripts.GameLogic.Scenes;
 

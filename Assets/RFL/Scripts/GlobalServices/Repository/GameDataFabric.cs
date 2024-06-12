@@ -28,8 +28,6 @@
             Assembly.GetExecutingAssembly().GetTypes().Where(x => x.BaseType == typeof(SceneName)).ForAll(x =>
                 gd.sceneDatas.Add(new SceneData((SceneName)Activator.CreateInstance(x)))
             );
-            
-            Debug.Log(string.Join(", ", gd.sceneDatas.Select(x => x.GetType().Name)));
         }
 
         public static void SubscribeOnChanged(GameData gd)

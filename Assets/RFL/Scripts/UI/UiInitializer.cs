@@ -1,10 +1,11 @@
 ﻿namespace RFL.Scripts.UI
 {
     using RFL.Scripts.Attributes;
+    using RFL.Scripts.Bootstrap.Initialization;
     using RFL.Scripts.DependenciesManagement.Injector;
     using RFL.Scripts.GameLogic.Scenes;
-    using RFL.Scripts.GlobalServices.Fps;
-    using RFL.Scripts.Helpers;
+    using RFL.Scripts.GlobalServices.Creator;
+    using RFL.Scripts.GlobalServices.Scenes;
     using UnityEngine;
     using UnityEngine.EventSystems;
 

@@ -2,12 +2,11 @@
 {
     using System;
     using RFL.Scripts.Attributes;
+    using RFL.Scripts.GlobalServices.Creator;
     using RFL.Scripts.GlobalServices.GameManager.MonoBeh;
     using RFL.Scripts.GlobalServices.Input.Axis;
-    using RFL.Scripts.GlobalServices.Pause;
+    using RFL.Scripts.GlobalServices.Pause.Canvas;
     using RFL.Scripts.GlobalServices.Repository;
-    using RFL.Scripts.Helpers;
-    using Unity.VisualScripting;
     using UnityEngine;
     using UnityEngine.UI;
 
@@ -42,7 +41,7 @@
 
         private void SubscribeOnButtonPause()
         {
-            var pauseCanvas = Resources.Load("UI/PauseCanvas");
+            var pauseCanvas = Resources.Load<GameObject>("UI/PauseCanvas");
             var pauseCanvasInstance = CreatorService.Instantiate(pauseCanvas);
             var button = pauseCanvasInstance.GetComponentInChildren<PauseButtonTag>().GetComponent<Button>();
             button.onClick.AddListener(OnPause.Invoke);

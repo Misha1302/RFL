@@ -4,7 +4,7 @@
     using UnityEngine;
 
     [Serializable]
-    public class SceneName
+    public abstract class SceneName
     {
         /// <summary>
         ///     Use Name instead

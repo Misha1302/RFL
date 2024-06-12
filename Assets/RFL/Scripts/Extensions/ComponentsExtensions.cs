@@ -2,7 +2,6 @@
 {
     using JetBrains.Annotations;
     using RFL.Scripts.GlobalServices.Scenes;
-    using Unity.VisualScripting;
     using UnityEngine;
 
     public static class ComponentsExtensions
@@ -13,7 +12,7 @@
         public static T GetOrAddComponent<T>(this Component component) where T : Component
         {
             if (!component.TryGetComponent<T>(out var value))
-                value = component.AddComponent<T>();
+                value = component.gameObject.AddComponent<T>();
             return value;
         }
 

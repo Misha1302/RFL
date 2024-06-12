@@ -1,6 +1,7 @@
 ﻿namespace RFL.Scripts.GameScreen.Orientation
 {
     using RFL.Scripts.Attributes;
+    using RFL.Scripts.Bootstrap.Initialization;
     using RFL.Scripts.GameLogic.Scenes;
 
     public class ScreenOrientationInitializer

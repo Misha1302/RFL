@@ -1,6 +1,7 @@
 ﻿namespace RFL.Scripts.Attributes
 {
     using System;
+    using RFL.Scripts.Bootstrap.Initialization;
     using RFL.Scripts.GlobalServices.Repository.DataContainers;
     using UnityEngine;
 
@@ -18,6 +19,7 @@
         )
         {
             Debug.Assert(sceneNameType.IsSubclassOf(typeof(SceneName)));
+
             SceneNameType = sceneNameType;
             Priority = priority;
             InitializationType = initializationType;

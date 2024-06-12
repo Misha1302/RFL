@@ -4,7 +4,6 @@
 
     public class CoreScene : SceneName
     {
-        public new const string Name = "Core";
-        public CoreScene() : base(Name) { }
+        public CoreScene() : base("Core") { }
     }
 }

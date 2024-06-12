@@ -25,10 +25,6 @@
                 act(item);
         }
 
-        public static T MaxBy<T, TComparable>(this IEnumerable<T> enumerable, Func<T, TComparable> act)
-            where TComparable : IComparable<TComparable> =>
-            enumerable.GetBy((x, y) => act(x).CompareTo(act(y)) > 0);
-
         public static T GetBy<T>(this IEnumerable<T> enumerable, Func<T, T, bool> predicate)
         {
             using var enumerator = enumerable.GetEnumerator();

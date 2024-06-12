@@ -4,6 +4,6 @@
 
     public class AnyScene : SceneName
     {
-        public AnyScene() : base("Invalid") { }
+        public AnyScene() : base("Any") { }
     }
 }
